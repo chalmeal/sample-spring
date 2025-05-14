@@ -7,34 +7,36 @@ import org.springframework.format.annotation.DateTimeFormat;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
-import sample.model.type.ProductStatusType;
 
 /**
- * <pre>
- * 商品を定義します。
- * </pre>
+ * <p>
+ * 社員を定義します。
+ * </p>
  */
 @Getter
 @Setter
 @Accessors(chain = true)
-public class Product {
-    /** 商品ID */
-    private String productId;
+public class Employee {
+    /** 社員ID */
+    private Integer employeeId;
 
-    /** 商品名 */
-    private String productName;
+    /** 社員コード */
+    private String employeeCode;
 
-    /** カテゴリID */
-    private String categoryId;
+    /** 社員名 */
+    private String name;
 
-    /** 取引先ID */
-    private String clientId;
+    /** 社員名カナ */
+    private String nameKana;
 
-    /** 単価 */
-    private int amount;
+    /** メールアドレス */
+    private String mail;
+
+    /** 所属部門コード */
+    private Integer departmentCode;
 
     /** 状態 */
-    private ProductStatusType status;
+    private int status;
 
     /** 登録日時 */
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)

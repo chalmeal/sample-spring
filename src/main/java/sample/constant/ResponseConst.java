@@ -42,8 +42,8 @@ public class ResponseConst {
      * </pre>
      */
     public enum Error {
-        // PRODUCT
-        PRODUCT_GET_NOT_FOUND("E01-0101", "商品が見つかりませんでした。");
+        // EMPLOYEE
+        EMPLOYEE_GET_NOT_FOUND("E400-1001", "対象の社員が見つかりませんでした。");
 
         // エラーコード
         private final String code;

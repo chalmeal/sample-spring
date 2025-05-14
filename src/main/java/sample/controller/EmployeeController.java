@@ -8,33 +8,34 @@ import org.springframework.web.bind.annotation.RestController;
 
 import lombok.RequiredArgsConstructor;
 import sample.exception.ServiceException;
-import sample.service.ProductService;
+import sample.service.EmployeeService;
 
 /**
  * <pre>
- * 商品のControllerクラス
+ * 社員のControllerクラス
  * </pre>
  */
 @RestController
-@RequestMapping("/product")
+@RequestMapping("/employee")
 @RequiredArgsConstructor
-public class ProductController extends SampleController {
+public class EmployeeController extends SampleController {
     // DI
-    private final ProductService service;
+    private final EmployeeService service;
 
     /**
-     * <pre>
-     * 商品取得API
-     * </pre>
+     * <p>
+     * 社員取得API
+     * 社員を1件取得します。
+     * </p>
      * 
-     * @param productId 商品ID
-     * @return 商品
+     * @param employeeId 社員ID
+     * @return 社員
      */
-    @GetMapping("/{product_id}")
-    public ResponseEntity<?> getProduct(
-            @PathVariable(value = "product_id", required = false) String productId) {
+    @GetMapping("/{employee_id}")
+    public ResponseEntity<?> getEmployee(
+            @PathVariable(value = "employee_id", required = false) int employeeId) {
         try {
-            return response(service.getProduct(productId));
+            return response(service.getEmployee(employeeId));
         } catch (ServiceException e) {
             return response(e.getStatusCode(), e.getErrorCode(), e.getErrorMessage());
         }
