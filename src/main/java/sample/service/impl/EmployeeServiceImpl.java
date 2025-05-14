@@ -33,7 +33,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     public EmployeeResponseDto getEmployee(int employeeId) {
         EmployeeResponseDto result = new EmployeeResponseDto();
 
-        Optional<Employee> optEmployee = repository.getEmployee(employeeId);
+        Optional<Employee> optEmployee = repository.getEmployeeById(employeeId);
         optEmployee.orElseThrow(() -> {
             return new ServiceException(ResponseConst.Status.NOT_FOUND.getStatus(),
                     ResponseConst.Error.EMPLOYEE_GET_NOT_FOUND);

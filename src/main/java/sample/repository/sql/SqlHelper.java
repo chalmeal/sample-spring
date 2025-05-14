@@ -1,12 +1,11 @@
-package sample.repository.dao;
+package sample.repository.sql;
 
 /**
- * <pre>
- * Daoクラスの共通処理
- * </pre>
+ * <p>
+ * SQLのヘルパークラス
+ * </p>
  */
-public abstract class DaoHelper {
-
+public class SqlHelper {
     // WHERE
     public final String SQL_WHERE = " where ";
 
