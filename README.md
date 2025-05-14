@@ -27,17 +27,39 @@ Here are the highlights of this release:
 ```
 
 #### 2. マイグレーションファイル更新時
-> マイグレーションファイルを新しく作成した場合、Dockerを再起動しないと、新しいマイグレーションファイルが適用されない
+> マイグレーションファイルを新しく作成した場合、Dockerコンテナを一度削除しないと更新されない
 
 **対応**
 1. コンテナ確認
 ```
 user@user-pc ~ % docker ps -a
-CONTAINER ID   IMAGE                                                         COMMAND                   CREATED         STATUS         PORTS                               NAMES
-6a86ad58697c   mcr.microsoft.com/vscode/devcontainers/java:21-jdk-bullseye   "/bin/sh -c 'echo Co…"   6 minutes ago   Up 6 minutes                                       sample-java_devcontainer-app-1
-fef5784402e3   mysql:8                                                       "docker-entrypoint.s…"   6 minutes ago   Up 6 minutes   0.0.0.0:3306->3306/tcp, 33060/tcp   sample-java_devcontainer-db-1
+CONTAINER ID   IMAGE                                                         COMMAND                   CREATED          STATUS              PORTS                               NAMES
+6a86ad58697c   mcr.microsoft.com/vscode/devcontainers/java:21-jdk-bullseye   "/bin/sh -c 'echo Co…"   17 minutes ago   Up About a minute                                       sample-java_devcontainer-app-1
+fef5784402e3   mysql:8                                                       "docker-entrypoint.s…"   17 minutes ago   Up About a minute   0.0.0.0:3306->3306/tcp, 33060/tcp   sample-java_devcontainer-db-1
 ```
-2. コンテナ再起動
+
+2. コンテナ停止
+> CONTAINER IDは適宜変更すること
 ```
-docker restart sample-java_devcontainer-app-1 sample-java_devcontainer-db-1
+user@user-pc ~ % docker stop 6a86ad58697c fef5784402e3
+6a86ad58697c
+fef5784402e3
 ```
+> Docker DesktopがあればそこからでもOK
+
+3. コンテナ削除
+> CONTAINER IDは適宜変更すること
+```
+user@user-pc ~ % docker rm 6a86ad58697c fef5784402e3
+```
+> Docker DesktopがあればそこからでもOK
+
+4. Devcontainer再起動
+
+**vscode > Reopen in Container**
+
+5. アプリケーション起動
+```
+./gradlew bootRun
+```
+または **Run and Debug**
