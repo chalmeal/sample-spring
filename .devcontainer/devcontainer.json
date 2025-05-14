@@ -1,3 +1,5 @@
+// ref:
+// https://github.com/jkazama/sample-boot-jpa/blob/master/.devcontainer/devcontainer.json
 {
 	"name": "sample-java",
 	"dockerComposeFile": [
