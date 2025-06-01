@@ -1,5 +1,7 @@
 package sample.service;
 
+import java.util.List;
+
 import sample.dto.response.EmployeeResponseDto;
 
 /**
@@ -19,5 +21,20 @@ public interface EmployeeService {
      * @return 社員
      */
     EmployeeResponseDto getEmployee(int employeeId);
+
+    /**
+     * <p>
+     * 社員を検索
+     * </p>
+     * 
+     * @param employeeId     社員ID
+     * @param employeeCode   社員コード
+     * @param name           名前
+     * @param mail           メールアドレス
+     * @param departmentCode 所属部門コード
+     * @return 社員
+     */
+    List<EmployeeResponseDto> searchEmployee(Integer employeeId, String employeeCode, String name, String mail,
+            Integer departmentCode);
 
 }

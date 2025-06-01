@@ -1,12 +1,16 @@
 package sample.controller;
 
+import java.util.List;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import lombok.RequiredArgsConstructor;
+import sample.dto.response.EmployeeResponseDto;
 import sample.exception.ServiceException;
 import sample.service.EmployeeService;
 
@@ -16,7 +20,7 @@ import sample.service.EmployeeService;
  * </pre>
  */
 @RestController
-@RequestMapping("/employee")
+@RequestMapping("/api/employee")
 @RequiredArgsConstructor
 public class EmployeeController extends SampleController {
     // DI
@@ -39,6 +43,31 @@ public class EmployeeController extends SampleController {
         } catch (ServiceException e) {
             return response(e.getStatusCode(), e.getErrorCode(), e.getErrorMessage());
         }
+    }
+
+    /**
+     * <p>
+     * 社員検索API
+     * 社員を検索します。
+     * </p>
+     * 
+     * @param employeeId     社員ID
+     * @param employeeCode   社員コード
+     * @param name           名前
+     * @param mail           メールアドレス
+     * @param departmentCode 所属部門コード
+     * 
+     * @return 社員
+     */
+    @GetMapping("/search")
+    public List<EmployeeResponseDto> searchEmployee(
+            @RequestParam(value = "employee_id", required = false) Integer employeeId,
+            @RequestParam(value = "employee_code", required = false) String employeeCode,
+            @RequestParam(value = "name", required = false) String name,
+            @RequestParam(value = "mail", required = false) String mail,
+            @RequestParam(value = "department_code", required = false) Integer departmentCode) {
+        return service.searchEmployee(employeeId, employeeCode, name, mail,
+                departmentCode);
     }
 
 }

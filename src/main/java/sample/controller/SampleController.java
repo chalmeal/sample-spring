@@ -15,10 +15,10 @@ import sample.dto.ResponseDto;
 public class SampleController {
 
     /**
-     * <pre>
+     * <p>
      * Success(200)
      * ResponseEntityにServiceからの結果値を格納してクライアントに返却
-     * </pre>
+     * </p>
      * 
      * @param resDto
      * @return ResponseEntity<ResponseDto>

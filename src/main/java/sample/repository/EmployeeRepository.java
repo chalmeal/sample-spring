@@ -2,38 +2,14 @@ package sample.repository;
 
 import java.util.Optional;
 
-import javax.sql.DataSource;
-
-import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
-import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
-import org.springframework.stereotype.Repository;
-
-import lombok.RequiredArgsConstructor;
 import sample.model.Employee;
-import sample.model.mapper.EmployeeMapper;
-import sample.repository.sql.EmployeeSql;
 
 /**
  * <p>
- * 社員のRepositoryクラス
+ * 社員のRepositoryインターフェース
  * <p>
  */
-@Repository
-@RequiredArgsConstructor
-public class EmployeeRepository extends EmployeeSql {
-
-    // DI
-    // JdbcTenplate
-    private final NamedParameterJdbcTemplate jdbcTemplate;
-    // Mapper
-    private final EmployeeMapper mapper;
-
-    // 初期化
-    public EmployeeRepository(DataSource dataSource, EmployeeMapper mapper) {
-        this.jdbcTemplate = new NamedParameterJdbcTemplate(dataSource);
-        this.mapper = mapper;
-    }
+public interface EmployeeRepository {
 
     /**
      * <p>
@@ -43,19 +19,20 @@ public class EmployeeRepository extends EmployeeSql {
      * @param employeeId 社員ID
      * @return 社員
      */
-    public Optional<Employee> getEmployeeById(int employeeId) {
-        try {
-            StringBuilder sql = new StringBuilder()
-                    .append(SQL_SELECT_EMPLOYEE_BY_ID);
-            MapSqlParameterSource param = new MapSqlParameterSource()
-                    .addValue("employeeId", employeeId);
+    Optional<Employee> getEmployeeById(Integer employeeId);
 
-            Employee employee = jdbcTemplate.queryForObject(sql.toString(), param, mapper);
-
-            return Optional.ofNullable(employee);
-        } catch (EmptyResultDataAccessException e) {
-            return Optional.empty();
-        }
-    }
-
+    /**
+     * <p>
+     * 社員を検索
+     * </p>
+     * 
+     * @param employeeId     社員ID
+     * @param employeeCode   社員コード
+     * @param name           名前
+     * @param mail           メールアドレス
+     * @param departmentCode 所属部門コード
+     * @return 社員
+     */
+    Optional<Employee[]> searchEmployee(Integer employeeId, String employeeCode, String name, String mail,
+            Integer departmentCode);
 }
