@@ -5,11 +5,16 @@ import java.util.Optional;
 
 import javax.sql.DataSource;
 
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import sample.context.util.Message;
+import sample.dto.ResultDto;
+import sample.dto.ResultDto.ResultType;
+import sample.dto.request.employee.EmployeeRegisterRequestDto;
 import sample.model.Employee;
 import sample.model.mapper.EmployeeMapper;
 import sample.repository.EmployeeRepository;
@@ -23,13 +28,16 @@ import sample.repository.sql.EmployeeSql;
 @Repository
 public class EmployeeRepositoryImpl extends EmployeeSql implements EmployeeRepository {
     // DI
+    // Message
+    private final Message message;
     // JdbcTenplate
     private final NamedParameterJdbcTemplate jdbcTemplate;
     // Mapper
     private final EmployeeMapper mapper;
 
     // 初期化
-    public EmployeeRepositoryImpl(DataSource dataSource, EmployeeMapper mapper) {
+    public EmployeeRepositoryImpl(Message message, DataSource dataSource, EmployeeMapper mapper) {
+        this.message = message;
         this.jdbcTemplate = new NamedParameterJdbcTemplate(dataSource);
         this.mapper = mapper;
     }
@@ -55,6 +63,8 @@ public class EmployeeRepositoryImpl extends EmployeeSql implements EmployeeRepos
 
             return Optional.ofNullable(employee);
         } catch (EmptyResultDataAccessException e) {
+            return Optional.empty();
+        } catch (Exception e) {
             return Optional.empty();
         }
     }
@@ -112,6 +122,41 @@ public class EmployeeRepositoryImpl extends EmployeeSql implements EmployeeRepos
 
             return Optional.ofNullable(employees.toArray(new Employee[employees.size()]));
         } catch (EmptyResultDataAccessException e) {
+            return Optional.empty();
+        }
+    }
+
+    /**
+     * <p>
+     * 社員を登録
+     * </p>
+     * 
+     * @param employee 登録する社員
+     * @return 登録した社員
+     */
+    public Optional<ResultDto> registerEmployee(EmployeeRegisterRequestDto employee) {
+        MapSqlParameterSource param;
+        param = new MapSqlParameterSource();
+
+        try {
+            String sql = SQL_INSERT_EMPLOYEE;
+
+            param.addValue("employeeId", employee.getEmployeeId());
+            param.addValue("employeeCode", employee.getEmployeeCode());
+            param.addValue("name", employee.getName());
+            param.addValue("nameKana", employee.getNameKana());
+            param.addValue("mail", employee.getMail());
+            param.addValue("departmentCode", employee.getDepartmentCode());
+            param.addValue("status", employee.getStatus());
+
+            jdbcTemplate.update(sql, param);
+
+            ResultDto result = new ResultDto();
+            result.setResult(ResultType.SUCCESS.getResult());
+            result.setMessage(message.getMessage("success.employee.register"));
+
+            return Optional.of(result);
+        } catch (DuplicateKeyException e) {
             return Optional.empty();
         }
     }

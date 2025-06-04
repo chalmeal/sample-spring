@@ -2,6 +2,8 @@ package sample.repository;
 
 import java.util.Optional;
 
+import sample.dto.ResultDto;
+import sample.dto.request.employee.EmployeeRegisterRequestDto;
 import sample.model.Employee;
 
 /**
@@ -35,4 +37,14 @@ public interface EmployeeRepository {
      */
     Optional<Employee[]> searchEmployee(Integer employeeId, String employeeCode, String name, String mail,
             Integer departmentCode);
+
+    /**
+     * <p>
+     * 社員を登録
+     * </p>
+     * 
+     * @param employee 登録パラメータ
+     * @return 登録された社員
+     */
+    Optional<ResultDto> registerEmployee(EmployeeRegisterRequestDto employee);
 }

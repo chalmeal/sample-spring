@@ -5,19 +5,23 @@ import java.util.List;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import sample.context.exception.ServiceException;
+import sample.dto.request.employee.EmployeeRegisterRequestDto;
 import sample.dto.response.EmployeeResponseDto;
-import sample.exception.ServiceException;
 import sample.service.EmployeeService;
 
 /**
- * <pre>
+ * <p>
  * 社員のControllerクラス
- * </pre>
+ * </p>
  */
 @RestController
 @RequestMapping("/api/employee")
@@ -56,7 +60,6 @@ public class EmployeeController extends SampleController {
      * @param name           名前
      * @param mail           メールアドレス
      * @param departmentCode 所属部門コード
-     * 
      * @return 社員
      */
     @GetMapping("/search")
@@ -68,6 +71,24 @@ public class EmployeeController extends SampleController {
             @RequestParam(value = "department_code", required = false) Integer departmentCode) {
         return service.searchEmployee(employeeId, employeeCode, name, mail,
                 departmentCode);
+    }
+
+    /**
+     * <p>
+     * 社員登録API
+     * 社員を登録します。
+     * </p>
+     * 
+     * @param
+     * @return 社員登録結果
+     */
+    @PostMapping("/register")
+    public ResponseEntity<?> registerEmployee(@Valid @RequestBody EmployeeRegisterRequestDto param) {
+        try {
+            return response(service.registerEmployee(param));
+        } catch (ServiceException e) {
+            return response(e.getStatusCode(), e.getErrorCode(), e.getErrorMessage());
+        }
     }
 
 }

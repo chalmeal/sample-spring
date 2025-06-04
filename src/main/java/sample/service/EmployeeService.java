@@ -2,6 +2,8 @@ package sample.service;
 
 import java.util.List;
 
+import sample.dto.ResultDto;
+import sample.dto.request.employee.EmployeeRegisterRequestDto;
 import sample.dto.response.EmployeeResponseDto;
 
 /**
@@ -36,5 +38,15 @@ public interface EmployeeService {
      */
     List<EmployeeResponseDto> searchEmployee(Integer employeeId, String employeeCode, String name, String mail,
             Integer departmentCode);
+
+    /**
+     * <p>
+     * 社員を登録
+     * </p>
+     * 
+     * @param param 登録パラメータ
+     * @return 社員
+     */
+    ResultDto registerEmployee(EmployeeRegisterRequestDto param);
 
 }

@@ -1,5 +1,5 @@
-INSERT INTO `sample-db`.`employees` (`employee_id`, `employee_code`, `name`, `name_kana`, `mail`, `department_code`, `status`) VALUES (1001, 'A0001', '山田 太郎', 'ヤマダ タロウ', 'taro_yamada@sample.jp', '100001', 1);
-INSERT INTO `sample-db`.`employees` (`employee_id`, `employee_code`, `name`, `name_kana`, `mail`, `department_code`, `status`) VALUES (1002, 'A0002', '田中 花子', 'タナカ ハナコ', 'hanako_tanaka@sample.jp', '200001', 1);
-INSERT INTO `sample-db`.`employees` (`employee_id`, `employee_code`, `name`, `name_kana`, `mail`, `department_code`, `status`) VALUES (1003, 'A0003', '佐藤 次郎', 'サトウ ジロウ', 'jiro_sato@sample.jp', '100001', 1);
-INSERT INTO `sample-db`.`employees` (`employee_id`, `employee_code`, `name`, `name_kana`, `mail`, `department_code`, `status`) VALUES (1004, 'A0004', '鈴木 一郎', 'スズキ イチロウ', 'ichiro_suzuki@sample.jp', '300001', 1);
-INSERT INTO `sample-db`.`employees` (`employee_id`, `employee_code`, `name`, `name_kana`, `mail`, `department_code`, `status`) VALUES (1005, 'A0005', '高橋 優子', 'タカハシ ユウコ', 'yuko_takahashi@sample.jp', '200001', 0);
+INSERT INTO `sample-db`.`employees` (`employee_id`, `employee_code`, `name`, `name_kana`, `mail`, `department_code`, `status`) VALUES ("1001", 'A0001', '山田 太郎', 'ヤマダ タロウ', 'taro_yamada@sample.jp', '100001', 1);
+INSERT INTO `sample-db`.`employees` (`employee_id`, `employee_code`, `name`, `name_kana`, `mail`, `department_code`, `status`) VALUES ("1002", 'A0002', '田中 花子', 'タナカ ハナコ', 'hanako_tanaka@sample.jp', '200001', 1);
+INSERT INTO `sample-db`.`employees` (`employee_id`, `employee_code`, `name`, `name_kana`, `mail`, `department_code`, `status`) VALUES ("1003", 'A0003', '佐藤 次郎', 'サトウ ジロウ', 'jiro_sato@sample.jp', '100001', 1);
+INSERT INTO `sample-db`.`employees` (`employee_id`, `employee_code`, `name`, `name_kana`, `mail`, `department_code`, `status`) VALUES ("1004", 'A0004', '鈴木 一郎', 'スズキ イチロウ', 'ichiro_suzuki@sample.jp', '300001', 1);
+INSERT INTO `sample-db`.`employees` (`employee_id`, `employee_code`, `name`, `name_kana`, `mail`, `department_code`, `status`) VALUES ("1005", 'A0005', '高橋 優子', 'タカハシ ユウコ', 'yuko_takahashi@sample.jp', '200001', 0);

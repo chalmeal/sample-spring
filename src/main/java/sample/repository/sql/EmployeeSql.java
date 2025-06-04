@@ -34,4 +34,13 @@ public class EmployeeSql {
         protected final String SQL_GET_EMPLOYEE_BY_ID = SQL_SELECT_EMPLOYEE
                         + "WHERE employee_id = :employeeId";
 
+        /**
+         * <p>
+         * 社員登録INSERT
+         * </p>
+         */
+        protected final String SQL_INSERT_EMPLOYEE = "INSERT INTO employees "
+                        + "(employee_id, employee_code, name, name_kana, mail, department_code, status) "
+                        + "VALUES (:employeeId, :employeeCode, :name, :nameKana, :mail, :departmentCode, :status)";
+
 }

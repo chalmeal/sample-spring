@@ -3,9 +3,10 @@ package sample.controller;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
-import sample.constant.ResponseConst;
+import sample.context.constant.ResponseConst;
 import sample.dto.ErrorDto;
 import sample.dto.ResponseDto;
+import sample.dto.ResultDto;
 
 /**
  * <pre>
@@ -28,10 +29,24 @@ public class SampleController {
     }
 
     /**
-     * <pre>
+     * <p>
+     * Success(201)
+     * ResponseEntityにServiceからの結果値を格納してクライアントに返却
+     * </p>
+     * 
+     * @param result
+     * @param message
+     * @return ResponseEntity<ResultDto>
+     */
+    protected ResponseEntity<ResultDto> response(ResultDto result) {
+        return new ResponseEntity<ResultDto>(result, ResponseConst.Status.CREATED.getStatus());
+    }
+
+    /**
+     * <p>
      * Error
      * ResponseEntityにServiceからの結果値を格納してクライアントに返却
-     * </pre>
+     * </p>
      * 
      * @param statusCode
      * @param errorCode

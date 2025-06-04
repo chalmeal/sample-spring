@@ -1,11 +1,13 @@
-package sample.constant;
+package sample.context.constant;
 
 import org.springframework.http.HttpStatus;
 
 import sample.dto.ErrorDto;
 
 /**
+ * <p>
  * アプリケーションレスポンス定義
+ * </p>
  */
 public class ResponseConst {
     /**
@@ -16,6 +18,8 @@ public class ResponseConst {
     public enum Status {
         // 200
         SUCCESS(HttpStatus.OK),
+        // 201
+        CREATED(HttpStatus.CREATED),
         // 400
         BAD_REQUEST(HttpStatus.BAD_REQUEST),
         // 401
@@ -23,7 +27,9 @@ public class ResponseConst {
         // 403
         FORBIDDEN(HttpStatus.FORBIDDEN),
         // 404
-        NOT_FOUND(HttpStatus.NOT_FOUND);
+        NOT_FOUND(HttpStatus.NOT_FOUND),
+        // 500
+        INTERNAL_SERVER_ERROR(HttpStatus.INTERNAL_SERVER_ERROR);
 
         private HttpStatus code;
 
@@ -37,13 +43,14 @@ public class ResponseConst {
     }
 
     /**
-     * <pre>
+     * <p>
      * エラー定義
-     * </pre>
+     * </p>
      */
     public enum Error {
         // EMPLOYEE
-        EMPLOYEE_GET_NOT_FOUND("E400-1001", "対象の社員が見つかりませんでした。");
+        EMPLOYEE_GET_NOT_FOUND("E400-1001", "対象の社員が見つかりませんでした。"),
+        EMPLOYEE_REGISTER_EXIST_ID("E400-1002", "既に登録されている社員IDです。"),;
 
         // エラーコード
         private final String code;

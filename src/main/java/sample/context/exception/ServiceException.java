@@ -1,9 +1,9 @@
-package sample.exception;
+package sample.context.exception;
 
 import org.springframework.http.HttpStatus;
 
 import lombok.Getter;
-import sample.constant.ResponseConst.Error;
+import sample.context.constant.ResponseConst.Error;
 
 /**
  * Serviceエラークラス

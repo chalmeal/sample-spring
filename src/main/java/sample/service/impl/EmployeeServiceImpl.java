@@ -8,9 +8,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import lombok.RequiredArgsConstructor;
-import sample.constant.ResponseConst;
+import sample.context.constant.ResponseConst;
+import sample.context.exception.ServiceException;
+import sample.dto.ResultDto;
+import sample.dto.request.employee.EmployeeRegisterRequestDto;
 import sample.dto.response.EmployeeResponseDto;
-import sample.exception.ServiceException;
 import sample.model.Employee;
 import sample.repository.EmployeeRepository;
 import sample.service.EmployeeService;
@@ -77,6 +79,20 @@ public class EmployeeServiceImpl implements EmployeeService {
         }
 
         return result;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public ResultDto registerEmployee(EmployeeRegisterRequestDto param) {
+        Optional<ResultDto> result = repository.registerEmployee(param);
+        result.orElseThrow(() -> {
+            return new ServiceException(ResponseConst.Status.BAD_REQUEST.getStatus(),
+                    ResponseConst.Error.EMPLOYEE_REGISTER_EXIST_ID);
+        });
+
+        return result.get();
     }
 
 }
