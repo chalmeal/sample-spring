@@ -5,6 +5,12 @@ import java.util.Locale;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Component;
 
+/**
+ * <p>
+ * メッセージ取得クラス
+ * messages.propertiesからメッセージを取得します。
+ * </p>
+ */
 @Component
 public class Message {
 
@@ -15,6 +21,15 @@ public class Message {
         this.messageSource = messageSource;
     }
 
+    /**
+     * <p>
+     * メッセージ取得
+     * エラーメッセージはハードコードせず、必ずmessages.propertiesから取得してください。
+     * </p>
+     * 
+     * @param msg メッセージキー
+     * @return メッセージ
+     */
     public String getMessage(String msg) {
         return messageSource.getMessage(msg, null, Locale.getDefault());
     }

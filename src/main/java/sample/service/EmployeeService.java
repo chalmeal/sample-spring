@@ -2,6 +2,7 @@ package sample.service;
 
 import java.util.List;
 
+import sample.context.exception.ServiceException;
 import sample.dto.ResultDto;
 import sample.dto.request.employee.EmployeeRegisterRequestDto;
 import sample.dto.response.EmployeeResponseDto;
@@ -22,7 +23,7 @@ public interface EmployeeService {
      * @param employeeId 社員ID
      * @return 社員
      */
-    EmployeeResponseDto getEmployee(int employeeId);
+    EmployeeResponseDto getEmployee(String employeeId);
 
     /**
      * <p>
@@ -34,10 +35,10 @@ public interface EmployeeService {
      * @param name           名前
      * @param mail           メールアドレス
      * @param departmentCode 所属部門コード
-     * @return 社員
+     * @return 社員一覧
      */
-    List<EmployeeResponseDto> searchEmployee(Integer employeeId, String employeeCode, String name, String mail,
-            Integer departmentCode);
+    List<EmployeeResponseDto> searchEmployee(String employeeId, String employeeCode, String name, String mail,
+            String departmentCode);
 
     /**
      * <p>
@@ -45,8 +46,9 @@ public interface EmployeeService {
      * </p>
      * 
      * @param param 登録パラメータ
-     * @return 社員
+     * @return 登録結果
+     * @throws ServiceException 社員登録に失敗した場合
      */
-    ResultDto registerEmployee(EmployeeRegisterRequestDto param);
+    ResultDto registerEmployee(EmployeeRegisterRequestDto param) throws ServiceException;
 
 }

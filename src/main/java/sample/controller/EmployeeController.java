@@ -41,7 +41,7 @@ public class EmployeeController extends SampleController {
      */
     @GetMapping("/{employee_id}")
     public ResponseEntity<?> getEmployee(
-            @PathVariable(value = "employee_id", required = false) int employeeId) {
+            @PathVariable(value = "employee_id", required = false) String employeeId) {
         try {
             return response(service.getEmployee(employeeId));
         } catch (ServiceException e) {
@@ -60,15 +60,15 @@ public class EmployeeController extends SampleController {
      * @param name           名前
      * @param mail           メールアドレス
      * @param departmentCode 所属部門コード
-     * @return 社員
+     * @return 社員一覧
      */
     @GetMapping("/search")
     public List<EmployeeResponseDto> searchEmployee(
-            @RequestParam(value = "employee_id", required = false) Integer employeeId,
+            @RequestParam(value = "employee_id", required = false) String employeeId,
             @RequestParam(value = "employee_code", required = false) String employeeCode,
             @RequestParam(value = "name", required = false) String name,
             @RequestParam(value = "mail", required = false) String mail,
-            @RequestParam(value = "department_code", required = false) Integer departmentCode) {
+            @RequestParam(value = "department_code", required = false) String departmentCode) {
         return service.searchEmployee(employeeId, employeeCode, name, mail,
                 departmentCode);
     }

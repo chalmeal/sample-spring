@@ -2,7 +2,6 @@ package sample.repository;
 
 import java.util.Optional;
 
-import sample.dto.ResultDto;
 import sample.dto.request.employee.EmployeeRegisterRequestDto;
 import sample.model.Employee;
 
@@ -21,7 +20,7 @@ public interface EmployeeRepository {
      * @param employeeId 社員ID
      * @return 社員
      */
-    Optional<Employee> getEmployeeById(Integer employeeId);
+    Optional<Employee> getEmployeeById(String employeeId);
 
     /**
      * <p>
@@ -35,8 +34,8 @@ public interface EmployeeRepository {
      * @param departmentCode 所属部門コード
      * @return 社員
      */
-    Optional<Employee[]> searchEmployee(Integer employeeId, String employeeCode, String name, String mail,
-            Integer departmentCode);
+    Optional<Employee[]> searchEmployee(String employeeId, String employeeCode, String name, String mail,
+            String departmentCode);
 
     /**
      * <p>
@@ -44,7 +43,8 @@ public interface EmployeeRepository {
      * </p>
      * 
      * @param employee 登録パラメータ
-     * @return 登録された社員
+     * @return 登録結果
+     * @throws RuntimeException 社員登録に失敗した場合
      */
-    Optional<ResultDto> registerEmployee(EmployeeRegisterRequestDto employee);
+    void registerEmployee(EmployeeRegisterRequestDto employee) throws RuntimeException;
 }

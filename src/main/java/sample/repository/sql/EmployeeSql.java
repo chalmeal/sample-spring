@@ -38,6 +38,14 @@ public class EmployeeSql {
          * <p>
          * 社員登録INSERT
          * </p>
+         * 
+         * @param employeeId     社員ID
+         * @param employeeCode   社員コード
+         * @param name           名前
+         * @param nameKana       名前カナ
+         * @param mail           メールアドレス
+         * @param departmentCode 所属部門コード
+         * @param status         状態
          */
         protected final String SQL_INSERT_EMPLOYEE = "INSERT INTO employees "
                         + "(employee_id, employee_code, name, name_kana, mail, department_code, status) "

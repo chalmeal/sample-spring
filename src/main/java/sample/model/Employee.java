@@ -18,7 +18,7 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 public class Employee {
     /** 社員ID */
-    private Integer employeeId;
+    private String employeeId;
 
     /** 社員コード */
     private String employeeCode;
@@ -33,7 +33,7 @@ public class Employee {
     private String mail;
 
     /** 所属部門コード */
-    private Integer departmentCode;
+    private String departmentCode;
 
     /** 状態 */
     private int status;

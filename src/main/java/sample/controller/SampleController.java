@@ -3,7 +3,6 @@ package sample.controller;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
-import sample.context.constant.ResponseConst;
 import sample.dto.ErrorDto;
 import sample.dto.ResponseDto;
 import sample.dto.ResultDto;
@@ -25,7 +24,7 @@ public class SampleController {
      * @return ResponseEntity<ResponseDto>
      */
     protected ResponseEntity<ResponseDto> response(ResponseDto resDto) {
-        return new ResponseEntity<ResponseDto>(resDto, ResponseConst.Status.SUCCESS.getStatus());
+        return new ResponseEntity<ResponseDto>(resDto, HttpStatus.OK);
     }
 
     /**
@@ -39,7 +38,7 @@ public class SampleController {
      * @return ResponseEntity<ResultDto>
      */
     protected ResponseEntity<ResultDto> response(ResultDto result) {
-        return new ResponseEntity<ResultDto>(result, ResponseConst.Status.CREATED.getStatus());
+        return new ResponseEntity<ResultDto>(result, HttpStatus.CREATED);
     }
 
     /**

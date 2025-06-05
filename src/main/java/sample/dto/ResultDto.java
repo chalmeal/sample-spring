@@ -12,13 +12,13 @@ import lombok.Setter;
 @Setter
 public class ResultDto {
     /** 結果 */
-    public String result;
+    public ResultType result;
 
     /** メッセージ */
     public String message;
 
     public enum ResultType {
-        SUCCESS("OK"),
+        SUCCESS("SUCCESS"),
         FAILURE("NG");
 
         private String result;

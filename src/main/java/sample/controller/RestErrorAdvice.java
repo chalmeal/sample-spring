@@ -9,12 +9,18 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+/**
+ * <p>
+ * REST APIのエラー処理を行うクラス
+ * </p>
+ */
 @ControllerAdvice
 public class RestErrorAdvice {
 
     /**
      * <p>
      * バリデーションエラーを処理するメソッド
+     * バリデーションエラーが発生した場合に呼び出され、エラーメッセージをMap形式で返します。
      * </p>
      * 
      * @param ex

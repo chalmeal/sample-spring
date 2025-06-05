@@ -3,10 +3,12 @@ package sample.context.exception;
 import org.springframework.http.HttpStatus;
 
 import lombok.Getter;
-import sample.context.constant.ResponseConst.Error;
 
 /**
+ * <p>
  * Serviceエラークラス
+ * Service層で発生する例外を表します。
+ * </p>
  */
 @Getter
 public class ServiceException extends RuntimeException {
@@ -21,14 +23,20 @@ public class ServiceException extends RuntimeException {
     private String errorMessage;
 
     /**
-     * @param HttpStatus ステータスコード
-     * @param String     エラーコード
-     * @param String     エラーメッセージ
+     * <p>
+     * ServiceExceptionコンストラクタ
+     * ステータスコード、エラーコード、エラーメッセージを指定してServiceExceptionを生成します。
+     * Controllerにエラーを返す際に使用します。
+     * </p>
+     * 
+     * @param statusCode ステータスコード
+     * @param errorCode  エラーコード
+     * @param msg        エラーメッセージ
      */
-    public ServiceException(HttpStatus statusCode, Error error) {
+    public ServiceException(HttpStatus statusCode, String errorCode, String msg) {
         super();
         this.statusCode = statusCode;
-        this.errorCode = error.getErrorCode();
-        this.errorMessage = error.getErrorMessage();
+        this.errorCode = errorCode;
+        this.errorMessage = msg;
     }
 }
