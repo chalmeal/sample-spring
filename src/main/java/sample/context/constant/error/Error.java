@@ -17,6 +17,7 @@ public class Error {
     /**
      * <p>
      * サーバー側のエラーコード
+     * message: "サーバー側で予期せぬエラーが発生しました。"
      * </p>
      */
     public static final String INTERNAL_SERVER_ERROR = "E500-9999";
