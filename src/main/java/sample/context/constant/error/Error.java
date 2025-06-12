@@ -12,7 +12,7 @@ public class Error {
      * 社員のベースエラーコード
      * </p>
      */
-    public static final String ERROR_CODE_EMPLOYEE = "E400";
+    public static final String ERROR_CODE_EMPLOYEE = "E10";
 
     /**
      * <p>
@@ -20,6 +20,6 @@ public class Error {
      * message: "サーバー側で予期せぬエラーが発生しました。"
      * </p>
      */
-    public static final String INTERNAL_SERVER_ERROR = "E500-9999";
+    public static final String INTERNAL_SERVER_ERROR = "E99-9999";
 
 }

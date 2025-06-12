@@ -5,7 +5,6 @@ import java.util.Optional;
 
 import javax.sql.DataSource;
 
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -43,20 +42,14 @@ public class EmployeeRepositoryImpl extends EmployeeSql implements EmployeeRepos
      * @param employeeId 社員ID
      * @return 社員
      */
-    public Optional<Employee> getEmployeeById(String employeeId) {
+    public Optional<Employee> getEmployeeById(String employeeId) throws RuntimeException {
         MapSqlParameterSource param;
         param = new MapSqlParameterSource();
 
-        try {
-            String sql = SQL_GET_EMPLOYEE_BY_ID;
-            param.addValue("employeeId", employeeId);
+        String sql = SQL_GET_EMPLOYEE_BY_ID;
+        param.addValue("employeeId", employeeId);
 
-            Employee employee = jdbcTemplate.queryForObject(sql, param, mapper);
-
-            return Optional.ofNullable(employee);
-        } catch (EmptyResultDataAccessException e) {
-            return Optional.empty();
-        }
+        return Optional.ofNullable(jdbcTemplate.queryForObject(sql, param, mapper));
     }
 
     /**
@@ -72,47 +65,43 @@ public class EmployeeRepositoryImpl extends EmployeeSql implements EmployeeRepos
      * @return 社員一覧
      */
     public Optional<Employee[]> searchEmployee(String employeeId, String employeeCode, String name, String mail,
-            String departmentCode) {
+            String departmentCode) throws RuntimeException {
         MapSqlParameterSource param;
         param = new MapSqlParameterSource();
 
-        try {
-            String sql = SQL_SELECT_EMPLOYEE;
-            sql += "WHERE 1=1 ";
+        String sql = SQL_SELECT_EMPLOYEE;
+        sql += "WHERE 1=1 ";
 
-            // 社員ID
-            if (!employeeId.isEmpty()) {
-                sql += "AND employee_id = :employeeId ";
-                param.addValue("employeeId", employeeId);
-            }
-            // 社員コード
-            if (!employeeCode.isEmpty()) {
-                sql += "AND employee_code LIKE :employeeCode ";
-                param.addValue("employeeCode", "%" + employeeCode + "%");
-            }
-            // 名前
-            if (!name.isEmpty()) {
-                sql += "AND (name LIKE :name OR name_kana LIKE :name) ";
-                param.addValue("name", "%" + name + "%");
-            }
-            // メールアドレス
-            if (!mail.isEmpty()) {
-                sql += "AND mail LIKE :mail ";
-                param.addValue("mail", "%" + mail + "%");
-            }
-            // 所属部門コード
-            if (!departmentCode.isEmpty()) {
-                sql += "AND department_code = :departmentCode ";
-                param.addValue("departmentCode", departmentCode);
-            }
-            sql += "ORDER BY employee_id ";
-
-            List<Employee> employees = jdbcTemplate.query(sql, param, mapper);
-
-            return Optional.ofNullable(employees.toArray(new Employee[employees.size()]));
-        } catch (EmptyResultDataAccessException e) {
-            return Optional.empty();
+        // 社員ID
+        if (!employeeId.isEmpty()) {
+            sql += "AND employee_id = :employeeId ";
+            param.addValue("employeeId", employeeId);
         }
+        // 社員コード
+        if (!employeeCode.isEmpty()) {
+            sql += "AND employee_code LIKE :employeeCode ";
+            param.addValue("employeeCode", "%" + employeeCode + "%");
+        }
+        // 名前
+        if (!name.isEmpty()) {
+            sql += "AND (name LIKE :name OR name_kana LIKE :name) ";
+            param.addValue("name", "%" + name + "%");
+        }
+        // メールアドレス
+        if (!mail.isEmpty()) {
+            sql += "AND mail LIKE :mail ";
+            param.addValue("mail", "%" + mail + "%");
+        }
+        // 所属部門コード
+        if (!departmentCode.isEmpty()) {
+            sql += "AND department_code = :departmentCode ";
+            param.addValue("departmentCode", departmentCode);
+        }
+        sql += "ORDER BY employee_id ";
+
+        List<Employee> employees = jdbcTemplate.query(sql, param, mapper);
+
+        return Optional.ofNullable(employees.toArray(new Employee[employees.size()]));
     }
 
     /**

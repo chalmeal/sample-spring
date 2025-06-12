@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.dao.DuplicateKeyException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -43,25 +44,26 @@ public class EmployeeServiceImpl implements EmployeeService {
     public EmployeeResponseDto getEmployee(String employeeId) {
         EmployeeResponseDto result = new EmployeeResponseDto();
 
-        // 社員IDから社員を取得
-        Optional<Employee> optEmployee = repository.getEmployeeById(employeeId);
-        optEmployee.orElseThrow(() -> {
+        try {
+            // 社員IDから社員を取得
+            Optional<Employee> optEmployee = repository.getEmployeeById(employeeId);
+
+            // 社員情報をDTOに設定
+            Employee employee = optEmployee.get();
+            result.setEmployeeId(employee.getEmployeeId());
+            result.setName(employee.getName());
+            result.setNameKana(employee.getNameKana());
+            result.setDepartmentCode(employee.getDepartmentCode());
+            result.setMail(employee.getMail());
+            result.setStatus(employee.getStatus());
+
+            return result;
+        } catch (EmptyResultDataAccessException e) {
             // 社員が存在しない場合はエラーを返却
-            return new ServiceException(HttpStatus.NOT_FOUND,
+            throw new ServiceException(HttpStatus.NOT_FOUND,
                     EmployeeError.getError(EmployeeError.NOTFOUND),
                     message.getMessage("error.employee.notfound"));
-        });
-
-        // 社員情報をDTOに設定
-        Employee employee = optEmployee.get();
-        result.setEmployeeId(employee.getEmployeeId());
-        result.setName(employee.getName());
-        result.setNameKana(employee.getNameKana());
-        result.setDepartmentCode(employee.getDepartmentCode());
-        result.setMail(employee.getMail());
-        result.setStatus(employee.getStatus());
-
-        return result;
+        }
     }
 
     /**
@@ -72,26 +74,31 @@ public class EmployeeServiceImpl implements EmployeeService {
             String departmentCode) {
         List<EmployeeResponseDto> result = new ArrayList<>();
 
-        // 社員を検索
-        // 検索条件に一致する社員が存在しない場合は空のリストを返却
-        Optional<Employee[]> optEmployee = repository.searchEmployee(employeeId, employeeCode, name, mail,
-                departmentCode);
+        try {
+            // 社員を検索
+            // 検索条件に一致する社員が存在しない場合は空のリストを返却
+            Optional<Employee[]> optEmployee = repository.searchEmployee(employeeId, employeeCode, name, mail,
+                    departmentCode);
 
-        // 社員情報をDTOに設定
-        Employee[] employees = optEmployee.get();
-        for (Employee employee : employees) {
-            EmployeeResponseDto dto = new EmployeeResponseDto();
-            dto.setEmployeeId(employee.getEmployeeId());
-            dto.setName(employee.getName());
-            dto.setNameKana(employee.getNameKana());
-            dto.setDepartmentCode(employee.getDepartmentCode());
-            dto.setMail(employee.getMail());
-            dto.setStatus(employee.getStatus());
+            // 社員情報をDTOに設定
+            Employee[] employees = optEmployee.get();
+            for (Employee employee : employees) {
+                EmployeeResponseDto dto = new EmployeeResponseDto();
+                dto.setEmployeeId(employee.getEmployeeId());
+                dto.setName(employee.getName());
+                dto.setNameKana(employee.getNameKana());
+                dto.setDepartmentCode(employee.getDepartmentCode());
+                dto.setMail(employee.getMail());
+                dto.setStatus(employee.getStatus());
 
-            result.add(dto);
+                result.add(dto);
+            }
+
+            return result;
+        } catch (EmptyResultDataAccessException e) {
+            // 社員が存在しない場合は空のリストを返却
+            return result;
         }
-
-        return result;
     }
 
     /**
@@ -110,15 +117,10 @@ public class EmployeeServiceImpl implements EmployeeService {
 
             return result;
         } catch (DuplicateKeyException e) {
-            // 社員コードが重複している場合はエラーを返却
+            // 社員IDが重複している場合はエラーを返却
             throw new ServiceException(HttpStatus.BAD_REQUEST,
                     EmployeeError.getError(EmployeeError.DUPLICATED),
                     message.getMessage("error.employee.register.duplicate"));
-        } catch (Exception e) {
-            // その他のエラーは内部エラーとして処理
-            throw new ServiceException(HttpStatus.INTERNAL_SERVER_ERROR,
-                    EmployeeError.INTERNAL_SERVER_ERROR,
-                    message.getMessage("error.global.internal"));
         }
     }
 

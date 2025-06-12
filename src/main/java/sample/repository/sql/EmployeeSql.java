@@ -36,7 +36,7 @@ public class EmployeeSql {
 
         /**
          * <p>
-         * 社員登録INSERT
+         * 社員登録SQL
          * </p>
          * 
          * @param employeeId     社員ID
