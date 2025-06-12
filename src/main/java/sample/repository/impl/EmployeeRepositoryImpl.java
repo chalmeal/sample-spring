@@ -5,10 +5,12 @@ import java.util.Optional;
 
 import javax.sql.DataSource;
 
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import sample.dto.request.employee.EmployeeEditRequestDto;
 import sample.dto.request.employee.EmployeeRegisterRequestDto;
 import sample.model.Employee;
 import sample.model.mapper.EmployeeMapper;
@@ -128,6 +130,38 @@ public class EmployeeRepositoryImpl extends EmployeeSql implements EmployeeRepos
         param.addValue("status", employee.getStatus());
 
         jdbcTemplate.update(sql, param);
+    }
+
+    /**
+     * <p>
+     * 社員を編集
+     * </p>
+     * 
+     * @param employee 更新する社員
+     * @return 更新結果
+     * @throws RuntimeException 社員更新に失敗した場合
+     */
+    public void editEmployee(String employeeId, EmployeeEditRequestDto employee) throws RuntimeException {
+        MapSqlParameterSource param;
+        param = new MapSqlParameterSource();
+
+        String sql = SQL_UPDATE_EMPLOYEE;
+
+        param.addValue("name", employee.getName());
+        param.addValue("nameKana", employee.getNameKana());
+        param.addValue("mail", employee.getMail());
+        param.addValue("departmentCode", employee.getDepartmentCode());
+        param.addValue("status", employee.getStatus());
+        // WHERE句で指定する社員ID
+        param.addValue("employeeId", employeeId);
+
+        int result = jdbcTemplate.update(sql, param);
+        if (result == 0) {
+            // 更新対象の社員が存在しない場合はエラーを返却
+            throw new EmptyResultDataAccessException(result);
+        } else {
+            // success
+        }
     }
 
 }

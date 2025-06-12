@@ -4,6 +4,7 @@ import java.util.List;
 
 import sample.context.exception.ServiceException;
 import sample.dto.ResultDto;
+import sample.dto.request.employee.EmployeeEditRequestDto;
 import sample.dto.request.employee.EmployeeRegisterRequestDto;
 import sample.dto.response.EmployeeResponseDto;
 
@@ -23,7 +24,7 @@ public interface EmployeeService {
      * @param employeeId 社員ID
      * @return 社員
      */
-    EmployeeResponseDto getEmployee(String employeeId);
+    EmployeeResponseDto getEmployee(String employeeId) throws ServiceException;
 
     /**
      * <p>
@@ -50,5 +51,16 @@ public interface EmployeeService {
      * @throws ServiceException 社員登録に失敗した場合
      */
     ResultDto registerEmployee(EmployeeRegisterRequestDto param) throws ServiceException;
+
+    /**
+     * <p>
+     * 社員を編集
+     * </p>
+     * 
+     * @param param 更新パラメータ
+     * @return 更新結果
+     * @throws ServiceException 社員更新に失敗した場合
+     */
+    ResultDto editEmployee(String employeeId, EmployeeEditRequestDto param) throws ServiceException;
 
 }

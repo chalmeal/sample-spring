@@ -16,6 +16,7 @@ import sample.context.exception.ServiceException;
 import sample.context.util.Message;
 import sample.dto.ResultDto;
 import sample.dto.ResultDto.ResultType;
+import sample.dto.request.employee.EmployeeEditRequestDto;
 import sample.dto.request.employee.EmployeeRegisterRequestDto;
 import sample.dto.response.EmployeeResponseDto;
 import sample.model.Employee;
@@ -41,7 +42,7 @@ public class EmployeeServiceImpl implements EmployeeService {
      * {@inheritDoc}
      */
     @Override
-    public EmployeeResponseDto getEmployee(String employeeId) {
+    public EmployeeResponseDto getEmployee(String employeeId) throws ServiceException {
         EmployeeResponseDto result = new EmployeeResponseDto();
 
         try {
@@ -121,6 +122,29 @@ public class EmployeeServiceImpl implements EmployeeService {
             throw new ServiceException(HttpStatus.BAD_REQUEST,
                     EmployeeError.getError(EmployeeError.DUPLICATED),
                     message.getMessage("error.employee.register.duplicate"));
+        }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public ResultDto editEmployee(String employeeId, EmployeeEditRequestDto param) throws ServiceException {
+        try {
+            // 社員編集
+            repository.editEmployee(employeeId, param);
+
+            // 更新結果を返却
+            ResultDto result = new ResultDto();
+            result.setResult(ResultType.SUCCESS);
+            result.setMessage(message.getMessage("success.employee.edit"));
+
+            return result;
+        } catch (EmptyResultDataAccessException e) {
+            // 社員が存在しない場合はエラーを返却
+            throw new ServiceException(HttpStatus.NOT_FOUND,
+                    EmployeeError.getError(EmployeeError.NOTFOUND),
+                    message.getMessage("error.employee.notfound"));
         }
     }
 

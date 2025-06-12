@@ -10,23 +10,13 @@ import lombok.experimental.Accessors;
 
 /**
  * <p>
- * 社員登録リクエストDTO
+ * 社員編集リクエストDTO
  * </p>
  */
 @Getter
 @Setter
 @Accessors(chain = true)
-public class EmployeeRegisterRequestDto {
-    /** 社員ID */
-    @NotNull(message = "{error.employee.id.required}")
-    @Size(max = 8, message = "{error.employee.id.max}")
-    private String employeeId;
-
-    /** 社員コード */
-    @NotNull(message = "{error.employee.code.required}")
-    @Size(max = 8, message = "{error.employee.code.length}")
-    private String employeeCode;
-
+public class EmployeeEditRequestDto {
     /** 名前 */
     @NotNull(message = "{error.employee.name.required}")
     @Size(max = 50, message = "{error.employee.name.max}")
@@ -53,5 +43,4 @@ public class EmployeeRegisterRequestDto {
     @NotNull(message = "{error.employee.status.required}")
     @Pattern(regexp = "^(0|1)$", message = "{error.employee.status.invalid}")
     private String status;
-
 }

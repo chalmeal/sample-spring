@@ -51,4 +51,23 @@ public class EmployeeSql {
                         + "(employee_id, employee_code, name, name_kana, mail, department_code, status) "
                         + "VALUES (:employeeId, :employeeCode, :name, :nameKana, :mail, :departmentCode, :status)";
 
+        /**
+         * <p>
+         * 社員編集SQL
+         * </p>
+         * 
+         * @param name           名前
+         * @param nameKana       名前カナ
+         * @param mail           メールアドレス
+         * @param departmentCode 所属部門コード
+         * @param status         状態
+         */
+        protected final String SQL_UPDATE_EMPLOYEE = "UPDATE employees "
+                        + "SET name = :name, "
+                        + "name_kana = :nameKana, "
+                        + "mail = :mail, "
+                        + "department_code = :departmentCode, "
+                        + "status = :status "
+                        + "WHERE employee_id = :employeeId";
+
 }

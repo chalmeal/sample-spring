@@ -2,6 +2,7 @@ package sample.repository;
 
 import java.util.Optional;
 
+import sample.dto.request.employee.EmployeeEditRequestDto;
 import sample.dto.request.employee.EmployeeRegisterRequestDto;
 import sample.model.Employee;
 
@@ -47,4 +48,15 @@ public interface EmployeeRepository {
      * @throws RuntimeException 社員登録に失敗した場合
      */
     void registerEmployee(EmployeeRegisterRequestDto employee) throws RuntimeException;
+
+    /**
+     * <p>
+     * 社員を編集
+     * </p>
+     * 
+     * @param employee 更新パラメータ
+     * @return 更新結果
+     * @throws RuntimeException 社員更新に失敗した場合
+     */
+    void editEmployee(String employeeId, EmployeeEditRequestDto employee) throws RuntimeException;
 }

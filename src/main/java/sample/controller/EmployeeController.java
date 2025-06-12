@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import sample.context.exception.ServiceException;
+import sample.dto.request.employee.EmployeeEditRequestDto;
 import sample.dto.request.employee.EmployeeRegisterRequestDto;
 import sample.dto.response.EmployeeResponseDto;
 import sample.service.EmployeeService;
@@ -79,13 +81,33 @@ public class EmployeeController extends SampleController {
      * 社員を登録します。
      * </p>
      * 
-     * @param
+     * @param param 社員登録パラメータ
      * @return 社員登録結果
      */
     @PostMapping("/register")
     public ResponseEntity<?> registerEmployee(@Valid @RequestBody EmployeeRegisterRequestDto param) {
         try {
             return response(service.registerEmployee(param));
+        } catch (ServiceException e) {
+            return response(e.getStatusCode(), e.getErrorCode(), e.getErrorMessage());
+        }
+    }
+
+    /**
+     * <p>
+     * 社員編集API
+     * 社員を編集します。
+     * </p>
+     * 
+     * @param param 社員編集パラメータ
+     * @return 社員編集結果
+     */
+    @PatchMapping("/edit/{employee_id}")
+    public ResponseEntity<?> editEmployee(
+            @PathVariable(value = "employee_id", required = true) String employeeId,
+            @Valid @RequestBody EmployeeEditRequestDto param) {
+        try {
+            return response(service.editEmployee(employeeId, param));
         } catch (ServiceException e) {
             return response(e.getStatusCode(), e.getErrorCode(), e.getErrorMessage());
         }
