@@ -148,4 +148,27 @@ public class EmployeeServiceImpl implements EmployeeService {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public ResultDto deleteEmployee(String employeeId) throws ServiceException {
+        try {
+            // 社員削除
+            repository.deleteEmployee(employeeId);
+
+            // 削除結果を返却
+            ResultDto result = new ResultDto();
+            result.setResult(ResultType.SUCCESS);
+            result.setMessage(message.getMessage("success.employee.delete"));
+
+            return result;
+        } catch (EmptyResultDataAccessException e) {
+            // 社員が存在しない場合はエラーを返却
+            throw new ServiceException(HttpStatus.NOT_FOUND,
+                    EmployeeError.getError(EmployeeError.NOTFOUND),
+                    message.getMessage("error.employee.notfound"));
+        }
+    }
+
 }

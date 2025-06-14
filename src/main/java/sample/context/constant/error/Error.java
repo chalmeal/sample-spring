@@ -16,6 +16,14 @@ public class Error {
 
     /**
      * <p>
+     * APIリソースが見つからない場合のエラーコード
+     * message: "対象のAPIリソースが見つかりませんでした。"
+     * </p>
+     */
+    public static final String NOT_FOUND = "E99-0001";
+
+    /**
+     * <p>
      * サーバー側のエラーコード
      * message: "サーバー側で予期せぬエラーが発生しました。"
      * </p>

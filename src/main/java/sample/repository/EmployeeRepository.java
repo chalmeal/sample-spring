@@ -59,4 +59,15 @@ public interface EmployeeRepository {
      * @throws RuntimeException 社員更新に失敗した場合
      */
     void editEmployee(String employeeId, EmployeeEditRequestDto employee) throws RuntimeException;
+
+    /**
+     * <p>
+     * 社員を削除
+     * </p>
+     * 
+     * @param employeeId 社員ID
+     * @throws RuntimeException 社員削除に失敗した場合
+     */
+    void deleteEmployee(String employeeId) throws RuntimeException;
+
 }

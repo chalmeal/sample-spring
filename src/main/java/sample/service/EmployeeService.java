@@ -63,4 +63,15 @@ public interface EmployeeService {
      */
     ResultDto editEmployee(String employeeId, EmployeeEditRequestDto param) throws ServiceException;
 
+    /**
+     * <p>
+     * 社員を物理削除
+     * </p>
+     * 
+     * @param employeeId 社員ID
+     * @return 削除結果
+     * @throws ServiceException 社員削除に失敗した場合
+     */
+    ResultDto deleteEmployee(String employeeId) throws ServiceException;
+
 }

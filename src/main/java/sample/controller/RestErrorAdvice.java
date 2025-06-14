@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.servlet.resource.NoResourceFoundException;
 
 import lombok.RequiredArgsConstructor;
 import sample.context.constant.error.EmployeeError;
@@ -29,6 +30,7 @@ public class RestErrorAdvice {
      * <p>
      * バリデーションエラーを処理するメソッド
      * バリデーションエラーが発生した場合に呼び出され、エラーメッセージをMap形式で返します。
+     * status: 400 Bad Request
      * </p>
      * 
      * @param ex
@@ -47,8 +49,28 @@ public class RestErrorAdvice {
 
     /**
      * <p>
+     * リソースが見つからない場合の例外を処理するメソッド
+     * リソースが見つからない場合に呼び出され、エラーメッセージを返します。
+     * status: 404 Not Found
+     * <p>
+     * 
+     * @param ex
+     * @return
+     */
+    @ExceptionHandler(NoResourceFoundException.class)
+    public ResponseEntity<ErrorDto> handleNoResourceFoundException(NoResourceFoundException ex) {
+        ErrorDto errors = new ErrorDto();
+        errors.setErrorCode(EmployeeError.NOT_FOUND);
+        errors.setErrorMessage(message.getMessage("error.global.not_found"));
+
+        return new ResponseEntity<>(errors, HttpStatus.NOT_FOUND);
+    }
+
+    /**
+     * <p>
      * その他の例外を処理するメソッド
      * 予期しない例外が発生した場合に呼び出され、エラーメッセージを返します。
+     * status: 500 Internal Server Error
      * </p>
      * 
      * @param ex

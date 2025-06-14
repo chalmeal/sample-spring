@@ -70,4 +70,14 @@ public class EmployeeSql {
                         + "status = :status "
                         + "WHERE employee_id = :employeeId";
 
+        /**
+         * <p>
+         * 社員削除SQL
+         * </p>
+         * 
+         * @param employeeId 社員ID
+         */
+        protected final String SQL_DELETE_EMPLOYEE = "DELETE FROM employees "
+                        + "WHERE employee_id = :employeeId";
+
 }

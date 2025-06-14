@@ -164,4 +164,30 @@ public class EmployeeRepositoryImpl extends EmployeeSql implements EmployeeRepos
         }
     }
 
+    /**
+     * <p>
+     * 社員を物理削除
+     * </p>
+     * 
+     * @param employeeId 社員ID
+     * @return 削除結果
+     * @throws RuntimeException 社員削除に失敗した場合
+     */
+    public void deleteEmployee(String employeeId) throws RuntimeException {
+        MapSqlParameterSource param;
+        param = new MapSqlParameterSource();
+
+        String sql = SQL_DELETE_EMPLOYEE;
+        // WHERE句で指定する社員ID
+        param.addValue("employeeId", employeeId);
+
+        int result = jdbcTemplate.update(sql, param);
+        if (result == 0) {
+            // 削除対象の社員が存在しない場合はエラーを返却
+            throw new EmptyResultDataAccessException(result);
+        } else {
+            // success
+        }
+    }
+
 }

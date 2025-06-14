@@ -3,6 +3,7 @@ package sample.controller;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -104,10 +105,29 @@ public class EmployeeController extends SampleController {
      */
     @PatchMapping("/edit/{employee_id}")
     public ResponseEntity<?> editEmployee(
-            @PathVariable(value = "employee_id", required = true) String employeeId,
+            @Valid @PathVariable(value = "employee_id", required = true) String employeeId,
             @Valid @RequestBody EmployeeEditRequestDto param) {
         try {
             return response(service.editEmployee(employeeId, param));
+        } catch (ServiceException e) {
+            return response(e.getStatusCode(), e.getErrorCode(), e.getErrorMessage());
+        }
+    }
+
+    /**
+     * <p>
+     * 社員削除API
+     * 社員を物理削除します。
+     * </p>
+     * 
+     * @param employeeId 社員ID
+     * @return 社員削除結果
+     */
+    @DeleteMapping("/delete/{employee_id}")
+    public ResponseEntity<?> deleteEmployee(
+            @PathVariable(value = "employee_id", required = true) String employeeId) {
+        try {
+            return response(service.deleteEmployee(employeeId));
         } catch (ServiceException e) {
             return response(e.getStatusCode(), e.getErrorCode(), e.getErrorMessage());
         }
