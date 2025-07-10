@@ -28,12 +28,12 @@ public class EmployeeSearchTests {
     private static final String uri = "/api/employee/search";
 
     /**
-     * <p>
+     * <pre>
      * [正常系]
      * status: 200 OK
      * 検索条件に合致する社員情報が取得できていること。
      * 検索条件：なし
-     * </p>
+     * </pre>
      */
     @Test
     void success_NoParamater() throws Exception {
@@ -66,9 +66,9 @@ public class EmployeeSearchTests {
     }
 
     /**
-     * <p>
+     * <pre>
      * success_NoParamaterが期待するレスポンス
-     * </p>
+     * </pre>
      */
     private EmployeeResponseDto success_NoParamater_response() {
         // 項目の検証
@@ -84,4 +84,180 @@ public class EmployeeSearchTests {
 
         return response;
     }
+
+    /**
+     * <pre>
+     * [正常系]
+     * status: 200 OK
+     * 検索条件に合致する社員情報が取得できていること
+     * 検索条件：社員ID
+     * </pre>
+     */
+    @Test
+    void success_EmployeeId() throws Exception {
+    }
+
+    /**
+     * <pre>
+     * success_EmployeeIdが期待するレスポンス
+     * </pre>
+     */
+    private EmployeeResponseDto success_EmployeeId_response() {
+        // 項目の検証
+        // 項目の検証は1レコード目のみ実施
+        EmployeeResponseDto response = new EmployeeResponseDto();
+
+        return response;
+    }
+
+    /**
+     * <pre>
+     * [正常系]
+     * status: 200 OK
+     * 検索条件に合致する社員情報が取得できていること
+     * 検索条件：社員コード
+     * </pre>
+     */
+    @Test
+    void success_EmployeeCode() throws Exception {
+    }
+
+    /**
+     * <pre>
+     * success_EmployeeCodeが期待するレスポンス
+     * </pre>
+     */
+    private EmployeeResponseDto success_EmployeeCode_response() {
+        // 項目の検証
+        // 項目の検証は1レコード目のみ実施
+        EmployeeResponseDto response = new EmployeeResponseDto();
+
+        return response;
+    }
+
+    /**
+     * <pre>
+     * [正常系]
+     * status: 200 OK
+     * 検索条件に合致する社員情報が取得できていること
+     * 検索条件：社員名
+     * </pre>
+     */
+    @Test
+    void success_Name() throws Exception {
+    }
+
+    /**
+     * <pre>
+     * success_Nameが期待するレスポンス
+     * </pre>
+     */
+    private EmployeeResponseDto success_Name_response() {
+        // 項目の検証
+        // 項目の検証は1レコード目のみ実施
+        EmployeeResponseDto response = new EmployeeResponseDto();
+
+        return response;
+    }
+
+    /**
+     * <pre>
+     * [正常系]
+     * status: 200 OK
+     * 検索条件に合致する社員情報が取得できていること
+     * 検索条件：社員名カナ
+     * </pre>
+     */
+    @Test
+    void success_NameKana() throws Exception {
+    }
+
+    /**
+     * <pre>
+     * success_NameKanaが期待するレスポンス
+     * </pre>
+     */
+    private EmployeeResponseDto success_NameKana_response() {
+        // 項目の検証
+        // 項目の検証は1レコード目のみ実施
+        EmployeeResponseDto response = new EmployeeResponseDto();
+
+        return response;
+    }
+
+    /**
+     * <pre>
+     * [正常系]
+     * status: 200 OK
+     * 検索条件に合致する社員情報が取得できていること
+     * 検索条件：メールアドレス
+     * </pre>
+     */
+    @Test
+    void success_Mail() throws Exception {
+    }
+
+    /**
+     * <pre>
+     * success_Mailが期待するレスポンス
+     * </pre>
+     */
+    private EmployeeResponseDto success_Mail_response() {
+        // 項目の検証
+        // 項目の検証は1レコード目のみ実施
+        EmployeeResponseDto response = new EmployeeResponseDto();
+
+        return response;
+    }
+
+    /**
+     * <pre>
+     * [正常系]
+     * status: 200 OK
+     * 検索条件に合致する社員情報が取得できていること
+     * 検索条件：所属部門コード
+     * </pre>
+     */
+    @Test
+    void success_DepartmentCode() throws Exception {
+    }
+
+    /**
+     * <pre>
+     * success_DepartmentCodeが期待するレスポンス
+     * </pre>
+     */
+    private EmployeeResponseDto success_DepartmentCode_response() {
+        // 項目の検証
+        // 項目の検証は1レコード目のみ実施
+        EmployeeResponseDto response = new EmployeeResponseDto();
+
+        return response;
+    }
+
+    /**
+     * <pre>
+     * [正常系]
+     * status: 200 OK
+     * 複数の検索条件に合致する社員情報が取得できていること
+     * 検索条件：社員名、所属部門コード
+     * </pre>
+     */
+    @Test
+    void success_MultipleConditions() throws Exception {
+    }
+
+    /**
+     * <pre>
+     * success_MultipleConditionsが期待するレスポンス
+     * </pre>
+     */
+    private EmployeeResponseDto success_MultipleConditions_response() {
+        // 項目の検証
+        // 項目の検証は1レコード目のみ実施
+        EmployeeResponseDto response = new EmployeeResponseDto();
+
+        return response;
+    }
+
 }
