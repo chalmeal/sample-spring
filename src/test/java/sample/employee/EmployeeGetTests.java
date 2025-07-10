@@ -14,6 +14,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import sample.TestHelper;
 import sample.context.constant.error.EmployeeError;
 import sample.context.util.Message;
 import sample.dto.ErrorDto;
@@ -21,7 +22,7 @@ import sample.dto.response.EmployeeResponseDto;
 
 @SpringBootTest
 @AutoConfigureMockMvc
-public class EmployeeGetTests {
+public class EmployeeGetTests extends TestHelper {
     @Autowired
     private MockMvc mockMvc;
     @Autowired
@@ -49,7 +50,6 @@ public class EmployeeGetTests {
                 .getResponse();
 
         // JSONレスポンスの変換
-        ObjectMapper objectMapper = new ObjectMapper();
         EmployeeResponseDto actual = objectMapper.readValue(result.getContentAsString(), EmployeeResponseDto.class);
 
         // ステータスの検証

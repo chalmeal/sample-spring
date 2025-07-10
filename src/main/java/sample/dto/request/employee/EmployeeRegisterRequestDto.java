@@ -35,7 +35,7 @@ public class EmployeeRegisterRequestDto {
     /** 名前カナ */
     @NotNull(message = "{error.employee.nameKana.required}")
     @Size(max = 50, message = "{error.employee.nameKana.max}")
-    @Pattern(regexp = "^[ァ-ヶー]+$", message = "{error.employee.nameKana.kana}")
+    @Pattern(regexp = "^[ァ-ヶー\\s]+$", message = "{error.employee.nameKana.kana}")
     private String nameKana;
 
     /** 部署コード */
