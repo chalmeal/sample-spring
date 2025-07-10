@@ -9,7 +9,7 @@ public class EmployeeError extends Error {
      * message: "社員情報が見つかりませんでした。"
      * </p>
      */
-    public static final String NOTFOUND = "1001";
+    public static final String NOT_EXISTS = "1001";
 
     /**
      * <p>

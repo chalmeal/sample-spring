@@ -4,9 +4,11 @@ import java.time.LocalDateTime;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.experimental.Accessors;
 
 /**
  * <p>
@@ -15,9 +17,11 @@ import lombok.experimental.Accessors;
  */
 @Getter
 @Setter
-@Accessors(chain = true)
+@Entity
+@Table(name = "employees")
 public class Employee {
     /** 社員ID */
+    @Id
     private String employeeId;
 
     /** 社員コード */

@@ -52,6 +52,7 @@ public class EmployeeServiceImpl implements EmployeeService {
             // 社員情報をDTOに設定
             Employee employee = optEmployee.get();
             result.setEmployeeId(employee.getEmployeeId());
+            result.setEmployeeCode(employee.getEmployeeCode());
             result.setName(employee.getName());
             result.setNameKana(employee.getNameKana());
             result.setDepartmentCode(employee.getDepartmentCode());
@@ -62,7 +63,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         } catch (EmptyResultDataAccessException e) {
             // 社員が存在しない場合はエラーを返却
             throw new ServiceException(HttpStatus.NOT_FOUND,
-                    EmployeeError.getError(EmployeeError.NOTFOUND),
+                    EmployeeError.getError(EmployeeError.NOT_EXISTS),
                     message.getMessage("error.employee.notfound"));
         }
     }
@@ -86,6 +87,7 @@ public class EmployeeServiceImpl implements EmployeeService {
             for (Employee employee : employees) {
                 EmployeeResponseDto dto = new EmployeeResponseDto();
                 dto.setEmployeeId(employee.getEmployeeId());
+                dto.setEmployeeCode(employee.getEmployeeCode());
                 dto.setName(employee.getName());
                 dto.setNameKana(employee.getNameKana());
                 dto.setDepartmentCode(employee.getDepartmentCode());
@@ -143,7 +145,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         } catch (EmptyResultDataAccessException e) {
             // 社員が存在しない場合はエラーを返却
             throw new ServiceException(HttpStatus.NOT_FOUND,
-                    EmployeeError.getError(EmployeeError.NOTFOUND),
+                    EmployeeError.getError(EmployeeError.NOT_EXISTS),
                     message.getMessage("error.employee.notfound"));
         }
     }
@@ -166,7 +168,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         } catch (EmptyResultDataAccessException e) {
             // 社員が存在しない場合はエラーを返却
             throw new ServiceException(HttpStatus.NOT_FOUND,
-                    EmployeeError.getError(EmployeeError.NOTFOUND),
+                    EmployeeError.getError(EmployeeError.NOT_EXISTS),
                     message.getMessage("error.employee.notfound"));
         }
     }
