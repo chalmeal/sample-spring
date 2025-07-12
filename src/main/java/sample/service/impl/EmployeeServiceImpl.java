@@ -24,9 +24,9 @@ import sample.repository.EmployeeRepository;
 import sample.service.EmployeeService;
 
 /**
- * <p>
+ * <pre>
  * 社員のService実装クラス
- * </p>
+ * </pre>
  */
 @Service
 @Transactional

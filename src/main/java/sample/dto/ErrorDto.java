@@ -4,9 +4,9 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * <p>
+ * <pre>
  * エラー情報を保持するDto
- * </p>
+ * </pre>
  */
 @Getter
 @Setter

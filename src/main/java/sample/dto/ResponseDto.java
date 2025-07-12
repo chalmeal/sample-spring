@@ -1,9 +1,9 @@
 package sample.dto;
 
 /**
- * <p>
+ * <pre>
  * ControllerクラスのレスポンスDto
- * </p>
+ * </pre>
  */
 public class ResponseDto {
 }

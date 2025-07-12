@@ -16,9 +16,9 @@ import sample.context.util.Message;
 import sample.dto.ErrorDto;
 
 /**
- * <p>
+ * <pre>
  * REST APIのエラー処理を行うクラス
- * </p>
+ * </pre>
  */
 @ControllerAdvice
 @RequiredArgsConstructor
@@ -27,11 +27,11 @@ public class RestErrorAdvice {
     private final Message message;
 
     /**
-     * <p>
+     * <pre>
      * バリデーションエラーを処理するメソッド
      * バリデーションエラーが発生した場合に呼び出され、エラーメッセージをMap形式で返します。
      * status: 400 Bad Request
-     * </p>
+     * </pre>
      * 
      * @param ex
      * @return
@@ -48,11 +48,12 @@ public class RestErrorAdvice {
     }
 
     /**
-     * <p>
+     * <pre>
      * リソースが見つからない場合の例外を処理するメソッド
      * リソースが見つからない場合に呼び出され、エラーメッセージを返します。
      * status: 404 Not Found
-     * <p>
+     * 
+     * <pre>
      * 
      * @param ex
      * @return
@@ -67,11 +68,11 @@ public class RestErrorAdvice {
     }
 
     /**
-     * <p>
+     * <pre>
      * その他の例外を処理するメソッド
      * 予期しない例外が発生した場合に呼び出され、エラーメッセージを返します。
      * status: 500 Internal Server Error
-     * </p>
+     * </pre>
      * 
      * @param ex
      * @return

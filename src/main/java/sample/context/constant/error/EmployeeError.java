@@ -3,27 +3,27 @@ package sample.context.constant.error;
 public class EmployeeError extends Error {
 
     /**
-     * <p>
+     * <pre>
      * 存在しない社員を取得しようとした場合のエラーコード
      * status: 404
      * message: "社員情報が見つかりませんでした。"
-     * </p>
+     * </pre>
      */
     public static final String NOT_EXISTS = "1001";
 
     /**
-     * <p>
+     * <pre>
      * 既に登録されている社員IDを登録しようとした場合のエラーコード
      * status: 400
      * message: "社員IDまたは社員コードが既に存在します。"
-     * </p>
+     * </pre>
      */
     public static final String DUPLICATED = "1002";
 
     /**
-     * <p>
+     * <pre>
      * 社員のエラーコードを取得
-     * </p>
+     * </pre>
      * 
      * @param error
      */

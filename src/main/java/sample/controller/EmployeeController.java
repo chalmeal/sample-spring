@@ -22,9 +22,9 @@ import sample.dto.response.EmployeeResponseDto;
 import sample.service.EmployeeService;
 
 /**
- * <p>
+ * <pre>
  * 社員のControllerクラス
- * </p>
+ * </pre>
  */
 @RestController
 @RequestMapping("/api/employee")
@@ -34,10 +34,10 @@ public class EmployeeController extends SampleController {
     private final EmployeeService service;
 
     /**
-     * <p>
+     * <pre>
      * 社員取得API
      * 社員を1件取得します。
-     * </p>
+     * </pre>
      * 
      * @param employeeId 社員ID
      * @return 社員
@@ -53,10 +53,10 @@ public class EmployeeController extends SampleController {
     }
 
     /**
-     * <p>
+     * <pre>
      * 社員検索API
      * 社員を検索します。
-     * </p>
+     * </pre>
      * 
      * @param employeeId     社員ID
      * @param employeeCode   社員コード
@@ -77,10 +77,10 @@ public class EmployeeController extends SampleController {
     }
 
     /**
-     * <p>
+     * <pre>
      * 社員登録API
      * 社員を登録します。
-     * </p>
+     * </pre>
      * 
      * @param param 社員登録パラメータ
      * @return 社員登録結果
@@ -95,10 +95,10 @@ public class EmployeeController extends SampleController {
     }
 
     /**
-     * <p>
+     * <pre>
      * 社員編集API
      * 社員を編集します。
-     * </p>
+     * </pre>
      * 
      * @param param 社員編集パラメータ
      * @return 社員編集結果
@@ -115,10 +115,10 @@ public class EmployeeController extends SampleController {
     }
 
     /**
-     * <p>
+     * <pre>
      * 社員削除API
      * 社員を物理削除します。
-     * </p>
+     * </pre>
      * 
      * @param employeeId 社員ID
      * @return 社員削除結果

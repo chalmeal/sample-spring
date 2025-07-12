@@ -5,10 +5,10 @@ import org.springframework.http.HttpStatus;
 import lombok.Getter;
 
 /**
- * <p>
+ * <pre>
  * Serviceエラークラス
  * Service層で発生する例外を表します。
- * </p>
+ * </pre>
  */
 @Getter
 public class ServiceException extends RuntimeException {
@@ -23,11 +23,11 @@ public class ServiceException extends RuntimeException {
     private String errorMessage;
 
     /**
-     * <p>
+     * <pre>
      * ServiceExceptionコンストラクタ
      * ステータスコード、エラーコード、エラーメッセージを指定してServiceExceptionを生成します。
      * Controllerにエラーを返す際に使用します。
-     * </p>
+     * </pre>
      * 
      * @param statusCode ステータスコード
      * @param errorCode  エラーコード

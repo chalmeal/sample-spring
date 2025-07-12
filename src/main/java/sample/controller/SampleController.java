@@ -15,10 +15,10 @@ import sample.dto.ResultDto;
 public class SampleController {
 
     /**
-     * <p>
+     * <pre>
      * OK(200)
      * ResponseEntityにServiceからの結果値を格納してクライアントに返却
-     * </p>
+     * </pre>
      * 
      * @param resDto
      * @return ResponseEntity<ResponseDto>
@@ -28,7 +28,7 @@ public class SampleController {
     }
 
     /**
-     * <p>
+     * <pre>
      * OK(200)
      * ResponseEntityにServiceからの結果値を格納してクライアントに返却
      * 
@@ -40,10 +40,10 @@ public class SampleController {
     }
 
     /**
-     * <p>
+     * <pre>
      * Success(201)
      * ResponseEntityにServiceからの結果値を格納してクライアントに返却
-     * </p>
+     * </pre>
      * 
      * @param result
      * @param message
@@ -54,10 +54,10 @@ public class SampleController {
     }
 
     /**
-     * <p>
+     * <pre>
      * Error
      * ResponseEntityにServiceからの結果値を格納してクライアントに返却
-     * </p>
+     * </pre>
      * 
      * @param statusCode
      * @param errorCode

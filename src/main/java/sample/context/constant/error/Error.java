@@ -1,32 +1,32 @@
 package sample.context.constant.error;
 
 /**
- * <p>
+ * <pre>
  * エラーコード定数クラス
- * </p>
+ * </pre>
  */
 public class Error {
 
     /**
-     * <p>
+     * <pre>
      * 社員のベースエラーコード
-     * </p>
+     * </pre>
      */
     public static final String ERROR_CODE_EMPLOYEE = "E10";
 
     /**
-     * <p>
+     * <pre>
      * APIリソースが見つからない場合のエラーコード
      * message: "対象のAPIリソースが見つかりませんでした。"
-     * </p>
+     * </pre>
      */
     public static final String NOT_FOUND = "E99-0001";
 
     /**
-     * <p>
+     * <pre>
      * サーバー側のエラーコード
      * message: "サーバー側で予期せぬエラーが発生しました。"
-     * </p>
+     * </pre>
      */
     public static final String INTERNAL_SERVER_ERROR = "E99-9999";
 

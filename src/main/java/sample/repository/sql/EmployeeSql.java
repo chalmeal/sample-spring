@@ -1,17 +1,17 @@
 package sample.repository.sql;
 
 /**
- * <p>
+ * <pre>
  * 社員のSQLクラス
  * SQLのパラメタがnullableの場合は、repository内で動的SQLを組み立ててください。
- * </p>
+ * </pre>
  */
 public class EmployeeSql {
 
         /**
-         * <p>
+         * <pre>
          * 社員取得SELECT
-         * </p>
+         * </pre>
          */
         protected final String SQL_SELECT_EMPLOYEE = " SELECT "
                         + "'SQL_SELECT_EMPLOYEE' AS sql_type, "
@@ -25,9 +25,9 @@ public class EmployeeSql {
                         + "FROM employees ";
 
         /**
-         * <p>
+         * <pre>
          * 社員取得SQL
-         * </p>
+         * </pre>
          *
          * @param employeeId 社員ID
          */
@@ -35,9 +35,9 @@ public class EmployeeSql {
                         + "WHERE employee_id = :employeeId";
 
         /**
-         * <p>
+         * <pre>
          * 社員登録SQL
-         * </p>
+         * </pre>
          * 
          * @param employeeId     社員ID
          * @param employeeCode   社員コード
@@ -52,9 +52,9 @@ public class EmployeeSql {
                         + "VALUES (:employeeId, :employeeCode, :name, :nameKana, :mail, :departmentCode, :status)";
 
         /**
-         * <p>
+         * <pre>
          * 社員編集SQL
-         * </p>
+         * </pre>
          * 
          * @param name           名前
          * @param nameKana       名前カナ
@@ -71,9 +71,9 @@ public class EmployeeSql {
                         + "WHERE employee_id = :employeeId";
 
         /**
-         * <p>
+         * <pre>
          * 社員削除SQL
-         * </p>
+         * </pre>
          * 
          * @param employeeId 社員ID
          */

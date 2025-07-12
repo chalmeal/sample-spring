@@ -7,16 +7,17 @@ import sample.dto.request.employee.EmployeeRegisterRequestDto;
 import sample.model.Employee;
 
 /**
- * <p>
+ * <pre>
  * 社員のRepositoryインターフェース
- * <p>
+ * 
+ * <pre>
  */
 public interface EmployeeRepository {
 
     /**
-     * <p>
+     * <pre>
      * 社員IDから社員を取得
-     * </p>
+     * </pre>
      * 
      * @param employeeId 社員ID
      * @return 社員
@@ -24,9 +25,9 @@ public interface EmployeeRepository {
     Optional<Employee> getEmployeeById(String employeeId);
 
     /**
-     * <p>
+     * <pre>
      * 社員を検索
-     * </p>
+     * </pre>
      * 
      * @param employeeId     社員ID
      * @param employeeCode   社員コード
@@ -39,9 +40,9 @@ public interface EmployeeRepository {
             String departmentCode);
 
     /**
-     * <p>
+     * <pre>
      * 社員を登録
-     * </p>
+     * </pre>
      * 
      * @param employee 登録パラメータ
      * @return 登録結果
@@ -50,9 +51,9 @@ public interface EmployeeRepository {
     void registerEmployee(EmployeeRegisterRequestDto employee) throws RuntimeException;
 
     /**
-     * <p>
+     * <pre>
      * 社員を編集
-     * </p>
+     * </pre>
      * 
      * @param employee 更新パラメータ
      * @return 更新結果
@@ -61,9 +62,9 @@ public interface EmployeeRepository {
     void editEmployee(String employeeId, EmployeeEditRequestDto employee) throws RuntimeException;
 
     /**
-     * <p>
+     * <pre>
      * 社員を削除
-     * </p>
+     * </pre>
      * 
      * @param employeeId 社員ID
      * @throws RuntimeException 社員削除に失敗した場合

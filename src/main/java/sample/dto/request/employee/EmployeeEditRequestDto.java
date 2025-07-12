@@ -9,9 +9,9 @@ import lombok.Setter;
 import lombok.experimental.Accessors;
 
 /**
- * <p>
+ * <pre>
  * 社員編集リクエストDTO
- * </p>
+ * </pre>
  */
 @Getter
 @Setter

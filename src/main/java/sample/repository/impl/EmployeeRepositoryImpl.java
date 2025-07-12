@@ -18,9 +18,10 @@ import sample.repository.EmployeeRepository;
 import sample.repository.sql.EmployeeSql;
 
 /**
- * <p>
+ * <pre>
  * 社員のRepositoryクラス
- * <p>
+ * 
+ * <pre>
  */
 @Repository
 public class EmployeeRepositoryImpl extends EmployeeSql implements EmployeeRepository {
@@ -37,9 +38,9 @@ public class EmployeeRepositoryImpl extends EmployeeSql implements EmployeeRepos
     }
 
     /**
-     * <p>
+     * <pre>
      * 社員IDから社員を取得
-     * </p>
+     * </pre>
      * 
      * @param employeeId 社員ID
      * @return 社員
@@ -55,9 +56,9 @@ public class EmployeeRepositoryImpl extends EmployeeSql implements EmployeeRepos
     }
 
     /**
-     * <p>
+     * <pre>
      * 社員を検索
-     * </p>
+     * </pre>
      * 
      * @param employeeId     社員ID
      * @param employeeCode   社員コード
@@ -107,9 +108,9 @@ public class EmployeeRepositoryImpl extends EmployeeSql implements EmployeeRepos
     }
 
     /**
-     * <p>
+     * <pre>
      * 社員を登録
-     * </p>
+     * </pre>
      * 
      * @param employee 登録する社員
      * @return 登録結果
@@ -133,9 +134,9 @@ public class EmployeeRepositoryImpl extends EmployeeSql implements EmployeeRepos
     }
 
     /**
-     * <p>
+     * <pre>
      * 社員を編集
-     * </p>
+     * </pre>
      * 
      * @param employee 更新する社員
      * @return 更新結果
@@ -165,9 +166,9 @@ public class EmployeeRepositoryImpl extends EmployeeSql implements EmployeeRepos
     }
 
     /**
-     * <p>
+     * <pre>
      * 社員を物理削除
-     * </p>
+     * </pre>
      * 
      * @param employeeId 社員ID
      * @return 削除結果

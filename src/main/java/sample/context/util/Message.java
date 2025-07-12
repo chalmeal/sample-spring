@@ -6,10 +6,10 @@ import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Component;
 
 /**
- * <p>
+ * <pre>
  * メッセージ取得クラス
  * messages.propertiesからメッセージを取得します。
- * </p>
+ * </pre>
  */
 @Component
 public class Message {
@@ -22,10 +22,10 @@ public class Message {
     }
 
     /**
-     * <p>
+     * <pre>
      * メッセージ取得
      * エラーメッセージはハードコードせず、必ずmessages.propertiesから取得してください。
-     * </p>
+     * </pre>
      * 
      * @param msg メッセージキー
      * @return メッセージ

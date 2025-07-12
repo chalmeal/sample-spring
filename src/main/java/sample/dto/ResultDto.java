@@ -4,9 +4,9 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * <p>
+ * <pre>
  * 結果レスポンスを表すDto
- * </p>
+ * </pre>
  */
 @Getter
 @Setter

@@ -6,9 +6,9 @@ import lombok.experimental.Accessors;
 import sample.dto.ResponseDto;
 
 /**
- * <p>
+ * <pre>
  * 社員情報を保持するDto
- * </p>
+ * </pre>
  */
 @Getter
 @Setter

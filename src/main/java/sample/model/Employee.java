@@ -11,9 +11,9 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * <p>
+ * <pre>
  * 社員を定義します。
- * </p>
+ * </pre>
  */
 @Getter
 @Setter

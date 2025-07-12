@@ -10,9 +10,9 @@ import org.springframework.stereotype.Component;
 import sample.model.Employee;
 
 /**
- * <p>
+ * <pre>
  * 社員のMapperクラス
- * </p>
+ * </pre>
  */
 @Component
 public class EmployeeMapper implements RowMapper<Employee> {
@@ -35,9 +35,9 @@ public class EmployeeMapper implements RowMapper<Employee> {
     }
 
     /**
-     * <p>
+     * <pre>
      * 社員取得SQLマッピング
-     * </p>
+     * </pre>
      * 
      * @param rs
      * @param rowNum
