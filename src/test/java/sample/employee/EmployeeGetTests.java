@@ -12,8 +12,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 import sample.TestHelper;
 import sample.context.constant.error.EmployeeError;
 import sample.context.util.Message;
@@ -101,7 +99,6 @@ public class EmployeeGetTests extends TestHelper {
                 .getResponse();
 
         // JSONレスポンスの変換
-        ObjectMapper objectMapper = new ObjectMapper();
         ErrorDto actual = objectMapper.readValue(result.getContentAsString(), ErrorDto.class);
 
         // ステータスの検証
@@ -137,13 +134,12 @@ public class EmployeeGetTests extends TestHelper {
         ErrorDto expected = failure_NotFoundResource_response();
 
         // リクエスト
-        MockHttpServletRequestBuilder request = MockMvcRequestBuilders.get(uri);
+        MockHttpServletRequestBuilder request = MockMvcRequestBuilders.get("/api/employee");
         MockHttpServletResponse result = this.mockMvc.perform(request)
                 .andReturn()
                 .getResponse();
 
         // JSONレスポンスの変換
-        ObjectMapper objectMapper = new ObjectMapper();
         ErrorDto actual = objectMapper.readValue(result.getContentAsString(), ErrorDto.class);
 
         // ステータスの検証

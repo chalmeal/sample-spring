@@ -46,7 +46,7 @@ public class EmployeeController extends SampleController {
     public ResponseEntity<?> getEmployee(
             @PathVariable(value = "employee_id", required = false) String employeeId) {
         try {
-            return response(service.getEmployee(employeeId));
+            return responseOK(service.getEmployee(employeeId));
         } catch (ServiceException e) {
             return response(e.getStatusCode(), e.getErrorCode(), e.getErrorMessage());
         }
@@ -88,7 +88,7 @@ public class EmployeeController extends SampleController {
     @PostMapping("/register")
     public ResponseEntity<?> registerEmployee(@Valid @RequestBody EmployeeRegisterRequestDto param) {
         try {
-            return response(service.registerEmployee(param));
+            return responseCreate(service.registerEmployee(param));
         } catch (ServiceException e) {
             return response(e.getStatusCode(), e.getErrorCode(), e.getErrorMessage());
         }
@@ -108,7 +108,7 @@ public class EmployeeController extends SampleController {
             @Valid @PathVariable(value = "employee_id", required = true) String employeeId,
             @Valid @RequestBody EmployeeEditRequestDto param) {
         try {
-            return response(service.editEmployee(employeeId, param));
+            return responseOK(service.editEmployee(employeeId, param));
         } catch (ServiceException e) {
             return response(e.getStatusCode(), e.getErrorCode(), e.getErrorMessage());
         }
@@ -127,7 +127,7 @@ public class EmployeeController extends SampleController {
     public ResponseEntity<?> deleteEmployee(
             @PathVariable(value = "employee_id", required = true) String employeeId) {
         try {
-            return response(service.deleteEmployee(employeeId));
+            return responseOK(service.deleteEmployee(employeeId));
         } catch (ServiceException e) {
             return response(e.getStatusCode(), e.getErrorCode(), e.getErrorMessage());
         }

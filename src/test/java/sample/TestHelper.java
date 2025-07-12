@@ -23,10 +23,4 @@ public class TestHelper {
         objectMapper.setPropertyNamingStrategy(PropertyNamingStrategies.SNAKE_CASE);
     }
 
-    /**
-     * <pre>
-     * 登録 / 更新後のデータ取得
-     * </pre>
-     */
-
 }

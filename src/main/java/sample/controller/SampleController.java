@@ -16,15 +16,27 @@ public class SampleController {
 
     /**
      * <p>
-     * Success(200)
+     * OK(200)
      * ResponseEntityにServiceからの結果値を格納してクライアントに返却
      * </p>
      * 
      * @param resDto
      * @return ResponseEntity<ResponseDto>
      */
-    protected ResponseEntity<ResponseDto> response(ResponseDto resDto) {
+    protected ResponseEntity<ResponseDto> responseOK(ResponseDto resDto) {
         return new ResponseEntity<ResponseDto>(resDto, HttpStatus.OK);
+    }
+
+    /**
+     * <p>
+     * OK(200)
+     * ResponseEntityにServiceからの結果値を格納してクライアントに返却
+     * 
+     * @param resDto
+     * @return ResponseEntity<ResultDto>
+     */
+    protected ResponseEntity<ResultDto> responseOK(ResultDto resDto) {
+        return new ResponseEntity<ResultDto>(resDto, HttpStatus.OK);
     }
 
     /**
@@ -37,7 +49,7 @@ public class SampleController {
      * @param message
      * @return ResponseEntity<ResultDto>
      */
-    protected ResponseEntity<ResultDto> response(ResultDto result) {
+    protected ResponseEntity<ResultDto> responseCreate(ResultDto result) {
         return new ResponseEntity<ResultDto>(result, HttpStatus.CREATED);
     }
 

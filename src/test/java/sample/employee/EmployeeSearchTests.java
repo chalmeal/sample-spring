@@ -15,13 +15,13 @@ import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilde
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
+import sample.TestHelper;
 import sample.dto.response.EmployeeResponseDto;
 
 @SpringBootTest
 @AutoConfigureMockMvc
-public class EmployeeSearchTests {
+public class EmployeeSearchTests extends TestHelper {
     @Autowired
     private MockMvc mockMvc;
 
@@ -48,7 +48,6 @@ public class EmployeeSearchTests {
                 .getResponse();
 
         // JSONレスポンスの変換
-        ObjectMapper objectMapper = new ObjectMapper();
         List<EmployeeResponseDto> actual = objectMapper.readValue(result.getContentAsString(),
                 new TypeReference<List<EmployeeResponseDto>>() {
                 });
