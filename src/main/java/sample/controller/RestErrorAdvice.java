@@ -61,7 +61,7 @@ public class RestErrorAdvice {
     public ResponseEntity<ErrorDto> handleNoResourceFoundException(NoResourceFoundException ex) {
         ErrorDto errors = new ErrorDto();
         errors.setErrorCode(EmployeeError.NOT_FOUND);
-        errors.setErrorMessage(message.getMessage("error.global.not_found"));
+        errors.setErrorMessage(message.get("error.global.not_found"));
 
         return new ResponseEntity<>(errors, HttpStatus.NOT_FOUND);
     }
@@ -80,7 +80,7 @@ public class RestErrorAdvice {
     public ResponseEntity<ErrorDto> handleAllExceptions(Exception ex) {
         ErrorDto errors = new ErrorDto();
         errors.setErrorCode(EmployeeError.INTERNAL_SERVER_ERROR);
-        errors.setErrorMessage(message.getMessage("error.global.internal"));
+        errors.setErrorMessage(message.get("error.global.internal"));
 
         return new ResponseEntity<>(errors, HttpStatus.INTERNAL_SERVER_ERROR);
     }

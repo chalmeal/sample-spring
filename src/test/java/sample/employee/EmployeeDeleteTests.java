@@ -12,6 +12,7 @@ import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilde
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import sample.TestHelper;
+import sample.context.util.Message;
 import sample.dto.ResultDto;
 
 @SpringBootTest
@@ -19,6 +20,8 @@ import sample.dto.ResultDto;
 public class EmployeeDeleteTests extends TestHelper {
     @Autowired
     private MockMvc mockMvc;
+    @Autowired
+    private Message message;
 
     private static final String uri = "/api/employee/delete/{employee_id}";
 
@@ -62,7 +65,7 @@ public class EmployeeDeleteTests extends TestHelper {
     private ResultDto success_response() {
         ResultDto result = new ResultDto();
         result.setResult(ResultDto.ResultType.SUCCESS);
-        result.setMessage("社員情報を削除しました。");
+        result.setMessage(message.get("success.employee.delete"));
 
         return result;
     }
@@ -78,6 +81,7 @@ public class EmployeeDeleteTests extends TestHelper {
         MockHttpServletResponse response = this.mockMvc.perform(request)
                 .andReturn()
                 .getResponse();
+
         // ステータスの検証
         assertEquals(404, response.getStatus());
     }

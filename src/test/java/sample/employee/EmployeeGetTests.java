@@ -116,7 +116,7 @@ public class EmployeeGetTests extends TestHelper {
     private ErrorDto failure_NotExistEmployee_response() {
         ErrorDto response = new ErrorDto();
         response.setErrorCode(EmployeeError.getError(EmployeeError.NOT_EXISTS));
-        response.setErrorMessage(message.getMessage("error.employee.notfound"));
+        response.setErrorMessage(message.get("error.employee.notfound"));
 
         return response;
     }
@@ -157,7 +157,7 @@ public class EmployeeGetTests extends TestHelper {
     private ErrorDto failure_NotFoundResource_response() {
         ErrorDto response = new ErrorDto();
         response.setErrorCode(EmployeeError.NOT_FOUND);
-        response.setErrorMessage(message.getMessage("error.global.not_found"));
+        response.setErrorMessage(message.get("error.global.not_found"));
 
         return response;
     }

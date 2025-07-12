@@ -30,7 +30,7 @@ public class Message {
      * @param msg メッセージキー
      * @return メッセージ
      */
-    public String getMessage(String msg) {
+    public String get(String msg) {
         return messageSource.getMessage(msg, null, Locale.getDefault());
     }
 }

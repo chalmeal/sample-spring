@@ -92,7 +92,7 @@ public class EmployeeRegisterTests extends TestHelper {
     private ResultDto success_response() {
         ResultDto response = new ResultDto();
         response.setResult(ResultType.SUCCESS);
-        response.setMessage(message.getMessage("success.employee.register"));
+        response.setMessage(message.get("success.employee.register"));
 
         return response;
     }

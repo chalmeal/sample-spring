@@ -64,7 +64,7 @@ public class EmployeeServiceImpl implements EmployeeService {
             // 社員が存在しない場合はエラーを返却
             throw new ServiceException(HttpStatus.NOT_FOUND,
                     EmployeeError.getError(EmployeeError.NOT_EXISTS),
-                    message.getMessage("error.employee.notfound"));
+                    message.get("error.employee.notfound"));
         }
     }
 
@@ -116,14 +116,14 @@ public class EmployeeServiceImpl implements EmployeeService {
             // 登録結果を返却
             ResultDto result = new ResultDto();
             result.setResult(ResultType.SUCCESS);
-            result.setMessage(message.getMessage("success.employee.register"));
+            result.setMessage(message.get("success.employee.register"));
 
             return result;
         } catch (DuplicateKeyException e) {
             // 社員IDが重複している場合はエラーを返却
             throw new ServiceException(HttpStatus.BAD_REQUEST,
                     EmployeeError.getError(EmployeeError.DUPLICATED),
-                    message.getMessage("error.employee.register.duplicate"));
+                    message.get("error.employee.register.duplicate"));
         }
     }
 
@@ -139,14 +139,14 @@ public class EmployeeServiceImpl implements EmployeeService {
             // 更新結果を返却
             ResultDto result = new ResultDto();
             result.setResult(ResultType.SUCCESS);
-            result.setMessage(message.getMessage("success.employee.edit"));
+            result.setMessage(message.get("success.employee.edit"));
 
             return result;
         } catch (EmptyResultDataAccessException e) {
             // 社員が存在しない場合はエラーを返却
             throw new ServiceException(HttpStatus.NOT_FOUND,
                     EmployeeError.getError(EmployeeError.NOT_EXISTS),
-                    message.getMessage("error.employee.notfound"));
+                    message.get("error.employee.notfound"));
         }
     }
 
@@ -162,14 +162,14 @@ public class EmployeeServiceImpl implements EmployeeService {
             // 削除結果を返却
             ResultDto result = new ResultDto();
             result.setResult(ResultType.SUCCESS);
-            result.setMessage(message.getMessage("success.employee.delete"));
+            result.setMessage(message.get("success.employee.delete"));
 
             return result;
         } catch (EmptyResultDataAccessException e) {
             // 社員が存在しない場合はエラーを返却
             throw new ServiceException(HttpStatus.NOT_FOUND,
                     EmployeeError.getError(EmployeeError.NOT_EXISTS),
-                    message.getMessage("error.employee.notfound"));
+                    message.get("error.employee.notfound"));
         }
     }
 

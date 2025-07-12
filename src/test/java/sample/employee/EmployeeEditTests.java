@@ -90,7 +90,7 @@ public class EmployeeEditTests extends TestHelper {
     private ResultDto success_response() {
         ResultDto result = new ResultDto();
         result.setResult(ResultDto.ResultType.SUCCESS);
-        result.setMessage(message.getMessage("success.employee.edit"));
+        result.setMessage(message.get("success.employee.edit"));
 
         return result;
     }
