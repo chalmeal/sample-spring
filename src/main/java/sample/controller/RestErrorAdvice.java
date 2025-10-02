@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.resource.NoResourceFoundException;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import sample.context.constant.error.EmployeeError;
 import sample.context.util.Message;
 import sample.dto.ErrorDto;
@@ -22,6 +23,7 @@ import sample.dto.ErrorDto;
  */
 @ControllerAdvice
 @RequiredArgsConstructor
+@Slf4j
 public class RestErrorAdvice {
     // DI
     private final Message message;
@@ -82,6 +84,7 @@ public class RestErrorAdvice {
         ErrorDto errors = new ErrorDto();
         errors.setErrorCode(EmployeeError.INTERNAL_SERVER_ERROR);
         errors.setErrorMessage(message.get("error.global.internal"));
+        log.error(ex.toString());
 
         return new ResponseEntity<>(errors, HttpStatus.INTERNAL_SERVER_ERROR);
     }
