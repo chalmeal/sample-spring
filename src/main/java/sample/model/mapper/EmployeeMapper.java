@@ -47,10 +47,10 @@ public class EmployeeMapper implements RowMapper<Employee> {
     private Employee getEmployee(ResultSet rs, int rowNum) throws SQLException {
         Employee model = mapper.mapRow(rs, rowNum);
         model.setEmployeeId(rs.getString("employee_id"));
-        model.setEmployeeCode(rs.getString("employee_code"));
+        // model.setEmployeeCode(rs.getString("employee_code"));
         model.setName(rs.getString("name"));
         model.setNameKana(rs.getString("name_kana"));
-        model.setMail(rs.getString("mail"));
+        // model.setMail(rs.getString("mail"));
         model.setDepartmentCode(rs.getString("department_code"));
         model.setStatus(rs.getInt("status"));
 

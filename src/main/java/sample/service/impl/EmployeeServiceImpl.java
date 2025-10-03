@@ -52,11 +52,11 @@ public class EmployeeServiceImpl implements EmployeeService {
             // 社員情報をDTOに設定
             Employee employee = optEmployee.get();
             result.setEmployeeId(employee.getEmployeeId());
-            result.setEmployeeCode(employee.getEmployeeCode());
+            // result.setEmployeeCode(employee.getEmployeeCode());
             result.setName(employee.getName());
             result.setNameKana(employee.getNameKana());
             result.setDepartmentCode(employee.getDepartmentCode());
-            result.setMail(employee.getMail());
+            // result.setMail(employee.getMail());
             result.setStatus(employee.getStatus());
 
             return result;
@@ -87,11 +87,11 @@ public class EmployeeServiceImpl implements EmployeeService {
             for (Employee employee : employees) {
                 EmployeeResponseDto dto = new EmployeeResponseDto();
                 dto.setEmployeeId(employee.getEmployeeId());
-                dto.setEmployeeCode(employee.getEmployeeCode());
+                // dto.setEmployeeCode(employee.getEmployeeCode());
                 dto.setName(employee.getName());
                 dto.setNameKana(employee.getNameKana());
                 dto.setDepartmentCode(employee.getDepartmentCode());
-                dto.setMail(employee.getMail());
+                // dto.setMail(employee.getMail());
                 dto.setStatus(employee.getStatus());
 
                 result.add(dto);

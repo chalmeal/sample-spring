@@ -21,12 +21,12 @@
 
 | 項目名（論理）     | 項目名（物理）      | PK | 必須 | 型     | 桁数  | 一意 | 備考 |
 | --------------- | ----------------- | -- | --- | ------ | --- | ---- | ---- |
-| 社員ID           | employee_id      | ◯  | -  | varchar  | 9   | -   |       |
+| 社員ID           | employee_id      | ◯  | -  | varchar  | 8   | -   |       |
 | 氏名             | name             |    | ◯  | varchar  | 256 | -   |       |
 | 氏名カナ          | name_kana        |    | ◯  | varchar  | 256 | -   |       |
 | 所属部門コード     | department_code  |    | ◯  | varchar  | 5   | -   |       |
 | 役職コード         | post_code       |    | ◯  | varchar  | 4   | -   |       |
-| 入社年月          | entered_date     |    | ◯  | date     | -   | -   |       |
+| 入社年月          | entered_at       |    | ◯  | date     | -   | -   |       |
 | メールアドレス     | mail_address     |    | ◯  | varchar  | 256 | ◯   |       |
 | 電話番号          | tel_number       |    | ◯  | varchar  | 11  | -   |       |
 | 郵便番号          | postal_code      |    | ◯  | varchar  | 7   | -   |       |
@@ -34,7 +34,7 @@
 | 生年月日          | birthday         |    | ◯  | date     | -  | -   |       |
 | 登録日時          | created_at       |    | ◯  | datetime | -  | -   |       |
 | 更新日時          | updated_at       |    | ◯  | datetime | -  | -   |       |
-| 状態 　　         | status           |    | ◯  | datetime | -  | -   |       |
+| 状態 　　         | status      |    | ◯  | int | -  | -   |       |
 
 **外部キー**
 | 項目名（論理） | 参照先テーブル名（論理） | 参照先テーブル名（物理） | 参照先項目名（論理） | 参照先項目名（物理） |
@@ -54,7 +54,7 @@
 | 部門長社員ID      | leader_employee_id |    | ◯  | varchar | 256 | -   |       |
 | 登録日時          | created_at        |    | ◯  | datetime | -  | -   |       |
 | 更新日時          | updated_at        |    | ◯  | datetime | -  | -   |       |
-| 状態 　　         | status            |    | ◯  | datetime | -  | -   |       |
+| 状態 　　         | status      |    | ◯  | int | -  | -   |       |
 
 ### 3. 役職
 | テーブル名（論理） | テーブル名（物理） | 説明 |
@@ -67,7 +67,7 @@
 | 役職名           | post_name    |    | ◯  | varchar | 256 | -   |       |
 | 登録日時          | created_at  |    | ◯  | datetime | -  | -   |       |
 | 更新日時          | updated_at  |    | ◯  | datetime | -  | -   |       |
-| 状態 　　         | status      |    | ◯  | datetime | -  | -   |       |
+| 状態 　　         | status      |    | ◯  | int | -  | -   |       |
 
 ### 4. アカウント
 | テーブル名（論理） | テーブル名（物理） | 説明 |
@@ -79,11 +79,11 @@
 | アカウントID      | account_id    | ◯  | -  | varchar | 64 | -   |       |
 | アカウント名      | account_name  |    |    | varchar | 256 | -   |       |
 | メールアドレス     | mail_address |    | ◯  | varchar | 256 | ◯   |       |
-| パスワード        | password     |    |    | varchar | 128 | -   |       |
+| パスワード        | password     |    |    | varchar | 512 | -   |       |
 | 権限　　　        | authority    |    |    | varchar | 20  | -   |       |
 | 登録日時          | created_at   |    | ◯  | datetime | -  | -   |       |
 | 更新日時          | updated_at   |    | ◯  | datetime | -  | -   |       |
-| 状態 　　         | status       |    | ◯  | datetime | -  | -   |       |
+| 状態 　　         | status       |    | ◯  | int | -  | -   |       |
 
 ### 5. ログ
 | テーブル名（論理） | テーブル名（物理） | 説明 |
@@ -98,7 +98,7 @@
 | カテゴリ     | category     |    | ◯  | varchar | 20   | -   |       |
 | メッセージ　  | message      |    |    | varchar | 2000 | -   |       |
 | エラー事由　　| error_reason |    |    | varchar | 2000 | -   |       |
-| 実行日時     | execute_at   |    | 　 | datetime | -  | -   |       |
+| 実行日時     | executed_at  |    | 　 | datetime | -  | -   |       |
 
 **外部キー**
 | 項目名（論理） | 参照先テーブル名（論理） | 参照先テーブル名（物理） | 参照先項目名（論理） | 参照先項目名（物理） |
