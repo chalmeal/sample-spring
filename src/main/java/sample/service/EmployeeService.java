@@ -1,7 +1,8 @@
 package sample.service;
 
-import java.util.List;
+import java.time.LocalDate;
 
+import sample.context.Pagination;
 import sample.context.exception.ServiceException;
 import sample.dto.ResultDto;
 import sample.dto.request.employee.EmployeeEditRequestDto;
@@ -32,14 +33,16 @@ public interface EmployeeService {
      * </pre>
      * 
      * @param employeeId     社員ID
-     * @param employeeCode   社員コード
      * @param name           名前
-     * @param mail           メールアドレス
      * @param departmentCode 所属部門コード
+     * @param postCode       役職コード
+     * @param mail           メールアドレス
+     * @param status         状態
      * @return 社員一覧
      */
-    List<EmployeeResponseDto> searchEmployee(String employeeId, String employeeCode, String name, String mail,
-            String departmentCode);
+    Pagination<EmployeeResponseDto> searchEmployee(String employeeId, String name, String departmentCode,
+            String postCode,
+            LocalDate enteredAtFrom, LocalDate enteredAtTo, String status);
 
     /**
      * <pre>

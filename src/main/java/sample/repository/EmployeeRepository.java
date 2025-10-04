@@ -1,5 +1,6 @@
 package sample.repository;
 
+import java.time.LocalDate;
 import java.util.Optional;
 
 import sample.dto.request.employee.EmployeeEditRequestDto;
@@ -36,8 +37,8 @@ public interface EmployeeRepository {
      * @param departmentCode 所属部門コード
      * @return 社員
      */
-    Optional<Employee[]> searchEmployee(String employeeId, String employeeCode, String name, String mail,
-            String departmentCode);
+    Optional<Employee[]> searchEmployee(String employeeId, String name,
+            String departmentCode, String postCode, LocalDate enteredAtFrom, LocalDate enteredAtTo, String status);
 
     /**
      * <pre>

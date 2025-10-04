@@ -1,5 +1,6 @@
 package sample.model;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -49,8 +50,8 @@ public class Employee {
 
     /** 入社年月 */
     @NotNull
-    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
-    private LocalDateTime enteredAt;
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+    private LocalDate enteredAt;
 
     /** メールアドレス */
     @NotNull
@@ -76,8 +77,8 @@ public class Employee {
 
     /** 生年月日 */
     @NotNull
-    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
-    private LocalDateTime birthday;
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+    private LocalDate birthday;
 
     /** 登録日時 */
     @NotNull

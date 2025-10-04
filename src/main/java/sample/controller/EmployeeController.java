@@ -1,7 +1,8 @@
 package sample.controller;
 
-import java.util.List;
+import java.time.LocalDate;
 
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import sample.context.Pagination;
 import sample.context.exception.ServiceException;
 import sample.dto.request.employee.EmployeeEditRequestDto;
 import sample.dto.request.employee.EmployeeRegisterRequestDto;
@@ -53,27 +55,27 @@ public class EmployeeController extends SampleController {
     }
 
     /**
-     * <pre>
      * 社員検索API
      * 社員を検索します。
-     * </pre>
      * 
      * @param employeeId     社員ID
-     * @param employeeCode   社員コード
-     * @param name           名前
-     * @param mail           メールアドレス
-     * @param departmentCode 所属部門コード
-     * @return 社員一覧
+     * @param name           社員名
+     * @param departmentCode 部署コード
+     * @param postCode       役職コード
+     * @param enteredAtFrom  入社日（開始）
+     * @param enteredAtTo    入社日（終了）
+     * @param status         ステータス
      */
     @GetMapping("/search")
-    public List<EmployeeResponseDto> searchEmployee(
+    public Pagination<EmployeeResponseDto> searchEmployee(
             @RequestParam(value = "employee_id", required = false) String employeeId,
-            @RequestParam(value = "employee_code", required = false) String employeeCode,
             @RequestParam(value = "name", required = false) String name,
-            @RequestParam(value = "mail", required = false) String mail,
-            @RequestParam(value = "department_code", required = false) String departmentCode) {
-        return service.searchEmployee(employeeId, employeeCode, name, mail,
-                departmentCode);
+            @RequestParam(value = "department_code", required = false) String departmentCode,
+            @RequestParam(value = "post_code", required = false) String postCode,
+            @RequestParam(value = "entered_at_from", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate enteredAtFrom,
+            @RequestParam(value = "entered_at_to", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate enteredAtTo,
+            @RequestParam(value = "status", required = false) String status) {
+        return service.searchEmployee(employeeId, name, departmentCode, postCode, enteredAtFrom, enteredAtTo, status);
     }
 
     /**

@@ -1,5 +1,6 @@
 package sample.service.impl;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import lombok.RequiredArgsConstructor;
+import sample.context.Pagination;
 import sample.context.constant.error.EmployeeError;
 import sample.context.exception.ServiceException;
 import sample.context.util.Message;
@@ -52,11 +54,18 @@ public class EmployeeServiceImpl implements EmployeeService {
             // 社員情報をDTOに設定
             Employee employee = optEmployee.get();
             result.setEmployeeId(employee.getEmployeeId());
-            // result.setEmployeeCode(employee.getEmployeeCode());
             result.setName(employee.getName());
             result.setNameKana(employee.getNameKana());
             result.setDepartmentCode(employee.getDepartmentCode());
-            // result.setMail(employee.getMail());
+            result.setPostCode(employee.getPostCode());
+            result.setEnteredAt(employee.getEnteredAt());
+            result.setMailAddress(employee.getMailAddress());
+            result.setTelNumber(employee.getTelNumber());
+            result.setPostalCode(employee.getPostalCode());
+            result.setAddress(employee.getAddress());
+            result.setBirthday(employee.getBirthday());
+            result.setCreatedAt(employee.getCreatedAt());
+            result.setUpdatedAt(employee.getUpdatedAt());
             result.setStatus(employee.getStatus());
 
             return result;
@@ -72,35 +81,43 @@ public class EmployeeServiceImpl implements EmployeeService {
      * {@inheritDoc}
      */
     @Override
-    public List<EmployeeResponseDto> searchEmployee(String employeeId, String employeeCode, String name, String mail,
-            String departmentCode) {
+    public Pagination<EmployeeResponseDto> searchEmployee(String employeeId, String name,
+            String departmentCode, String postCode, LocalDate enteredAtFrom, LocalDate enteredAtTo, String status) {
+        Pagination<EmployeeResponseDto> pagination = new Pagination<>();
         List<EmployeeResponseDto> result = new ArrayList<>();
 
         try {
             // 社員を検索
             // 検索条件に一致する社員が存在しない場合は空のリストを返却
-            Optional<Employee[]> optEmployee = repository.searchEmployee(employeeId, employeeCode, name, mail,
-                    departmentCode);
+            Optional<Employee[]> optEmployee = repository.searchEmployee(employeeId, name, departmentCode, postCode,
+                    enteredAtFrom, enteredAtTo, status);
 
             // 社員情報をDTOに設定
             Employee[] employees = optEmployee.get();
             for (Employee employee : employees) {
                 EmployeeResponseDto dto = new EmployeeResponseDto();
                 dto.setEmployeeId(employee.getEmployeeId());
-                // dto.setEmployeeCode(employee.getEmployeeCode());
                 dto.setName(employee.getName());
                 dto.setNameKana(employee.getNameKana());
                 dto.setDepartmentCode(employee.getDepartmentCode());
-                // dto.setMail(employee.getMail());
+                dto.setPostCode(employee.getPostCode());
+                dto.setEnteredAt(employee.getEnteredAt());
+                dto.setMailAddress(employee.getMailAddress());
+                dto.setTelNumber(employee.getTelNumber());
+                dto.setPostalCode(employee.getPostalCode());
+                dto.setAddress(employee.getAddress());
+                dto.setBirthday(employee.getBirthday());
+                dto.setCreatedAt(employee.getCreatedAt());
+                dto.setUpdatedAt(employee.getUpdatedAt());
                 dto.setStatus(employee.getStatus());
 
                 result.add(dto);
             }
 
-            return result;
+            return pagination.paging(result, employees.length);
         } catch (EmptyResultDataAccessException e) {
             // 社員が存在しない場合は空のリストを返却
-            return result;
+            return pagination.paging(result, 0);
         }
     }
 

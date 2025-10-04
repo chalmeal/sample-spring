@@ -84,7 +84,7 @@ public class RestErrorAdvice {
         ErrorDto errors = new ErrorDto();
         errors.setErrorCode(EmployeeError.INTERNAL_SERVER_ERROR);
         errors.setErrorMessage(message.get("error.global.internal"));
-        log.error(ex.toString());
+        log.error(ex.getMessage(), ex);
 
         return new ResponseEntity<>(errors, HttpStatus.INTERNAL_SERVER_ERROR);
     }

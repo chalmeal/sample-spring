@@ -2,7 +2,7 @@ package sample.employee;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.util.List;
+import java.time.LocalDate;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +17,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import com.fasterxml.jackson.core.type.TypeReference;
 
 import sample.TestHelper;
+import sample.context.Pagination;
 import sample.dto.response.EmployeeResponseDto;
 
 @SpringBootTest
@@ -42,26 +43,32 @@ public class EmployeeSearchTests extends TestHelper {
 
         // リクエスト
         MockHttpServletRequestBuilder request = MockMvcRequestBuilders
-                .get(uri + "?employee_id=&employee_code=&name=&mail=&department_code=");
+                .get(uri);
         MockHttpServletResponse result = this.mockMvc.perform(request)
                 .andReturn()
                 .getResponse();
 
         // JSONレスポンスの変換
-        List<EmployeeResponseDto> actual = objectMapper.readValue(result.getContentAsString(),
-                new TypeReference<List<EmployeeResponseDto>>() {
+        Pagination<EmployeeResponseDto> actual = objectMapper.readValue(result.getContentAsString(),
+                new TypeReference<Pagination<EmployeeResponseDto>>() {
                 });
 
         // ステータスの検証
         assertEquals(HttpStatus.OK.value(), result.getStatus());
         // レスポンスの検証
-        assertEquals(5, actual.size());
-        assertEquals(expected.getEmployeeId(), actual.get(0).getEmployeeId());
-        assertEquals(expected.getEmployeeCode(), actual.get(0).getEmployeeCode());
-        assertEquals(expected.getName(), actual.get(0).getName());
-        assertEquals(expected.getNameKana(), actual.get(0).getNameKana());
-        assertEquals(expected.getMail(), actual.get(0).getMail());
-        assertEquals(expected.getDepartmentCode(), actual.get(0).getDepartmentCode());
+        assertEquals(25, actual.getTotalCount());
+        assertEquals(expected.getEmployeeId(), actual.getData().get(0).getEmployeeId());
+        assertEquals(expected.getName(), actual.getData().get(0).getName());
+        assertEquals(expected.getNameKana(), actual.getData().get(0).getNameKana());
+        assertEquals(expected.getDepartmentCode(), actual.getData().get(0).getDepartmentCode());
+        assertEquals(expected.getPostCode(), actual.getData().get(0).getPostCode());
+        assertEquals(expected.getEnteredAt(), actual.getData().get(0).getEnteredAt());
+        assertEquals(expected.getMailAddress(), actual.getData().get(0).getMailAddress());
+        assertEquals(expected.getTelNumber(), actual.getData().get(0).getTelNumber());
+        assertEquals(expected.getPostalCode(), actual.getData().get(0).getPostalCode());
+        assertEquals(expected.getAddress(), actual.getData().get(0).getAddress());
+        assertEquals(expected.getBirthday(), actual.getData().get(0).getBirthday());
+        assertEquals(expected.getStatus(), actual.getData().get(0).getStatus());
     }
 
     /**
@@ -73,12 +80,17 @@ public class EmployeeSearchTests extends TestHelper {
         // 項目の検証
         // 項目の検証は1レコード目のみ実施
         EmployeeResponseDto response = new EmployeeResponseDto();
-        response.setEmployeeId("1001");
-        response.setEmployeeCode("A0001");
-        response.setName("山田 太郎");
-        response.setNameKana("ヤマダ タロウ");
-        response.setMail("taro_yamada@sample.jp");
-        response.setDepartmentCode("100001");
+        response.setEmployeeId("1010");
+        response.setName("加藤 理恵");
+        response.setNameKana("カトウ リエ");
+        response.setDepartmentCode("30001");
+        response.setPostCode("P005");
+        response.setEnteredAt(LocalDate.of(2024, 1, 10));
+        response.setMailAddress("rie_kato@sample.jp");
+        response.setTelNumber("0401234567");
+        response.setPostalCode("1000010");
+        response.setAddress("東京都千代田区10-10-10");
+        response.setBirthday(LocalDate.of(1990, 10, 10));
         response.setStatus(1);
 
         return response;

@@ -2,6 +2,8 @@ package sample.employee;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.time.LocalDate;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -54,11 +56,17 @@ public class EmployeeGetTests extends TestHelper {
         assertEquals(HttpStatus.OK.value(), result.getStatus());
         // レスポンスの検証
         assertEquals(expected.getEmployeeId(), actual.getEmployeeId());
-        assertEquals(expected.getEmployeeCode(), actual.getEmployeeCode());
         assertEquals(expected.getName(), actual.getName());
         assertEquals(expected.getNameKana(), actual.getNameKana());
-        assertEquals(expected.getMail(), actual.getMail());
         assertEquals(expected.getDepartmentCode(), actual.getDepartmentCode());
+        assertEquals(expected.getPostCode(), actual.getPostCode());
+        assertEquals(expected.getEnteredAt(), actual.getEnteredAt());
+        assertEquals(expected.getMailAddress(), actual.getMailAddress());
+        assertEquals(expected.getTelNumber(), actual.getTelNumber());
+        assertEquals(expected.getPostalCode(), actual.getPostalCode());
+        assertEquals(expected.getAddress(), actual.getAddress());
+        assertEquals(expected.getBirthday(), actual.getBirthday());
+        assertEquals(expected.getStatus(), actual.getStatus());
     }
 
     /**
@@ -69,11 +77,16 @@ public class EmployeeGetTests extends TestHelper {
     private EmployeeResponseDto success_response() {
         EmployeeResponseDto response = new EmployeeResponseDto();
         response.setEmployeeId("1001");
-        response.setEmployeeCode("A0001");
         response.setName("山田 太郎");
         response.setNameKana("ヤマダ タロウ");
-        response.setMail("taro_yamada@sample.jp");
-        response.setDepartmentCode("100001");
+        response.setDepartmentCode("10001");
+        response.setPostCode("P001");
+        response.setEnteredAt(LocalDate.of(2020, 4, 1));
+        response.setMailAddress("taro_yamada@sample.jp");
+        response.setTelNumber("0312345678");
+        response.setPostalCode("1000001");
+        response.setAddress("東京都千代田区1-1-1");
+        response.setBirthday(LocalDate.of(1980, 1, 1));
         response.setStatus(1);
 
         return response;

@@ -1,10 +1,12 @@
 package sample.repository.impl;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
 import javax.sql.DataSource;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -61,14 +63,16 @@ public class EmployeeRepositoryImpl extends EmployeeSql implements EmployeeRepos
      * </pre>
      * 
      * @param employeeId     社員ID
-     * @param employeeCode   社員コード
      * @param name           名前
-     * @param mail           メールアドレス
      * @param departmentCode 所属部門コード
-     * @return 社員一覧
+     * @param postCode       役職コード
+     * @param mail           メールアドレス
+     * @param status         状態
+     * @return 社員
      */
-    public Optional<Employee[]> searchEmployee(String employeeId, String employeeCode, String name, String mail,
-            String departmentCode) throws RuntimeException {
+    public Optional<Employee[]> searchEmployee(String employeeId, String name,
+            String departmentCode, String postCode, LocalDate enteredAtFrom, LocalDate enteredAtTo, String status)
+            throws RuntimeException {
         MapSqlParameterSource param;
         param = new MapSqlParameterSource();
 
@@ -76,31 +80,45 @@ public class EmployeeRepositoryImpl extends EmployeeSql implements EmployeeRepos
         sql += "WHERE 1=1 ";
 
         // 社員ID
-        if (!employeeId.isEmpty()) {
+        if (StringUtils.isNotEmpty(employeeId)) {
             sql += "AND employee_id = :employeeId ";
             param.addValue("employeeId", employeeId);
         }
-        // 社員コード
-        if (!employeeCode.isEmpty()) {
-            sql += "AND employee_code LIKE :employeeCode ";
-            param.addValue("employeeCode", "%" + employeeCode + "%");
-        }
         // 名前
-        if (!name.isEmpty()) {
+        if (StringUtils.isNotEmpty(name)) {
             sql += "AND (name LIKE :name OR name_kana LIKE :name) ";
             param.addValue("name", "%" + name + "%");
         }
-        // メールアドレス
-        if (!mail.isEmpty()) {
-            sql += "AND mail LIKE :mail ";
-            param.addValue("mail", "%" + mail + "%");
-        }
-        // 所属部門コード
-        if (!departmentCode.isEmpty()) {
+        // 所属部門
+        if (StringUtils.isNotEmpty(departmentCode)) {
             sql += "AND department_code = :departmentCode ";
             param.addValue("departmentCode", departmentCode);
         }
-        sql += "ORDER BY employee_id ";
+        // 役職
+        if (StringUtils.isNotEmpty(postCode)) {
+            sql += "AND post_code = :postCode ";
+            param.addValue("postCode", postCode);
+        }
+        // 入社年月日
+        if (enteredAtFrom != null && enteredAtTo != null) {
+            sql += "AND entered_at BETWEEN :enteredAtFrom AND :enteredAtTo ";
+            param.addValue("enteredAtFrom", enteredAtFrom);
+            param.addValue("enteredAtTo", enteredAtTo);
+        } else if (enteredAtFrom != null) {
+            // Fromのみ
+            sql += "AND entered_at >= :enteredAtFrom ";
+            param.addValue("enteredAtFrom", enteredAtFrom);
+        } else if (enteredAtTo != null) {
+            // Toのみ
+            sql += "AND entered_at <= :enteredAtTo ";
+            param.addValue("enteredAtTo", enteredAtTo);
+        }
+        // 状態
+        if (StringUtils.isNotEmpty(status)) {
+            sql += "AND status = :status ";
+            param.addValue("status", Integer.parseInt(status));
+        }
+        sql += "ORDER BY entered_at desc, employee_id ";
 
         List<Employee> employees = jdbcTemplate.query(sql, param, mapper);
 

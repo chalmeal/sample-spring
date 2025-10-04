@@ -28,33 +28,10 @@ public class EmployeeMapper implements RowMapper<Employee> {
 
         switch (sqlType) {
             case "SQL_SELECT_EMPLOYEE":
-                return getEmployee(rs, rowNum);
+                return mapper.mapRow(rs, rowNum);
             default:
                 return new Employee();
         }
-    }
-
-    /**
-     * <pre>
-     * 社員取得SQLマッピング
-     * </pre>
-     * 
-     * @param rs
-     * @param rowNum
-     * @return
-     * @throws SQLException
-     */
-    private Employee getEmployee(ResultSet rs, int rowNum) throws SQLException {
-        Employee model = mapper.mapRow(rs, rowNum);
-        model.setEmployeeId(rs.getString("employee_id"));
-        // model.setEmployeeCode(rs.getString("employee_code"));
-        model.setName(rs.getString("name"));
-        model.setNameKana(rs.getString("name_kana"));
-        // model.setMail(rs.getString("mail"));
-        model.setDepartmentCode(rs.getString("department_code"));
-        model.setStatus(rs.getInt("status"));
-
-        return model;
     }
 
 }
