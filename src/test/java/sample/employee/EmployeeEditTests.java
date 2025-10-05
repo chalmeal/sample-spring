@@ -17,7 +17,6 @@ import sample.TestHelper;
 import sample.context.util.Message;
 import sample.dto.ResultDto;
 import sample.dto.request.employee.EmployeeEditRequestDto;
-import sample.dto.request.employee.EmployeeRegisterRequestDto;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -111,8 +110,8 @@ public class EmployeeEditTests extends TestHelper {
         // ステータスの検証
         assertEquals(200, response.getStatus());
         // レスポンスの検証
-        EmployeeRegisterRequestDto actual = objectMapper.readValue(response.getContentAsString(),
-                new TypeReference<EmployeeRegisterRequestDto>() {
+        EmployeeEditRequestDto actual = objectMapper.readValue(response.getContentAsString(),
+                new TypeReference<EmployeeEditRequestDto>() {
                 });
 
         assertEquals(employee.getName(), actual.getName());

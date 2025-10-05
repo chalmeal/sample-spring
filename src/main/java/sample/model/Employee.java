@@ -48,7 +48,7 @@ public class Employee {
     @NotNull
     private String postCode;
 
-    /** 入社年月 */
+    /** 入社年月日 */
     @NotNull
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate enteredAt;
@@ -93,4 +93,30 @@ public class Employee {
     /** 状態 */
     @NotNull
     private int status;
+
+    /**
+     * <pre>
+     * 社員状態
+     * </pre>
+     */
+    public enum Status {
+        ACTIVE(1, "有効"),
+        INACTIVE(0, "無効");
+
+        private final int code;
+        private final String label;
+
+        private Status(int code, String label) {
+            this.code = code;
+            this.label = label;
+        }
+
+        public int getCode() {
+            return code;
+        }
+
+        public String getLabel() {
+            return label;
+        }
+    }
 }

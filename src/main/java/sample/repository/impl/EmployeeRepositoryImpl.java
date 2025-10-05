@@ -12,6 +12,7 @@ import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import sample.context.util.Parse;
 import sample.dto.request.employee.EmployeeEditRequestDto;
 import sample.dto.request.employee.EmployeeRegisterRequestDto;
 import sample.model.Employee;
@@ -141,12 +142,17 @@ public class EmployeeRepositoryImpl extends EmployeeSql implements EmployeeRepos
         String sql = SQL_INSERT_EMPLOYEE;
 
         param.addValue("employeeId", employee.getEmployeeId());
-        param.addValue("employeeCode", employee.getEmployeeCode());
         param.addValue("name", employee.getName());
         param.addValue("nameKana", employee.getNameKana());
-        param.addValue("mail", employee.getMail());
         param.addValue("departmentCode", employee.getDepartmentCode());
-        param.addValue("status", employee.getStatus());
+        param.addValue("postCode", employee.getPostCode());
+        param.addValue("enteredAt", Parse.parseDate(employee.getEnteredAt()));
+        param.addValue("mailAddress", employee.getMailAddress());
+        param.addValue("telNumber", employee.getTelNumber());
+        param.addValue("postalCode", employee.getPostalCode());
+        param.addValue("address", employee.getAddress());
+        param.addValue("birthday", Parse.parseDate(employee.getBirthday()));
+        param.addValue("status", Employee.Status.ACTIVE.getCode());
 
         jdbcTemplate.update(sql, param);
     }

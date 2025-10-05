@@ -47,16 +47,25 @@ public class EmployeeSql {
          * </pre>
          * 
          * @param employeeId     社員ID
-         * @param employeeCode   社員コード
          * @param name           名前
          * @param nameKana       名前カナ
-         * @param mail           メールアドレス
          * @param departmentCode 所属部門コード
+         * @param postCode       役職コード
+         * @param enteredAt      入社年月日
+         * @param mailAddress    メールアドレス
+         * @param telNumber      電話番号
+         * @param postalCode     郵便番号
+         * @param address        住所
+         * @param birthday       生年月日
+         * @param createdAt      登録日時
+         * @param updatedAt      更新日時
          * @param status         状態
          */
         protected final String SQL_INSERT_EMPLOYEE = "INSERT INTO employees "
-                        + "(employee_id, employee_code, name, name_kana, mail, department_code, status) "
-                        + "VALUES (:employeeId, :employeeCode, :name, :nameKana, :mail, :departmentCode, :status)";
+                        + "(employee_id, name, name_kana, department_code, post_code, entered_at, "
+                        + "mail_address, tel_number, postal_code, address, birthday, created_at, updated_at, status) "
+                        + "VALUES (:employeeId, :name, :nameKana, :departmentCode, :postCode, :enteredAt, "
+                        + ":mailAddress, :telNumber, :postalCode, :address, :birthday, NOW(), NOW(), :status)";
 
         /**
          * <pre>
