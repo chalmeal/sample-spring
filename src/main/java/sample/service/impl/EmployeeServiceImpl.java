@@ -31,7 +31,6 @@ import sample.service.EmployeeService;
  * </pre>
  */
 @Service
-@Transactional
 @RequiredArgsConstructor
 public class EmployeeServiceImpl implements EmployeeService {
     // DI
@@ -44,6 +43,7 @@ public class EmployeeServiceImpl implements EmployeeService {
      * {@inheritDoc}
      */
     @Override
+    @Transactional(readOnly = true)
     public EmployeeResponseDto getEmployee(String employeeId) throws ServiceException {
         EmployeeResponseDto result = new EmployeeResponseDto();
 
@@ -81,6 +81,7 @@ public class EmployeeServiceImpl implements EmployeeService {
      * {@inheritDoc}
      */
     @Override
+    @Transactional(readOnly = true)
     public Pagination<EmployeeResponseDto> searchEmployee(String employeeId, String name,
             String departmentCode, String postCode, LocalDate enteredAtFrom, LocalDate enteredAtTo, String status) {
         Pagination<EmployeeResponseDto> pagination = new Pagination<>();
@@ -125,6 +126,7 @@ public class EmployeeServiceImpl implements EmployeeService {
      * {@inheritDoc}
      */
     @Override
+    @Transactional
     public ResultDto registerEmployee(EmployeeRegisterRequestDto param) throws ServiceException {
         try {
             // 社員登録
@@ -148,6 +150,7 @@ public class EmployeeServiceImpl implements EmployeeService {
      * {@inheritDoc}
      */
     @Override
+    @Transactional
     public ResultDto editEmployee(String employeeId, EmployeeEditRequestDto param) throws ServiceException {
         try {
             // 社員編集
