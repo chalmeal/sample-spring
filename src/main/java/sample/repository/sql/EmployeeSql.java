@@ -57,8 +57,6 @@ public class EmployeeSql {
          * @param postalCode     郵便番号
          * @param address        住所
          * @param birthday       生年月日
-         * @param createdAt      登録日時
-         * @param updatedAt      更新日時
          * @param status         状態
          */
         protected final String SQL_INSERT_EMPLOYEE = "INSERT INTO employees "

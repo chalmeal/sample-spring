@@ -13,6 +13,7 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
+import lombok.Getter;
 
 /**
  * <pre>
@@ -99,8 +100,11 @@ public class Employee {
      * 社員状態
      * </pre>
      */
+    @Getter
     public enum Status {
+        /** 有効 */
         ACTIVE(1, "有効"),
+        /** 無効 */
         INACTIVE(0, "無効");
 
         private final int code;
@@ -109,14 +113,6 @@ public class Employee {
         private Status(int code, String label) {
             this.code = code;
             this.label = label;
-        }
-
-        public int getCode() {
-            return code;
-        }
-
-        public String getLabel() {
-            return label;
         }
     }
 }

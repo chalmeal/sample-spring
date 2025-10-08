@@ -3,7 +3,7 @@
     "configurations": [
         {
             "type": "java",
-            "name": "Run sample-java",
+            "name": "Run sample-spring",
             "request": "launch",
             "cwd": "${workspaceFolder}",
             "console": "internalConsole",
