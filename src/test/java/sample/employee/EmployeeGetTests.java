@@ -16,6 +16,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import sample.TestHelper;
 import sample.context.constant.error.EmployeeError;
+import sample.context.constant.error.Error;
 import sample.context.util.Message;
 import sample.dto.ErrorDto;
 import sample.dto.response.EmployeeResponseDto;
@@ -128,8 +129,8 @@ public class EmployeeGetTests extends TestHelper {
      */
     private ErrorDto failure_NotExistEmployee_response() {
         ErrorDto response = new ErrorDto();
-        response.setErrorCode(EmployeeError.getError(EmployeeError.NOT_EXISTS));
-        response.setErrorMessage(message.get("error.employee.notfound"));
+        response.setErrorCode(EmployeeError.NOT_EXISTS);
+        response.setErrorMessage(message.get("error.employee.not_exists"));
 
         return response;
     }
@@ -169,7 +170,7 @@ public class EmployeeGetTests extends TestHelper {
      */
     private ErrorDto failure_NotFoundResource_response() {
         ErrorDto response = new ErrorDto();
-        response.setErrorCode(EmployeeError.NOT_FOUND);
+        response.setErrorCode(Error.NOT_FOUND_GLOBAL);
         response.setErrorMessage(message.get("error.global.not_found"));
 
         return response;

@@ -72,8 +72,8 @@ public class EmployeeServiceImpl implements EmployeeService {
         } catch (EmptyResultDataAccessException e) {
             // 社員が存在しない場合はエラーを返却
             throw new ServiceException(HttpStatus.NOT_FOUND,
-                    EmployeeError.getError(EmployeeError.NOT_EXISTS),
-                    message.get("error.employee.notfound"));
+                    EmployeeError.NOT_EXISTS,
+                    message.get("error.employee.not_exists"));
         }
     }
 
@@ -141,7 +141,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         } catch (DuplicateKeyException e) {
             // 社員IDが重複している場合はエラーを返却
             throw new ServiceException(HttpStatus.BAD_REQUEST,
-                    EmployeeError.getError(EmployeeError.DUPLICATED),
+                    EmployeeError.DUPLICATED,
                     message.get("error.employee.register.duplicate"));
         }
     }
@@ -165,8 +165,8 @@ public class EmployeeServiceImpl implements EmployeeService {
         } catch (EmptyResultDataAccessException e) {
             // 社員が存在しない場合はエラーを返却
             throw new ServiceException(HttpStatus.NOT_FOUND,
-                    EmployeeError.getError(EmployeeError.NOT_EXISTS),
-                    message.get("error.employee.notfound"));
+                    EmployeeError.NOT_EXISTS,
+                    message.get("error.employee.not_exists"));
         }
     }
 
@@ -188,8 +188,8 @@ public class EmployeeServiceImpl implements EmployeeService {
         } catch (EmptyResultDataAccessException e) {
             // 社員が存在しない場合はエラーを返却
             throw new ServiceException(HttpStatus.NOT_FOUND,
-                    EmployeeError.getError(EmployeeError.NOT_EXISTS),
-                    message.get("error.employee.notfound"));
+                    EmployeeError.NOT_EXISTS,
+                    message.get("error.employee.not_exists"));
         }
     }
 

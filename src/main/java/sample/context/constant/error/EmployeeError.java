@@ -1,6 +1,21 @@
 package sample.context.constant.error;
 
+/**
+ * <pre>
+ * 社員に関するエラーコード定数クラス
+ * 子エラーコードは1000番台とします。
+ * </pre>
+ */
 public class EmployeeError extends Error {
+
+    /**
+     * <pre>
+     * 既に登録されている社員IDを登録しようとした場合のエラーコード
+     * status: 400
+     * message: "社員IDまたはメールアドレスが既に存在します。"
+     * </pre>
+     */
+    public static final String DUPLICATED = BAD_REQUEST + "1001";
 
     /**
      * <pre>
@@ -9,30 +24,6 @@ public class EmployeeError extends Error {
      * message: "社員情報が見つかりませんでした。"
      * </pre>
      */
-    public static final String NOT_EXISTS = "1001";
-
-    /**
-     * <pre>
-     * 既に登録されている社員IDを登録しようとした場合のエラーコード
-     * status: 400
-     * message: "社員IDまたは社員コードが既に存在します。"
-     * </pre>
-     */
-    public static final String DUPLICATED = "1002";
-
-    /**
-     * <pre>
-     * 社員のエラーコードを取得
-     * </pre>
-     * 
-     * @param error
-     */
-    public static String getError(String error) {
-        return new StringBuilder()
-                .append(ERROR_CODE_EMPLOYEE)
-                .append("-")
-                .append(error)
-                .toString();
-    }
+    public static final String NOT_EXISTS = NOT_FOUND + "1001";
 
 }
