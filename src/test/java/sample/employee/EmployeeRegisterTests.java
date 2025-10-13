@@ -58,7 +58,7 @@ public class EmployeeRegisterTests extends TestHelper {
         ResultDto actual = objectMapper.readValue(result.getContentAsString(), ResultDto.class);
 
         // ステータスの検証
-        assertEquals(201, result.getStatus());
+        assertEquals(HttpStatus.CREATED.value(), result.getStatus());
         // レスポンスの検証
         assertEquals(expected.getResult(), actual.result);
         assertEquals(expected.getMessage(), actual.message);

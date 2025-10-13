@@ -72,4 +72,14 @@ public interface EmployeeRepository {
      */
     void deleteEmployee(String employeeId) throws RuntimeException;
 
+    /**
+     * <pre>
+     * 社員を有効化
+     * </pre>
+     * 
+     * @param employeeId 社員ID
+     * @throws RuntimeException 社員有効化に失敗した場合
+     */
+    void activeEmployee(String employeeId) throws RuntimeException;
+
 }

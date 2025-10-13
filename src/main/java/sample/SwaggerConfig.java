@@ -24,7 +24,6 @@ public class SwaggerConfig {
 
     @PostConstruct
     public void init() {
-        // SwaggerにSpringのObjectMapper（Jackson設定含む）を使わせる
         ModelConverters.getInstance().addConverter(new ModelResolver(objectMapper));
     }
 }

@@ -49,8 +49,7 @@ public class EmployeeRepositoryImpl extends EmployeeSql implements EmployeeRepos
      * @return 社員
      */
     public Optional<Employee> getEmployeeById(String employeeId) throws RuntimeException {
-        MapSqlParameterSource param;
-        param = new MapSqlParameterSource();
+        MapSqlParameterSource param = new MapSqlParameterSource();
 
         String sql = SQL_GET_EMPLOYEE_BY_ID;
         param.addValue("employeeId", employeeId);
@@ -74,8 +73,7 @@ public class EmployeeRepositoryImpl extends EmployeeSql implements EmployeeRepos
     public Optional<Employee[]> searchEmployee(String employeeId, String name,
             String departmentCode, String postCode, LocalDate enteredAtFrom, LocalDate enteredAtTo, String status)
             throws RuntimeException {
-        MapSqlParameterSource param;
-        param = new MapSqlParameterSource();
+        MapSqlParameterSource param = new MapSqlParameterSource();
 
         String sql = SQL_SELECT_EMPLOYEE;
         sql += "WHERE 1=1 ";
@@ -167,8 +165,7 @@ public class EmployeeRepositoryImpl extends EmployeeSql implements EmployeeRepos
      * @throws RuntimeException 社員更新に失敗した場合
      */
     public void editEmployee(String employeeId, EmployeeEditRequestDto employee) throws RuntimeException {
-        MapSqlParameterSource param;
-        param = new MapSqlParameterSource();
+        MapSqlParameterSource param = new MapSqlParameterSource();
 
         String sql = SQL_UPDATE_EMPLOYEE;
         param.addValue("name", employee.getName());
@@ -195,7 +192,7 @@ public class EmployeeRepositoryImpl extends EmployeeSql implements EmployeeRepos
 
     /**
      * <pre>
-     * 社員を物理削除
+     * 社員を論理削除
      * </pre>
      * 
      * @param employeeId 社員ID
@@ -203,11 +200,11 @@ public class EmployeeRepositoryImpl extends EmployeeSql implements EmployeeRepos
      * @throws RuntimeException 社員削除に失敗した場合
      */
     public void deleteEmployee(String employeeId) throws RuntimeException {
-        MapSqlParameterSource param;
-        param = new MapSqlParameterSource();
+        MapSqlParameterSource param = new MapSqlParameterSource();
 
         String sql = SQL_DELETE_EMPLOYEE;
         // WHERE句で指定する社員ID
+        param.addValue("status", Employee.Status.INACTIVE.getCode());
         param.addValue("employeeId", employeeId);
 
         int result = jdbcTemplate.update(sql, param);
@@ -219,4 +216,28 @@ public class EmployeeRepositoryImpl extends EmployeeSql implements EmployeeRepos
         }
     }
 
+    /**
+     * <pre>
+     * 社員を有効化
+     * </pre>
+     * 
+     * @param employeeId 社員ID
+     * @return 有効化結果
+     * @throws RuntimeException 社員有効化に失敗した場合
+     */
+    public void activeEmployee(String employeeId) throws RuntimeException {
+        MapSqlParameterSource param = new MapSqlParameterSource();
+
+        String sql = SQL_ACTIVE_EMPLOYEE;
+        param.addValue("status", Employee.Status.ACTIVE.getCode());
+        param.addValue("employeeId", employeeId);
+
+        int result = jdbcTemplate.update(sql, param);
+        if (result == 0) {
+            // 有効化対象の社員が存在しない場合はエラーを返却
+            throw new EmptyResultDataAccessException(result);
+        } else {
+            // success
+        }
+    }
 }

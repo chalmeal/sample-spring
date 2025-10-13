@@ -119,7 +119,7 @@ public class EmployeeController extends SampleController {
     /**
      * <pre>
      * 社員削除API
-     * 社員を物理削除します。
+     * 社員を論理削除（無効化）します。
      * </pre>
      * 
      * @param employeeId 社員ID
@@ -130,6 +130,25 @@ public class EmployeeController extends SampleController {
             @PathVariable(value = "employee_id", required = true) String employeeId) {
         try {
             return responseOK(service.deleteEmployee(employeeId));
+        } catch (ServiceException e) {
+            return response(e.getStatusCode(), e.getErrorCode(), e.getErrorMessage());
+        }
+    }
+
+    /**
+     * <pre>
+     * 社員有効化API
+     * 論理削除された社員を有効化します。
+     * </pre>
+     * 
+     * @param employeeId 社員ID
+     * @return 社員有効化結果
+     */
+    @PatchMapping("/active/{employee_id}")
+    public ResponseEntity<?> restoreEmployee(
+            @PathVariable(value = "employee_id", required = true) String employeeId) {
+        try {
+            return responseOK(service.activeEmployee(employeeId));
         } catch (ServiceException e) {
             return response(e.getStatusCode(), e.getErrorCode(), e.getErrorMessage());
         }

@@ -101,7 +101,19 @@ public class EmployeeSql {
          * 
          * @param employeeId 社員ID
          */
-        protected final String SQL_DELETE_EMPLOYEE = "DELETE FROM employees "
+        protected final String SQL_DELETE_EMPLOYEE = "UPDATE employees "
+                        + "SET status = :status "
+                        + "WHERE employee_id = :employeeId";
+
+        /**
+         * <pre>
+         * 社員有効化SQL
+         * </pre>
+         * 
+         * @param employeeId 社員ID
+         */
+        protected final String SQL_ACTIVE_EMPLOYEE = "UPDATE employees "
+                        + "SET status = :status "
                         + "WHERE employee_id = :employeeId";
 
 }

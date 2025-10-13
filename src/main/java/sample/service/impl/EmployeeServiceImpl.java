@@ -193,4 +193,26 @@ public class EmployeeServiceImpl implements EmployeeService {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public ResultDto activeEmployee(String employeeId) throws ServiceException {
+        try {
+            // 社員有効化
+            repository.activeEmployee(employeeId);
+
+            // 有効化結果を返却
+            ResultDto result = new ResultDto();
+            result.setResult(ResultType.SUCCESS);
+            result.setMessage(message.get("success.employee.active"));
+
+            return result;
+        } catch (EmptyResultDataAccessException e) {
+            // 社員が存在しない場合はエラーを返却
+            throw new ServiceException(HttpStatus.NOT_FOUND,
+                    EmployeeError.NOT_EXISTS,
+                    message.get("error.employee.not_exists"));
+        }
+    }
 }

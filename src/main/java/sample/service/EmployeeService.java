@@ -68,7 +68,7 @@ public interface EmployeeService {
 
     /**
      * <pre>
-     * 社員を物理削除
+     * 社員を論理削除
      * </pre>
      * 
      * @param employeeId 社員ID
@@ -76,5 +76,16 @@ public interface EmployeeService {
      * @throws ServiceException 社員削除に失敗した場合
      */
     ResultDto deleteEmployee(String employeeId) throws ServiceException;
+
+    /**
+     * <pre>
+     * 社員を有効化
+     * </pre>
+     * 
+     * @param employeeId 社員ID
+     * @return 有効化結果
+     * @throws ServiceException 社員有効化に失敗した場合
+     */
+    ResultDto activeEmployee(String employeeId) throws ServiceException;
 
 }
