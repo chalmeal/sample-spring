@@ -17,6 +17,7 @@ import sample.TestHelper;
 import sample.context.util.Message;
 import sample.dto.ResultDto;
 import sample.dto.request.employee.EmployeeEditRequestDto;
+import sample.dto.response.EmployeeResponseDto;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -74,9 +75,14 @@ public class EmployeeEditTests extends TestHelper {
         EmployeeEditRequestDto request = new EmployeeEditRequestDto();
         request.setName("山田 太郎");
         request.setNameKana("ヤマダ タロウ");
-        request.setMail("taro_yamada@sample.jp");
-        request.setDepartmentCode("100001");
-        request.setStatus("1");
+        request.setDepartmentCode("10001");
+        request.setPostCode("P001");
+        request.setEnteredAt("2020-04-01");
+        request.setMailAddress("taro_yamada@sample.jp");
+        request.setTelNumber("0312345678");
+        request.setPostalCode("1234567");
+        request.setAddress("東京都新宿区西新宿2-8-1");
+        request.setBirthday("1990-01-01");
 
         return request;
     }
@@ -110,14 +116,19 @@ public class EmployeeEditTests extends TestHelper {
         // ステータスの検証
         assertEquals(200, response.getStatus());
         // レスポンスの検証
-        EmployeeEditRequestDto actual = objectMapper.readValue(response.getContentAsString(),
-                new TypeReference<EmployeeEditRequestDto>() {
+        EmployeeResponseDto actual = objectMapper.readValue(response.getContentAsString(),
+                new TypeReference<EmployeeResponseDto>() {
                 });
 
         assertEquals(employee.getName(), actual.getName());
         assertEquals(employee.getNameKana(), actual.getNameKana());
-        assertEquals(employee.getMail(), actual.getMail());
         assertEquals(employee.getDepartmentCode(), actual.getDepartmentCode());
-        assertEquals(employee.getStatus(), actual.getStatus());
+        assertEquals(employee.getPostCode(), actual.getPostCode());
+        assertEquals(employee.getEnteredAt(), actual.getEnteredAt().toString());
+        assertEquals(employee.getMailAddress(), actual.getMailAddress());
+        assertEquals(employee.getTelNumber(), actual.getTelNumber());
+        assertEquals(employee.getPostalCode(), actual.getPostalCode());
+        assertEquals(employee.getAddress(), actual.getAddress());
+        assertEquals(employee.getBirthday(), actual.getBirthday().toString());
     }
 }

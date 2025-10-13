@@ -72,16 +72,26 @@ public class EmployeeSql {
          * 
          * @param name           名前
          * @param nameKana       名前カナ
-         * @param mail           メールアドレス
          * @param departmentCode 所属部門コード
-         * @param status         状態
+         * @param postCode       役職コード
+         * @param enteredAt      入社年月日
+         * @param mail           メールアドレス
+         * @param telNumber      電話番号
+         * @param postalCode     郵便番号
+         * @param address        住所
+         * @param birthday       生年月日
          */
         protected final String SQL_UPDATE_EMPLOYEE = "UPDATE employees "
                         + "SET name = :name, "
                         + "name_kana = :nameKana, "
-                        + "mail = :mail, "
                         + "department_code = :departmentCode, "
-                        + "status = :status "
+                        + "post_code = :postCode, "
+                        + "entered_at = :enteredAt, "
+                        + "mail_address = :mailAddress, "
+                        + "tel_number = :telNumber, "
+                        + "postal_code = :postalCode, "
+                        + "address = :address, "
+                        + "birthday = :birthday "
                         + "WHERE employee_id = :employeeId";
 
         /**

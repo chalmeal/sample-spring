@@ -171,12 +171,16 @@ public class EmployeeRepositoryImpl extends EmployeeSql implements EmployeeRepos
         param = new MapSqlParameterSource();
 
         String sql = SQL_UPDATE_EMPLOYEE;
-
         param.addValue("name", employee.getName());
         param.addValue("nameKana", employee.getNameKana());
-        param.addValue("mail", employee.getMail());
         param.addValue("departmentCode", employee.getDepartmentCode());
-        param.addValue("status", employee.getStatus());
+        param.addValue("postCode", employee.getPostCode());
+        param.addValue("enteredAt", employee.getEnteredAt());
+        param.addValue("mailAddress", employee.getMailAddress());
+        param.addValue("telNumber", employee.getTelNumber());
+        param.addValue("postalCode", employee.getPostalCode());
+        param.addValue("address", employee.getAddress());
+        param.addValue("birthday", employee.getBirthday());
         // WHERE句で指定する社員ID
         param.addValue("employeeId", employeeId);
 
