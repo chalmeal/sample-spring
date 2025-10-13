@@ -10,8 +10,7 @@ import sample.model.Employee;
 /**
  * <pre>
  * 社員のRepositoryインターフェース
- * 
- * <pre>
+ * </pre>
  */
 public interface EmployeeRepository {
 

@@ -102,10 +102,10 @@ public class Employee {
      */
     @Getter
     public enum Status {
-        /** 有効 */
-        ACTIVE(1, "有効"),
         /** 無効 */
-        INACTIVE(0, "無効");
+        INACTIVE(0, "無効"),
+        /** 有効 */
+        ACTIVE(1, "有効");
 
         private final int code;
         private final String label;

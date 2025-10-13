@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import lombok.RequiredArgsConstructor;
+import sample.context.Logger.Loggable;
 import sample.context.Pagination;
 import sample.context.constant.error.EmployeeError;
 import sample.context.exception.ServiceException;
@@ -127,6 +128,7 @@ public class EmployeeServiceImpl implements EmployeeService {
      */
     @Override
     @Transactional
+    @Loggable(category = "API")
     public ResultDto registerEmployee(EmployeeRegisterRequestDto param) throws ServiceException {
         try {
             // 社員登録
@@ -151,6 +153,7 @@ public class EmployeeServiceImpl implements EmployeeService {
      */
     @Override
     @Transactional
+    @Loggable(category = "API")
     public ResultDto editEmployee(String employeeId, EmployeeEditRequestDto param) throws ServiceException {
         try {
             // 社員編集
@@ -174,6 +177,8 @@ public class EmployeeServiceImpl implements EmployeeService {
      * {@inheritDoc}
      */
     @Override
+    @Transactional
+    @Loggable(category = "API")
     public ResultDto deleteEmployee(String employeeId) throws ServiceException {
         try {
             // 社員削除
@@ -197,6 +202,8 @@ public class EmployeeServiceImpl implements EmployeeService {
      * {@inheritDoc}
      */
     @Override
+    @Transactional
+    @Loggable(category = "API")
     public ResultDto activeEmployee(String employeeId) throws ServiceException {
         try {
             // 社員有効化

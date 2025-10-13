@@ -19,7 +19,8 @@ public class ResultDto {
 
     public enum ResultType {
         SUCCESS("SUCCESS"),
-        FAILURE("NG");
+        FAILURE("NG"),
+        WARNING("WARN");
 
         private String result;
 

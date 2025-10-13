@@ -23,8 +23,7 @@ import sample.repository.sql.EmployeeSql;
 /**
  * <pre>
  * 社員のRepositoryクラス
- * 
- * <pre>
+ * </pre>
  */
 @Repository
 public class EmployeeRepositoryImpl extends EmployeeSql implements EmployeeRepository {
@@ -41,12 +40,7 @@ public class EmployeeRepositoryImpl extends EmployeeSql implements EmployeeRepos
     }
 
     /**
-     * <pre>
-     * 社員IDから社員を取得
-     * </pre>
-     * 
-     * @param employeeId 社員ID
-     * @return 社員
+     * {@inheritDoc}
      */
     public Optional<Employee> getEmployeeById(String employeeId) throws RuntimeException {
         MapSqlParameterSource param = new MapSqlParameterSource();
@@ -58,17 +52,7 @@ public class EmployeeRepositoryImpl extends EmployeeSql implements EmployeeRepos
     }
 
     /**
-     * <pre>
-     * 社員を検索
-     * </pre>
-     * 
-     * @param employeeId     社員ID
-     * @param name           名前
-     * @param departmentCode 所属部門コード
-     * @param postCode       役職コード
-     * @param mail           メールアドレス
-     * @param status         状態
-     * @return 社員
+     * {@inheritDoc}
      */
     public Optional<Employee[]> searchEmployee(String employeeId, String name,
             String departmentCode, String postCode, LocalDate enteredAtFrom, LocalDate enteredAtTo, String status)
@@ -125,20 +109,12 @@ public class EmployeeRepositoryImpl extends EmployeeSql implements EmployeeRepos
     }
 
     /**
-     * <pre>
-     * 社員を登録
-     * </pre>
-     * 
-     * @param employee 登録する社員
-     * @return 登録結果
-     * @throws RuntimeException 社員登録に失敗した場合
+     * {@inheritDoc}
      */
     public void registerEmployee(EmployeeRegisterRequestDto employee) throws RuntimeException {
-        MapSqlParameterSource param;
-        param = new MapSqlParameterSource();
+        MapSqlParameterSource param = new MapSqlParameterSource();
 
         String sql = SQL_INSERT_EMPLOYEE;
-
         param.addValue("employeeId", employee.getEmployeeId());
         param.addValue("name", employee.getName());
         param.addValue("nameKana", employee.getNameKana());
@@ -156,13 +132,7 @@ public class EmployeeRepositoryImpl extends EmployeeSql implements EmployeeRepos
     }
 
     /**
-     * <pre>
-     * 社員を編集
-     * </pre>
-     * 
-     * @param employee 更新する社員
-     * @return 更新結果
-     * @throws RuntimeException 社員更新に失敗した場合
+     * {@inheritDoc}
      */
     public void editEmployee(String employeeId, EmployeeEditRequestDto employee) throws RuntimeException {
         MapSqlParameterSource param = new MapSqlParameterSource();
@@ -191,13 +161,7 @@ public class EmployeeRepositoryImpl extends EmployeeSql implements EmployeeRepos
     }
 
     /**
-     * <pre>
-     * 社員を論理削除
-     * </pre>
-     * 
-     * @param employeeId 社員ID
-     * @return 削除結果
-     * @throws RuntimeException 社員削除に失敗した場合
+     * {@inheritDoc}
      */
     public void deleteEmployee(String employeeId) throws RuntimeException {
         MapSqlParameterSource param = new MapSqlParameterSource();
@@ -217,13 +181,7 @@ public class EmployeeRepositoryImpl extends EmployeeSql implements EmployeeRepos
     }
 
     /**
-     * <pre>
-     * 社員を有効化
-     * </pre>
-     * 
-     * @param employeeId 社員ID
-     * @return 有効化結果
-     * @throws RuntimeException 社員有効化に失敗した場合
+     * {@inheritDoc}
      */
     public void activeEmployee(String employeeId) throws RuntimeException {
         MapSqlParameterSource param = new MapSqlParameterSource();
