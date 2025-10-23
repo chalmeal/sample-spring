@@ -1,4 +1,4 @@
-package sample.context;
+package sample.context.logger;
 
 /**
  * <pre>

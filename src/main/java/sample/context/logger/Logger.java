@@ -1,4 +1,4 @@
-package sample.context;
+package sample.context.logger;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
