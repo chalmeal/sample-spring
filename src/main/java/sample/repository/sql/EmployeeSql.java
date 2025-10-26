@@ -10,9 +10,27 @@ public class EmployeeSql {
 
         /**
          * <pre>
-         * 社員取得SELECT
+         * 社員取得SQL
          * </pre>
          */
+        protected final String SQL_GET_EMPLOYEE_BY_ID = " SELECT "
+                        + "employee_id, "
+                        + "name, "
+                        + "name_kana, "
+                        + "department_code, "
+                        + "post_code, "
+                        + "entered_at, "
+                        + "mail_address, "
+                        + "tel_number, "
+                        + "postal_code, "
+                        + "address, "
+                        + "birthday, "
+                        + "created_at, "
+                        + "updated_at, "
+                        + "status "
+                        + "FROM employees "
+                        + "WHERE employee_id = :employeeId AND status = :status";
+
         protected final String SQL_SELECT_EMPLOYEE = " SELECT "
                         + "'SQL_SELECT_EMPLOYEE' AS sql_type, "
                         + "employee_id, "
@@ -30,16 +48,6 @@ public class EmployeeSql {
                         + "updated_at, "
                         + "status "
                         + "FROM employees ";
-
-        /**
-         * <pre>
-         * 社員取得SQL
-         * </pre>
-         *
-         * @param employeeId 社員ID
-         */
-        protected final String SQL_GET_EMPLOYEE_BY_ID = SQL_SELECT_EMPLOYEE
-                        + "WHERE employee_id = :employeeId";
 
         /**
          * <pre>
@@ -121,14 +129,13 @@ public class EmployeeSql {
          * 社員所属部門情報取得SQL
          * </pre>
          */
-        protected final String SQL_GET_EMPLOYEE_DEPARTMENT = " SELECT "
-                        + "'SQL_GET_EMPLOYEE_DEPARTMENT' AS sql_type, "
+        protected final String SQL_GET_EMPLOYEE_DEPARTMENT = "SELECT "
                         + "e.employee_id, "
                         + "e.department_code, "
                         + "d.department_name, "
                         + "d.manager_employee_id "
                         + "FROM employees e "
                         + "JOIN departments d ON e.department_code = d.department_code "
-                        + "WHERE e.employee_id = :employeeId";
+                        + "WHERE e.employee_id = :employeeId AND e.status = 1";
 
 }

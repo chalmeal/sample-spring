@@ -17,6 +17,7 @@ import sample.dto.request.employee.EmployeeEditRequestDto;
 import sample.dto.request.employee.EmployeeRegisterRequestDto;
 import sample.model.Employee;
 import sample.model.Employee.EmployeeDepartmentEntity;
+import sample.model.Employee.EmployeeEntity;
 import sample.model.mapper.EmployeeMapper;
 import sample.repository.EmployeeRepository;
 import sample.repository.sql.EmployeeSql;
@@ -43,13 +44,16 @@ public class EmployeeRepositoryImpl extends EmployeeSql implements EmployeeRepos
     /**
      * {@inheritDoc}
      */
-    public Optional<Employee> getEmployeeById(String employeeId) throws RuntimeException {
+    public EmployeeEntity getEmployeeById(String employeeId) throws RuntimeException {
         MapSqlParameterSource param = new MapSqlParameterSource();
 
         String sql = SQL_GET_EMPLOYEE_BY_ID;
         param.addValue("employeeId", employeeId);
+        param.addValue("status", Employee.Status.ACTIVE.getCode());
 
-        return Optional.ofNullable(jdbcTemplate.queryForObject(sql, param, mapper));
+        // TODO: 別のRepositoryメソッド対応後にimpl.mapperを利用する
+        return jdbcTemplate.queryForObject(sql, param,
+                new sample.repository.impl.mapper.EmployeeMapper.EmployeeGetMapper());
     }
 
     /**
@@ -211,7 +215,7 @@ public class EmployeeRepositoryImpl extends EmployeeSql implements EmployeeRepos
 
         // TODO: 別のRepositoryメソッド対応後にimpl.mapperを利用する
         return jdbcTemplate.queryForObject(sql, param,
-                new sample.repository.impl.mapper.EmployeeMapper.EmployeeDepartmentMapper());
+                new sample.repository.impl.mapper.EmployeeMapper.EmployeeDepartmentGetMapper());
     }
 
 }

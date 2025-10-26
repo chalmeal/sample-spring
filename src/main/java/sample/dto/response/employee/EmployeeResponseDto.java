@@ -1,10 +1,9 @@
 package sample.dto.response.employee;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 import sample.dto.ResponseDto;
 
 /**
@@ -12,8 +11,8 @@ import sample.dto.ResponseDto;
  * 社員情報を保持するDto
  * </pre>
  */
-@Getter
-@Setter
+@Data
+@EqualsAndHashCode(callSuper = true)
 public class EmployeeResponseDto extends ResponseDto {
     /** 社員ID */
     private String employeeId;
@@ -47,12 +46,6 @@ public class EmployeeResponseDto extends ResponseDto {
 
     /** 生年月日 */
     private LocalDate birthday;
-
-    /** 登録日時 */
-    private LocalDateTime createdAt;
-
-    /** 更新日時 */
-    private LocalDateTime updatedAt;
 
     /** 状態 */
     private int status;

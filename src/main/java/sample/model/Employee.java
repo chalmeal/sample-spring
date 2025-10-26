@@ -117,6 +117,23 @@ public class Employee {
         }
     }
 
+    /** 社員情報 */
+    @Builder
+    public record EmployeeEntity(
+            String employeeId,
+            String name,
+            String nameKana,
+            String departmentCode,
+            String postCode,
+            LocalDate enteredAt,
+            String mailAddress,
+            String telNumber,
+            String postalCode,
+            String address,
+            LocalDate birthday,
+            int status) {
+    }
+
     /** 社員の所属部門情報 */
     @Builder
     public record EmployeeDepartmentEntity(

@@ -25,6 +25,7 @@ import sample.dto.response.employee.EmployeeDepartmentResponseDto;
 import sample.dto.response.employee.EmployeeResponseDto;
 import sample.model.Employee;
 import sample.model.Employee.EmployeeDepartmentEntity;
+import sample.model.Employee.EmployeeEntity;
 import sample.repository.EmployeeRepository;
 import sample.service.EmployeeService;
 
@@ -48,30 +49,25 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     @Transactional(readOnly = true)
     public EmployeeResponseDto getEmployee(String employeeId) throws ServiceException {
-        EmployeeResponseDto result = new EmployeeResponseDto();
-
+        EmployeeResponseDto dto = new EmployeeResponseDto();
         try {
             // 社員IDから社員を取得
-            Optional<Employee> optEmployee = repository.getEmployeeById(employeeId);
-
+            EmployeeEntity result = repository.getEmployeeById(employeeId);
             // 社員情報をDTOに設定
-            Employee employee = optEmployee.get();
-            result.setEmployeeId(employee.getEmployeeId());
-            result.setName(employee.getName());
-            result.setNameKana(employee.getNameKana());
-            result.setDepartmentCode(employee.getDepartmentCode());
-            result.setPostCode(employee.getPostCode());
-            result.setEnteredAt(employee.getEnteredAt());
-            result.setMailAddress(employee.getMailAddress());
-            result.setTelNumber(employee.getTelNumber());
-            result.setPostalCode(employee.getPostalCode());
-            result.setAddress(employee.getAddress());
-            result.setBirthday(employee.getBirthday());
-            result.setCreatedAt(employee.getCreatedAt());
-            result.setUpdatedAt(employee.getUpdatedAt());
-            result.setStatus(employee.getStatus());
+            dto.setEmployeeId(result.employeeId());
+            dto.setName(result.name());
+            dto.setNameKana(result.nameKana());
+            dto.setDepartmentCode(result.departmentCode());
+            dto.setPostCode(result.postCode());
+            dto.setEnteredAt(result.enteredAt());
+            dto.setMailAddress(result.mailAddress());
+            dto.setTelNumber(result.telNumber());
+            dto.setPostalCode(result.postalCode());
+            dto.setAddress(result.address());
+            dto.setBirthday(result.birthday());
+            dto.setStatus(result.status());
 
-            return result;
+            return dto;
         } catch (EmptyResultDataAccessException e) {
             // 社員が存在しない場合はエラーを返却
             throw new ServiceException(HttpStatus.NOT_FOUND,
@@ -111,9 +107,6 @@ public class EmployeeServiceImpl implements EmployeeService {
                 dto.setPostalCode(employee.getPostalCode());
                 dto.setAddress(employee.getAddress());
                 dto.setBirthday(employee.getBirthday());
-                dto.setCreatedAt(employee.getCreatedAt());
-                dto.setUpdatedAt(employee.getUpdatedAt());
-                dto.setStatus(employee.getStatus());
 
                 result.add(dto);
             }

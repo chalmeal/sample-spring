@@ -7,6 +7,7 @@ import sample.dto.request.employee.EmployeeEditRequestDto;
 import sample.dto.request.employee.EmployeeRegisterRequestDto;
 import sample.model.Employee;
 import sample.model.Employee.EmployeeDepartmentEntity;
+import sample.model.Employee.EmployeeEntity;
 
 /**
  * <pre>
@@ -23,7 +24,7 @@ public interface EmployeeRepository {
      * @param employeeId 社員ID
      * @return 社員
      */
-    Optional<Employee> getEmployeeById(String employeeId);
+    EmployeeEntity getEmployeeById(String employeeId);
 
     /**
      * <pre>
