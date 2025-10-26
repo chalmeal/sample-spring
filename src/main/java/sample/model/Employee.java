@@ -12,6 +12,7 @@ import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import lombok.Builder;
 import lombok.Data;
 import lombok.Getter;
 
@@ -114,5 +115,14 @@ public class Employee {
             this.code = code;
             this.label = label;
         }
+    }
+
+    /** 社員の所属部門情報 */
+    @Builder
+    public record EmployeeDepartmentEntity(
+            String employeeId,
+            String departmentCode,
+            String departmentName,
+            String managerEmployeeId) {
     }
 }

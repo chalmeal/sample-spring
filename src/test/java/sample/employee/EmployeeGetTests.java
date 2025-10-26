@@ -19,7 +19,7 @@ import sample.context.constant.error.EmployeeError;
 import sample.context.constant.error.Error;
 import sample.context.util.Message;
 import sample.dto.ErrorDto;
-import sample.dto.response.EmployeeResponseDto;
+import sample.dto.response.employee.EmployeeResponseDto;
 
 @SpringBootTest
 @AutoConfigureMockMvc

@@ -6,6 +6,7 @@ import java.util.Optional;
 import sample.dto.request.employee.EmployeeEditRequestDto;
 import sample.dto.request.employee.EmployeeRegisterRequestDto;
 import sample.model.Employee;
+import sample.model.Employee.EmployeeDepartmentEntity;
 
 /**
  * <pre>
@@ -80,5 +81,16 @@ public interface EmployeeRepository {
      * @throws RuntimeException 社員有効化に失敗した場合
      */
     void activeEmployee(String employeeId) throws RuntimeException;
+
+    /**
+     * <pre>
+     * 社員所属部門情報を取得
+     * </pre>
+     * 
+     * @param employeeId 社員ID
+     * @return 社員所属部門情報
+     * @throws RuntimeException 社員所属部門情報の取得に失敗した場合
+     */
+    EmployeeDepartmentEntity getEmployeeDepartment(String employeeId) throws RuntimeException;
 
 }

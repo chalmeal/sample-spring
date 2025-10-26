@@ -20,7 +20,7 @@ import sample.context.Pagination;
 import sample.context.exception.ServiceException;
 import sample.dto.request.employee.EmployeeEditRequestDto;
 import sample.dto.request.employee.EmployeeRegisterRequestDto;
-import sample.dto.response.EmployeeResponseDto;
+import sample.dto.response.employee.EmployeeResponseDto;
 import sample.service.EmployeeService;
 
 /**
@@ -149,6 +149,22 @@ public class EmployeeController extends SampleController {
             @PathVariable(value = "employee_id", required = true) String employeeId) {
         try {
             return responseOK(service.activeEmployee(employeeId));
+        } catch (ServiceException e) {
+            return response(e.getStatusCode(), e.getErrorCode(), e.getErrorMessage());
+        }
+    }
+
+    /**
+     * <pre>
+     * 所属部門取得API
+     * 社員の所属部門を取得します。
+     * </pre>
+     */
+    @GetMapping("/department/{employee_id}")
+    public ResponseEntity<?> getEmployeeDepartment(
+            @PathVariable(value = "employee_id", required = true) String employeeId) {
+        try {
+            return responseOK(service.getEmployeeDepartment(employeeId));
         } catch (ServiceException e) {
             return response(e.getStatusCode(), e.getErrorCode(), e.getErrorMessage());
         }

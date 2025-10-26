@@ -7,7 +7,8 @@ import sample.context.exception.ServiceException;
 import sample.dto.ResultDto;
 import sample.dto.request.employee.EmployeeEditRequestDto;
 import sample.dto.request.employee.EmployeeRegisterRequestDto;
-import sample.dto.response.EmployeeResponseDto;
+import sample.dto.response.employee.EmployeeDepartmentResponseDto;
+import sample.dto.response.employee.EmployeeResponseDto;
 
 /**
  * <pre>
@@ -87,5 +88,16 @@ public interface EmployeeService {
      * @throws ServiceException 社員有効化に失敗した場合
      */
     ResultDto activeEmployee(String employeeId) throws ServiceException;
+
+    /**
+     * <pre>
+     * 社員が所属する部門を取得
+     * </pre>
+     * 
+     * @param employeeId 社員ID
+     * @return 部門コード
+     * @throws ServiceException 社員の部門取得に失敗した場合
+     */
+    EmployeeDepartmentResponseDto getEmployeeDepartment(String employeeId) throws ServiceException;
 
 }

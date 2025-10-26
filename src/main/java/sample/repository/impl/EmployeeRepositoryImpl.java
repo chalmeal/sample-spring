@@ -16,6 +16,7 @@ import sample.context.util.Parse;
 import sample.dto.request.employee.EmployeeEditRequestDto;
 import sample.dto.request.employee.EmployeeRegisterRequestDto;
 import sample.model.Employee;
+import sample.model.Employee.EmployeeDepartmentEntity;
 import sample.model.mapper.EmployeeMapper;
 import sample.repository.EmployeeRepository;
 import sample.repository.sql.EmployeeSql;
@@ -198,4 +199,19 @@ public class EmployeeRepositoryImpl extends EmployeeSql implements EmployeeRepos
             // success
         }
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    public EmployeeDepartmentEntity getEmployeeDepartment(String employeeId) throws RuntimeException {
+        MapSqlParameterSource param = new MapSqlParameterSource();
+
+        String sql = SQL_GET_EMPLOYEE_DEPARTMENT;
+        param.addValue("employeeId", employeeId);
+
+        // TODO: 別のRepositoryメソッド対応後にimpl.mapperを利用する
+        return jdbcTemplate.queryForObject(sql, param,
+                new sample.repository.impl.mapper.EmployeeMapper.EmployeeDepartmentMapper());
+    }
+
 }

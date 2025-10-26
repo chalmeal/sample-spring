@@ -18,7 +18,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 
 import sample.TestHelper;
 import sample.context.Pagination;
-import sample.dto.response.EmployeeResponseDto;
+import sample.dto.response.employee.EmployeeResponseDto;
 
 @SpringBootTest
 @AutoConfigureMockMvc

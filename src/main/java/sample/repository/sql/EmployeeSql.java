@@ -116,4 +116,19 @@ public class EmployeeSql {
                         + "SET status = :status "
                         + "WHERE employee_id = :employeeId";
 
+        /**
+         * <pre>
+         * 社員所属部門情報取得SQL
+         * </pre>
+         */
+        protected final String SQL_GET_EMPLOYEE_DEPARTMENT = " SELECT "
+                        + "'SQL_GET_EMPLOYEE_DEPARTMENT' AS sql_type, "
+                        + "e.employee_id, "
+                        + "e.department_code, "
+                        + "d.department_name, "
+                        + "d.manager_employee_id "
+                        + "FROM employees e "
+                        + "JOIN departments d ON e.department_code = d.department_code "
+                        + "WHERE e.employee_id = :employeeId";
+
 }

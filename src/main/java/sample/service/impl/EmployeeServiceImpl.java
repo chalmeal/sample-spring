@@ -21,8 +21,10 @@ import sample.dto.ResultDto;
 import sample.dto.ResultDto.ResultType;
 import sample.dto.request.employee.EmployeeEditRequestDto;
 import sample.dto.request.employee.EmployeeRegisterRequestDto;
-import sample.dto.response.EmployeeResponseDto;
+import sample.dto.response.employee.EmployeeDepartmentResponseDto;
+import sample.dto.response.employee.EmployeeResponseDto;
 import sample.model.Employee;
+import sample.model.Employee.EmployeeDepartmentEntity;
 import sample.repository.EmployeeRepository;
 import sample.service.EmployeeService;
 
@@ -222,4 +224,28 @@ public class EmployeeServiceImpl implements EmployeeService {
                     message.get("error.employee.not_exists"));
         }
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    @Transactional(readOnly = true)
+    public EmployeeDepartmentResponseDto getEmployeeDepartment(String employeeId) throws ServiceException {
+        EmployeeDepartmentResponseDto dto = new EmployeeDepartmentResponseDto();
+        try {
+            EmployeeDepartmentEntity result = repository.getEmployeeDepartment(employeeId);
+            dto.setEmployeeId(result.employeeId());
+            dto.setDepartmentCode(result.departmentCode());
+            dto.setDepartmentName(result.departmentName());
+            dto.setManagerEmployeeId(result.managerEmployeeId());
+
+            return dto;
+        } catch (EmptyResultDataAccessException e) {
+            // 社員が存在しない場合はエラーを返却
+            throw new ServiceException(HttpStatus.NOT_FOUND,
+                    EmployeeError.NOT_EXISTS,
+                    message.get("error.employee.not_exists"));
+        }
+    }
+
 }
