@@ -7,7 +7,7 @@ import sample.context.exception.ServiceException;
 import sample.dto.ResultDto;
 import sample.dto.request.employee.EmployeeEditRequestDto;
 import sample.dto.request.employee.EmployeeRegisterRequestDto;
-import sample.dto.response.EmployeeResponseDto;
+import sample.dto.response.employee.EmployeeResponseDto;
 
 /**
  * <pre>

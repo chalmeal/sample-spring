@@ -12,16 +12,16 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import lombok.RequiredArgsConstructor;
-import sample.context.Logger.Loggable;
 import sample.context.Pagination;
 import sample.context.constant.error.EmployeeError;
 import sample.context.exception.ServiceException;
+import sample.context.logger.Logger.Loggable;
 import sample.context.util.Message;
 import sample.dto.ResultDto;
 import sample.dto.ResultDto.ResultType;
 import sample.dto.request.employee.EmployeeEditRequestDto;
 import sample.dto.request.employee.EmployeeRegisterRequestDto;
-import sample.dto.response.EmployeeResponseDto;
+import sample.dto.response.employee.EmployeeResponseDto;
 import sample.model.Employee;
 import sample.repository.EmployeeRepository;
 import sample.service.EmployeeService;

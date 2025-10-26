@@ -1,4 +1,4 @@
-package sample.dto.response;
+package sample.dto.response.employee;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;

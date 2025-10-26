@@ -19,7 +19,7 @@ import sample.TestHelper;
 import sample.context.util.Message;
 import sample.dto.ResultDto;
 import sample.dto.request.employee.EmployeeEditRequestDto;
-import sample.dto.response.EmployeeResponseDto;
+import sample.dto.response.employee.EmployeeResponseDto;
 
 @SpringBootTest
 @AutoConfigureMockMvc

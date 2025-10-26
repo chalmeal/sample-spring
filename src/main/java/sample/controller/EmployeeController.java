@@ -20,7 +20,7 @@ import sample.context.Pagination;
 import sample.context.exception.ServiceException;
 import sample.dto.request.employee.EmployeeEditRequestDto;
 import sample.dto.request.employee.EmployeeRegisterRequestDto;
-import sample.dto.response.EmployeeResponseDto;
+import sample.dto.response.employee.EmployeeResponseDto;
 import sample.service.EmployeeService;
 
 /**

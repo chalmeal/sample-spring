@@ -17,7 +17,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 
 import sample.TestHelper;
 import sample.dto.ResultDto;
-import sample.dto.response.EmployeeResponseDto;
+import sample.dto.response.employee.EmployeeResponseDto;
 import sample.model.Employee;
 
 @SpringBootTest
