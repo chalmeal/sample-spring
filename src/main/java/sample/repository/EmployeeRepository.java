@@ -1,13 +1,13 @@
 package sample.repository;
 
 import java.time.LocalDate;
-import java.util.Optional;
+import java.util.List;
 
 import sample.dto.request.employee.EmployeeEditRequestDto;
 import sample.dto.request.employee.EmployeeRegisterRequestDto;
-import sample.model.Employee;
 import sample.model.Employee.EmployeeDepartmentEntity;
 import sample.model.Employee.EmployeeEntity;
+import sample.model.Employee.EmployeeSearchEntity;
 
 /**
  * <pre>
@@ -36,10 +36,32 @@ public interface EmployeeRepository {
      * @param name           名前
      * @param mail           メールアドレス
      * @param departmentCode 所属部門コード
+     * @param postCode       役職コード
+     * @param enteredAtFrom  入社日From
+     * @param enteredAtTo    入社日To
+     * @param status         状態
+     * @param pageNumber     ページ番号
      * @return 社員
      */
-    Optional<Employee[]> searchEmployee(String employeeId, String name,
-            String departmentCode, String postCode, LocalDate enteredAtFrom, LocalDate enteredAtTo, String status);
+    List<EmployeeSearchEntity> searchEmployee(String employeeId, String name,
+            String departmentCode, String postCode, LocalDate enteredAtFrom, LocalDate enteredAtTo,
+            Integer pageNumber);
+
+    /**
+     * <pre>
+     * 社員検索件数を取得
+     * </pre>
+     * 
+     * @param employeeId     社員ID
+     * @param name           名前
+     * @param departmentCode 所属部門コード
+     * @param postCode       役職コード
+     * @param enteredAtFrom  入社日From
+     * @param enteredAtTo    入社日To
+     * @return 件数
+     */
+    int countSearchEmployee(String employeeId, String name, String departmentCode,
+            String postCode, LocalDate enteredAtFrom, LocalDate enteredAtTo);
 
     /**
      * <pre>

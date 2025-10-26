@@ -134,6 +134,17 @@ public class Employee {
             int status) {
     }
 
+    /** 社員検索情報 */
+    @Builder
+    public record EmployeeSearchEntity(
+            String employeeId,
+            String name,
+            String nameKana,
+            String departmentCode,
+            String postCode,
+            int rowCount) {
+    }
+
     /** 社員の所属部門情報 */
     @Builder
     public record EmployeeDepartmentEntity(

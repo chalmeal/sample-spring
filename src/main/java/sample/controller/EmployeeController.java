@@ -20,7 +20,7 @@ import sample.context.Pagination;
 import sample.context.exception.ServiceException;
 import sample.dto.request.employee.EmployeeEditRequestDto;
 import sample.dto.request.employee.EmployeeRegisterRequestDto;
-import sample.dto.response.employee.EmployeeResponseDto;
+import sample.dto.response.employee.EmployeeSearchResponseDto;
 import sample.service.EmployeeService;
 
 /**
@@ -67,15 +67,16 @@ public class EmployeeController extends SampleController {
      * @param status         ステータス
      */
     @GetMapping("/search")
-    public Pagination<EmployeeResponseDto> searchEmployee(
+    public Pagination<EmployeeSearchResponseDto> searchEmployee(
             @RequestParam(value = "employee_id", required = false) String employeeId,
             @RequestParam(value = "name", required = false) String name,
             @RequestParam(value = "department_code", required = false) String departmentCode,
             @RequestParam(value = "post_code", required = false) String postCode,
             @RequestParam(value = "entered_at_from", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate enteredAtFrom,
             @RequestParam(value = "entered_at_to", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate enteredAtTo,
-            @RequestParam(value = "status", required = false) String status) {
-        return service.searchEmployee(employeeId, name, departmentCode, postCode, enteredAtFrom, enteredAtTo, status);
+            @RequestParam(value = "page_number", required = true) int pageNumber) {
+        return service.searchEmployee(employeeId, name, departmentCode, postCode, enteredAtFrom, enteredAtTo,
+                pageNumber);
     }
 
     /**

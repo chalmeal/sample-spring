@@ -9,6 +9,7 @@ import sample.dto.request.employee.EmployeeEditRequestDto;
 import sample.dto.request.employee.EmployeeRegisterRequestDto;
 import sample.dto.response.employee.EmployeeDepartmentResponseDto;
 import sample.dto.response.employee.EmployeeResponseDto;
+import sample.dto.response.employee.EmployeeSearchResponseDto;
 
 /**
  * <pre>
@@ -39,11 +40,12 @@ public interface EmployeeService {
      * @param postCode       役職コード
      * @param mail           メールアドレス
      * @param status         状態
+     * @param pageNumber     ページ番号
      * @return 社員一覧
      */
-    Pagination<EmployeeResponseDto> searchEmployee(String employeeId, String name, String departmentCode,
+    Pagination<EmployeeSearchResponseDto> searchEmployee(String employeeId, String name, String departmentCode,
             String postCode,
-            LocalDate enteredAtFrom, LocalDate enteredAtTo, String status);
+            LocalDate enteredAtFrom, LocalDate enteredAtTo, Integer pageNumber) throws ServiceException;
 
     /**
      * <pre>

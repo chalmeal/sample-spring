@@ -2,8 +2,8 @@ package sample.service.impl;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -23,9 +23,10 @@ import sample.dto.request.employee.EmployeeEditRequestDto;
 import sample.dto.request.employee.EmployeeRegisterRequestDto;
 import sample.dto.response.employee.EmployeeDepartmentResponseDto;
 import sample.dto.response.employee.EmployeeResponseDto;
-import sample.model.Employee;
+import sample.dto.response.employee.EmployeeSearchResponseDto;
 import sample.model.Employee.EmployeeDepartmentEntity;
 import sample.model.Employee.EmployeeEntity;
+import sample.model.Employee.EmployeeSearchEntity;
 import sample.repository.EmployeeRepository;
 import sample.service.EmployeeService;
 
@@ -81,40 +82,36 @@ public class EmployeeServiceImpl implements EmployeeService {
      */
     @Override
     @Transactional(readOnly = true)
-    public Pagination<EmployeeResponseDto> searchEmployee(String employeeId, String name,
-            String departmentCode, String postCode, LocalDate enteredAtFrom, LocalDate enteredAtTo, String status) {
-        Pagination<EmployeeResponseDto> pagination = new Pagination<>();
-        List<EmployeeResponseDto> result = new ArrayList<>();
+    public Pagination<EmployeeSearchResponseDto> searchEmployee(String employeeId, String name,
+            String departmentCode, String postCode, LocalDate enteredAtFrom, LocalDate enteredAtTo,
+            Integer pageNumber) throws ServiceException {
+        List<EmployeeSearchResponseDto> data = new ArrayList<>();
+        Pagination<EmployeeSearchResponseDto> page = new Pagination<>();
 
         try {
             // 社員を検索
-            // 検索条件に一致する社員が存在しない場合は空のリストを返却
-            Optional<Employee[]> optEmployee = repository.searchEmployee(employeeId, name, departmentCode, postCode,
-                    enteredAtFrom, enteredAtTo, status);
+            List<EmployeeSearchEntity> result = repository.searchEmployee(employeeId, name, departmentCode, postCode,
+                    enteredAtFrom, enteredAtTo, pageNumber);
 
             // 社員情報をDTOに設定
-            Employee[] employees = optEmployee.get();
-            for (Employee employee : employees) {
-                EmployeeResponseDto dto = new EmployeeResponseDto();
-                dto.setEmployeeId(employee.getEmployeeId());
-                dto.setName(employee.getName());
-                dto.setNameKana(employee.getNameKana());
-                dto.setDepartmentCode(employee.getDepartmentCode());
-                dto.setPostCode(employee.getPostCode());
-                dto.setEnteredAt(employee.getEnteredAt());
-                dto.setMailAddress(employee.getMailAddress());
-                dto.setTelNumber(employee.getTelNumber());
-                dto.setPostalCode(employee.getPostalCode());
-                dto.setAddress(employee.getAddress());
-                dto.setBirthday(employee.getBirthday());
+            for (EmployeeSearchEntity employee : result) {
+                EmployeeSearchResponseDto dto = new EmployeeSearchResponseDto();
+                dto.setEmployeeId(employee.employeeId());
+                dto.setName(employee.name());
+                dto.setNameKana(employee.nameKana());
+                dto.setDepartmentCode(employee.departmentCode());
+                dto.setPostCode(employee.postCode());
 
-                result.add(dto);
+                data.add(dto);
             }
+            // 検索件数を取得
+            int rowCount = repository.countSearchEmployee(employeeId, name, departmentCode, postCode,
+                    enteredAtFrom, enteredAtTo);
 
-            return pagination.paging(result, employees.length);
+            return page.paging(data, rowCount);
         } catch (EmptyResultDataAccessException e) {
             // 社員が存在しない場合は空のリストを返却
-            return pagination.paging(result, 0);
+            return page.paging(Collections.emptyList(), 0);
         }
     }
 

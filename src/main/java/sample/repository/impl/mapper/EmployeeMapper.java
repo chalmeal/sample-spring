@@ -8,6 +8,7 @@ import org.springframework.jdbc.core.RowMapper;
 
 import sample.model.Employee.EmployeeDepartmentEntity;
 import sample.model.Employee.EmployeeEntity;
+import sample.model.Employee.EmployeeSearchEntity;
 
 /**
  * <pre>
@@ -36,6 +37,24 @@ public class EmployeeMapper {
                     .address(rs.getString("address"))
                     .birthday(rs.getObject("birthday", LocalDate.class))
                     .status(rs.getInt("status"))
+                    .build();
+        }
+    }
+
+    /**
+     * <pre>
+     * 社員検索情報のMapperクラス
+     * </pre>
+     */
+    public static record EmployeeSearchMapper() implements RowMapper<EmployeeSearchEntity> {
+        @Override
+        public EmployeeSearchEntity mapRow(ResultSet rs, int rowNum) throws SQLException {
+            return EmployeeSearchEntity.builder()
+                    .employeeId(rs.getString("employee_id"))
+                    .name(rs.getString("name"))
+                    .nameKana(rs.getString("name_kana"))
+                    .departmentCode(rs.getString("department_code"))
+                    .postCode(rs.getString("post_code"))
                     .build();
         }
     }
