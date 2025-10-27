@@ -17,35 +17,16 @@ Javaのサンプルプロジェクトです。小規模のシンプルなレイ�
 |     |     ├── java
 |     |     |     └── sample
 |     |     |            ├── context
-|     |     |            ├── controller                         ------------- プレゼンテーション層
-|     |     |            |      ├── EmployeeController.java         ------------- 
-|     |     |            |      ├── RestErrorAdvice.java            -------------
-|     |     |            |      └── SampleController.java           -------------
-|     |     |            ├── dto                                -------------
-|     |     |            |      ├── request                         -------------
-|     |     |            |      ├── response                        -------------
-|     |     |            |      ├── ErrorDto.java                   -------------
-|     |     |            |      ├── ResponseDto.java                -------------
-|     |     |            |      └── ResultDto.java                  -------------
-|     |     |            ├── model                              ------------- ドメイン層
-|     |     |            |      ├── mapper                          -------------
-|     |     |            |      └── Employee.java                   -------------
-|     |     |            ├── repository                         ------------- リポジトリ層
-|     |     |            |      ├── impl                            -------------
-|     |     |            |      ├── sql                             -------------
-|     |     |            |      └── EmployeeRepository.java         -------------
-|     |     |            ├── service                            ------------- アプリケーション層
-|     |     |            |      ├── impl                            -------------
-|     |     |            |      └── EmployeeService.java            -------------
-|     |     |            └── SampleApplication.java             ------------- アプリケーションエントリーポイント
-|     |     └── resources                                   -------------
-|     |           ├── application.properties                    -------------
-|     |           ├── data.sql                                  -------------
-|     |           └── message.properties                        -------------
-|　　　└── test                                         -------------
-|　　　      ├── employee                                    -------------
-|　　　      ├── SampleApplicationTests.java                 -------------
-|　　　      └── TestHelper.java                             -------------
+|     |     |            ├── controller                         # プレゼンテーション層
+|     |     |            ├── dto                                # DTO
+|     |     |            ├── model                              # ドメイン層
+|     |     |            ├── repository                         # リポジトリ層
+|     |     |            ├── service                            # アプリケーション層
+|     |     |            └── SampleApplication.java             # アプリケーションエントリーポイント
+|     |     └── resources
+|　　　└── test
+|　　　      ├── employee
+|　　　      └── TestHelper.java
 ├── build.gradle
 └── settings.gradle
 ```
