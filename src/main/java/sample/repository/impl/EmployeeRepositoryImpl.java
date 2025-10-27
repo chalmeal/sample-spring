@@ -10,10 +10,8 @@ import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import sample.context.util.Parse;
 import sample.dto.request.employee.EmployeeEditRequestDto;
 import sample.dto.request.employee.EmployeeRegisterRequestDto;
-import sample.model.Employee;
 import sample.model.Employee.EmployeeDepartmentEntity;
 import sample.model.Employee.EmployeeEntity;
 import sample.model.Employee.EmployeeSearchEntity;
@@ -82,22 +80,9 @@ public class EmployeeRepositoryImpl extends EmployeeDao implements EmployeeRepos
      */
     public void registerEmployee(EmployeeRegisterRequestDto employee) throws RuntimeException {
         MapSqlParameterSource param = new MapSqlParameterSource();
+        SqlParamSource source = this.insert(param, employee);
 
-        String sql = "SQL_INSERT_EMPLOYEE";
-        param.addValue("employeeId", employee.getEmployeeId());
-        param.addValue("name", employee.getName());
-        param.addValue("nameKana", employee.getNameKana());
-        param.addValue("departmentCode", employee.getDepartmentCode());
-        param.addValue("postCode", employee.getPostCode());
-        param.addValue("enteredAt", Parse.parseDate(employee.getEnteredAt()));
-        param.addValue("mailAddress", employee.getMailAddress());
-        param.addValue("telNumber", employee.getTelNumber());
-        param.addValue("postalCode", employee.getPostalCode());
-        param.addValue("address", employee.getAddress());
-        param.addValue("birthday", Parse.parseDate(employee.getBirthday()));
-        param.addValue("status", Employee.Status.ACTIVE.getCode());
-
-        jdbcTemplate.update(sql, param);
+        jdbcTemplate.update(source.getSql(), source.getParam());
     }
 
     /**
@@ -105,22 +90,10 @@ public class EmployeeRepositoryImpl extends EmployeeDao implements EmployeeRepos
      */
     public void editEmployee(String employeeId, EmployeeEditRequestDto employee) throws RuntimeException {
         MapSqlParameterSource param = new MapSqlParameterSource();
+        SqlParamSource source = this.update(param, employeeId, employee);
 
-        String sql = "SQL_UPDATE_EMPLOYEE";
-        param.addValue("name", employee.getName());
-        param.addValue("nameKana", employee.getNameKana());
-        param.addValue("departmentCode", employee.getDepartmentCode());
-        param.addValue("postCode", employee.getPostCode());
-        param.addValue("enteredAt", employee.getEnteredAt());
-        param.addValue("mailAddress", employee.getMailAddress());
-        param.addValue("telNumber", employee.getTelNumber());
-        param.addValue("postalCode", employee.getPostalCode());
-        param.addValue("address", employee.getAddress());
-        param.addValue("birthday", employee.getBirthday());
-        // WHERE句で指定する社員ID
-        param.addValue("employeeId", employeeId);
+        int result = jdbcTemplate.update(source.getSql(), source.getParam());
 
-        int result = jdbcTemplate.update(sql, param);
         if (result == 0) {
             // 更新対象の社員が存在しない場合はエラーを返却
             throw new EmptyResultDataAccessException(result);
@@ -132,15 +105,22 @@ public class EmployeeRepositoryImpl extends EmployeeDao implements EmployeeRepos
     /**
      * {@inheritDoc}
      */
+    public int getEmployeeStatus(String employeeId) throws RuntimeException {
+        MapSqlParameterSource param = new MapSqlParameterSource();
+        SqlParamSource source = getStatusByEmployeeId(param, employeeId);
+
+        return jdbcTemplate.queryForObject(source.getSql(), source.getParam(),
+                Integer.class);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     public void deleteEmployee(String employeeId) throws RuntimeException {
         MapSqlParameterSource param = new MapSqlParameterSource();
+        SqlParamSource source = this.delete(param, employeeId);
 
-        String sql = "SQL_DELETE_EMPLOYEE";
-        // WHERE句で指定する社員ID
-        param.addValue("status", Employee.Status.INACTIVE.getCode());
-        param.addValue("employeeId", employeeId);
-
-        int result = jdbcTemplate.update(sql, param);
+        int result = jdbcTemplate.update(source.getSql(), source.getParam());
         if (result == 0) {
             // 削除対象の社員が存在しない場合はエラーを返却
             throw new EmptyResultDataAccessException(result);
@@ -154,12 +134,9 @@ public class EmployeeRepositoryImpl extends EmployeeDao implements EmployeeRepos
      */
     public void activeEmployee(String employeeId) throws RuntimeException {
         MapSqlParameterSource param = new MapSqlParameterSource();
+        SqlParamSource source = this.active(param, employeeId);
 
-        String sql = "SQL_ACTIVE_EMPLOYEE";
-        param.addValue("status", Employee.Status.ACTIVE.getCode());
-        param.addValue("employeeId", employeeId);
-
-        int result = jdbcTemplate.update(sql, param);
+        int result = jdbcTemplate.update(source.getSql(), source.getParam());
         if (result == 0) {
             // 有効化対象の社員が存在しない場合はエラーを返却
             throw new EmptyResultDataAccessException(result);

@@ -19,6 +19,24 @@ public class EmployeeError extends Error {
 
     /**
      * <pre>
+     * 既に無効化されている社員を無効化しようとした場合のエラーコード
+     * status: 400
+     * message: "社員は既に無効化されています。"
+     * </pre>
+     */
+    public static final String ALREADY_INACTIVE = BAD_REQUEST + "1002";
+
+    /**
+     * <pre>
+     * 既に有効化されている社員を有効化しようとした場合のエラーコード
+     * status: 400
+     * message: "社員は既に有効化されています。"
+     * </pre>
+     */
+    public static final String ALREADY_ACTIVE = BAD_REQUEST + "1003";
+
+    /**
+     * <pre>
      * 存在しない社員を取得しようとした場合のエラーコード
      * status: 404
      * message: "社員情報が見つかりませんでした。"

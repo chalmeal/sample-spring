@@ -24,6 +24,7 @@ import sample.dto.request.employee.EmployeeRegisterRequestDto;
 import sample.dto.response.employee.EmployeeDepartmentResponseDto;
 import sample.dto.response.employee.EmployeeResponseDto;
 import sample.dto.response.employee.EmployeeSearchResponseDto;
+import sample.model.Employee;
 import sample.model.Employee.EmployeeDepartmentEntity;
 import sample.model.Employee.EmployeeEntity;
 import sample.model.Employee.EmployeeSearchEntity;
@@ -173,6 +174,14 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Loggable(category = "API")
     public ResultDto deleteEmployee(String employeeId) throws ServiceException {
         try {
+            // 社員状態取得
+            int status = repository.getEmployeeStatus(employeeId);
+            if (status == Employee.Status.INACTIVE.getCode()) {
+                // 既に無効化されている場合はエラーを返却
+                throw new ServiceException(HttpStatus.BAD_REQUEST,
+                        EmployeeError.ALREADY_INACTIVE,
+                        message.get("error.employee.already_inactive"));
+            }
             // 社員削除
             repository.deleteEmployee(employeeId);
 
@@ -198,6 +207,14 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Loggable(category = "API")
     public ResultDto activeEmployee(String employeeId) throws ServiceException {
         try {
+            // 社員状態取得
+            int status = repository.getEmployeeStatus(employeeId);
+            if (status == Employee.Status.ACTIVE.getCode()) {
+                // 既に有効化されている場合はエラーを返却
+                throw new ServiceException(HttpStatus.BAD_REQUEST,
+                        EmployeeError.ALREADY_ACTIVE,
+                        message.get("error.employee.already_active"));
+            }
             // 社員有効化
             repository.activeEmployee(employeeId);
 

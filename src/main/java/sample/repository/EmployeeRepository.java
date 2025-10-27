@@ -87,6 +87,17 @@ public interface EmployeeRepository {
 
     /**
      * <pre>
+     * 社員状態取得
+     * </pre>
+     * 
+     * @param employeeId 社員ID
+     * @return 社員状態
+     * @throws RuntimeException 社員状態取得に失敗した場合
+     */
+    int getEmployeeStatus(String employeeId) throws RuntimeException;
+
+    /**
+     * <pre>
      * 社員を削除
      * </pre>
      * 

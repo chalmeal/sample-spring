@@ -6,6 +6,9 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 
 import sample.context.Pagination;
+import sample.context.util.Parse;
+import sample.dto.request.employee.EmployeeEditRequestDto;
+import sample.dto.request.employee.EmployeeRegisterRequestDto;
 import sample.model.Employee;
 
 public class EmployeeDao extends DaoHelper {
@@ -166,6 +169,175 @@ public class EmployeeDao extends DaoHelper {
             sql += "AND entered_at <= :enteredAtTo ";
             param.addValue("enteredAtTo", enteredAtTo);
         }
+
+        return new SqlParamSource(sql, param);
+    }
+
+    /**
+     * <pre>
+     * 社員登録SQL
+     * </pre>
+     * 
+     * @param param
+     * @param employee
+     * @return
+     */
+    protected SqlParamSource insert(MapSqlParameterSource param, EmployeeRegisterRequestDto employee) {
+        String sql = "INSERT INTO "
+                + "employees ("
+                + "employee_id, "
+                + "name, "
+                + "name_kana, "
+                + "department_code, "
+                + "post_code, "
+                + "entered_at, "
+                + "mail_address, "
+                + "tel_number, "
+                + "postal_code, "
+                + "address, "
+                + "birthday, "
+                + "status, "
+                + "created_at, "
+                + "updated_at)";
+        sql += "VALUES ("
+                + ":employeeId, "
+                + ":name, "
+                + ":nameKana, "
+                + ":departmentCode, "
+                + ":postCode, "
+                + ":enteredAt, "
+                + ":mailAddress, "
+                + ":telNumber, "
+                + ":postalCode, "
+                + ":address, "
+                + ":birthday, "
+                + ":status, "
+                + "CURRENT_TIMESTAMP, "
+                + "CURRENT_TIMESTAMP"
+                + ")";
+        param.addValue("employeeId", employee.getEmployeeId());
+        param.addValue("name", employee.getName());
+        param.addValue("nameKana", employee.getNameKana());
+        param.addValue("departmentCode", employee.getDepartmentCode());
+        param.addValue("postCode", employee.getPostCode());
+        param.addValue("enteredAt", Parse.parseDate(employee.getEnteredAt()));
+        param.addValue("mailAddress", employee.getMailAddress());
+        param.addValue("telNumber", employee.getTelNumber());
+        param.addValue("postalCode", employee.getPostalCode());
+        param.addValue("address", employee.getAddress());
+        param.addValue("birthday", Parse.parseDate(employee.getBirthday()));
+        param.addValue("status", Employee.Status.ACTIVE.getCode());
+
+        return new SqlParamSource(sql, param);
+    }
+
+    /**
+     * <pre>
+     * 社員編集SQL
+     * </pre>
+     * 
+     * @param param
+     * @param employeeId
+     * @param employee
+     * @return
+     */
+    protected SqlParamSource update(MapSqlParameterSource param, String employeeId,
+            EmployeeEditRequestDto employee) {
+        String sql = "UPDATE "
+                + "employees SET "
+                + "name = :name, "
+                + "name_kana = :nameKana, "
+                + "department_code = :departmentCode, "
+                + "post_code = :postCode, "
+                + "entered_at = :enteredAt, "
+                + "mail_address = :mailAddress, "
+                + "tel_number = :telNumber, "
+                + "postal_code = :postalCode, "
+                + "address = :address, "
+                + "birthday = :birthday, "
+                + "updated_at = CURRENT_TIMESTAMP "
+                + "WHERE employee_id = :employeeId "
+                + "AND status = :status";
+        param.addValue("name", employee.getName());
+        param.addValue("nameKana", employee.getNameKana());
+        param.addValue("departmentCode", employee.getDepartmentCode());
+        param.addValue("postCode", employee.getPostCode());
+        param.addValue("enteredAt", Parse.parseDate(employee.getEnteredAt()));
+        param.addValue("mailAddress", employee.getMailAddress());
+        param.addValue("telNumber", employee.getTelNumber());
+        param.addValue("postalCode", employee.getPostalCode());
+        param.addValue("address", employee.getAddress());
+        param.addValue("birthday", Parse.parseDate(employee.getBirthday()));
+        // WHERE
+        param.addValue("employeeId", employeeId);
+        param.addValue("status", Employee.Status.ACTIVE.getCode());
+
+        return new SqlParamSource(sql, param);
+    }
+
+    /**
+     * <pre>
+     * 社員状態取得SQL
+     * </pre>
+     * 
+     * @param param
+     * @param employeeId
+     * @return
+     */
+    protected SqlParamSource getStatusByEmployeeId(MapSqlParameterSource param, String employeeId) {
+        String sql = "SELECT "
+                + "status "
+                + "FROM employees "
+                + "WHERE employee_id = :employeeId";
+        param.addValue("employeeId", employeeId);
+
+        return new SqlParamSource(sql, param);
+    }
+
+    /**
+     * <pre>
+     * 社員削除SQL
+     * </pre>
+     * 
+     * @param param
+     * @param employeeId
+     * @return
+     */
+    protected SqlParamSource delete(MapSqlParameterSource param, String employeeId) {
+        String sql = "UPDATE "
+                + "employees SET "
+                + "status = :status, "
+                + "updated_at = CURRENT_TIMESTAMP "
+                + "WHERE employee_id = :employeeId "
+                + "AND status = :currentStatus";
+        param.addValue("status", Employee.Status.INACTIVE.getCode());
+        // WHERE
+        param.addValue("employeeId", employeeId);
+        param.addValue("currentStatus", Employee.Status.ACTIVE.getCode());
+
+        return new SqlParamSource(sql, param);
+    }
+
+    /**
+     * <pre>
+     * 社員有効化SQL
+     * </pre>
+     * 
+     * @param param
+     * @param employeeId
+     * @return
+     */
+    protected SqlParamSource active(MapSqlParameterSource param, String employeeId) {
+        String sql = "UPDATE "
+                + "employees SET "
+                + "status = :status, "
+                + "updated_at = CURRENT_TIMESTAMP "
+                + "WHERE employee_id = :employeeId "
+                + "AND status = :currentStatus";
+        param.addValue("status", Employee.Status.ACTIVE.getCode());
+        // WHERE
+        param.addValue("employeeId", employeeId);
+        param.addValue("currentStatus", Employee.Status.INACTIVE.getCode());
 
         return new SqlParamSource(sql, param);
     }
