@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import sample.dto.request.log.LogWriteDto;
 import sample.repository.LogRepository;
-import sample.repository.sql.LogSql;
+import sample.repository.impl.dao.LogDao;
 
 /**
  * <pre>
@@ -18,7 +18,7 @@ import sample.repository.sql.LogSql;
  * </pre>
  */
 @Repository
-public class LogRepositoryImpl extends LogSql implements LogRepository {
+public class LogRepositoryImpl extends LogDao implements LogRepository {
     // DI
     // JdbcTemplate
     private final NamedParameterJdbcTemplate jdbcTemplate;
@@ -35,15 +35,10 @@ public class LogRepositoryImpl extends LogSql implements LogRepository {
      */
     public long startWriteLog(LogWriteDto log) throws RuntimeException {
         MapSqlParameterSource param = new MapSqlParameterSource();
-
-        String sql = SQL_START_WRITE_LOG;
-        param.addValue("executorId", log.getExecutorId());
-        param.addValue("processName", log.getProcessName());
-        param.addValue("logType", log.getLogType());
-        param.addValue("category", log.getCategory());
+        SqlParamSource source = this.startWrite(param, log);
 
         KeyHolder keyHolder = new GeneratedKeyHolder();
-        jdbcTemplate.update(sql, param, keyHolder, new String[] { "log_id" });
+        jdbcTemplate.update(source.getSql(), source.getParam(), keyHolder, new String[] { "log_id" });
 
         return keyHolder.getKey().intValue();
     }
@@ -53,14 +48,9 @@ public class LogRepositoryImpl extends LogSql implements LogRepository {
      */
     public void endWriteLog(LogWriteDto log) throws RuntimeException {
         MapSqlParameterSource param = new MapSqlParameterSource();
+        SqlParamSource source = this.endWrite(param, log);
 
-        String sql = SQL_END_WRITE_LOG;
-        param.addValue("logType", log.getLogType());
-        param.addValue("message", log.getMessage());
-        param.addValue("executedAt", log.getExecutedAt());
-        param.addValue("logId", log.getLogId());
-
-        jdbcTemplate.update(sql, param);
+        jdbcTemplate.update(source.getSql(), source.getParam());
     }
 
 }

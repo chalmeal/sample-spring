@@ -11,6 +11,7 @@ import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
+import lombok.Getter;
 
 /**
  * <pre>
@@ -59,4 +60,27 @@ public class Account {
     /** 状態 */
     @NotNull
     private int status;
+
+    /**
+     * <pre>
+     * アカウント状態
+     * </pre>
+     */
+    @Getter
+    public enum Status {
+        /** 無効 */
+        INACTIVE(0, "無効"),
+        /** 仮登録 */
+        PENDING(1, "仮登録"),
+        /** 本登録 */
+        REGISTERED(2, "本登録");
+
+        private final int code;
+        private final String label;
+
+        private Status(int code, String label) {
+            this.code = code;
+            this.label = label;
+        }
+    }
 }

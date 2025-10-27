@@ -18,7 +18,7 @@ import sample.model.Employee.EmployeeSearchEntity;
 public class EmployeeMapper {
     /**
      * <pre>
-     * 社員情報のMapperクラス
+     * 社員情報のMapper
      * </pre>
      */
     public static record EmployeeGetMapper() implements RowMapper<EmployeeEntity> {
@@ -43,7 +43,7 @@ public class EmployeeMapper {
 
     /**
      * <pre>
-     * 社員検索情報のMapperクラス
+     * 社員検索情報のMapper
      * </pre>
      */
     public static record EmployeeSearchMapper() implements RowMapper<EmployeeSearchEntity> {
@@ -61,7 +61,7 @@ public class EmployeeMapper {
 
     /**
      * <pre>
-     * 所属部署情報のMapperクラス
+     * 所属部署情報のMapper
      * </pre>
      */
     public static record EmployeeDepartmentGetMapper() implements RowMapper<EmployeeDepartmentEntity> {

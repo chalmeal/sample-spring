@@ -11,8 +11,12 @@ import sample.dto.request.employee.EmployeeEditRequestDto;
 import sample.dto.request.employee.EmployeeRegisterRequestDto;
 import sample.model.Employee;
 
+/**
+ * <pre>
+ * 社員のDAOクラス
+ * </pre>
+ */
 public class EmployeeDao extends DaoHelper {
-
     /**
      * <pre>
      * 社員取得SQL

@@ -10,6 +10,7 @@ import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
+import lombok.Getter;
 
 /**
  * <pre>
@@ -43,4 +44,25 @@ public class Post {
     /** 状態 */
     @NotNull
     private int status;
+
+    /**
+     * <pre>
+     * 役職状態
+     * </pre>
+     */
+    @Getter
+    public enum Status {
+        /** 無効 */
+        INACTIVE(0, "無効"),
+        /** 有効 */
+        ACTIVE(1, "有効");
+
+        private final int code;
+        private final String label;
+
+        private Status(int code, String label) {
+            this.code = code;
+            this.label = label;
+        }
+    }
 }
